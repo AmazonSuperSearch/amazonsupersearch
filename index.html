@@ -93,38 +93,6 @@
     .form-check-input {
       width: 1.4em; height: 1.4em; border: 3px solid #000 !important; border-radius: 3px;
     }
-    
-    .expand-icon {
-  position: fixed;
-  top: 1rem;      /* pin 16px down from top of viewport */
-  right: 1rem;    /* pin 16px in from the right edge */
-  /* remove the old left:-25px; rule entirely */
-  font-size: 22px;
-  background: #007bff;
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
-.minimized + .expand-icon {
-  display: flex;
-}
-
-/* Place this after it, at top level */
-#helpPanel,
-#helpPanel .card-body,
-#helpPanel select,
-#helpPanel button,
-#helpPanel ol,
-#helpPanel h6,
-#helpPanel div {
-  background-color: #fff !important;
-}
 
     .minimized {
   right: -260px; /* slide out of view */
@@ -155,26 +123,17 @@
   🔎 Amazon Super Search – <span style="color: #d62828;">The Smart Way to Find Amazon Products</span>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const closeBtn = document.getElementById('closeHelpPanel');
-    const expandIcon = document.getElementById('expandHelpIcon');
-    const helpPanel = document.getElementById('helpPanel');
-
-  if (closeBtn && helpPanel) {
-   closeBtn.addEventListener('click', () => {
-  helpPanel.classList.add('minimized');
-});
-  }
-
-  if (expandIcon && helpPanel) {
-   expandIcon.addEventListener('click', () => {
-  helpPanel.classList.remove('minimized');
-});
-  }
-
-
-</script>
+  <section class="container text-center my-4">
+  <h1 class="fw-bold mb-3">
+    Discover Live In-Stock Amazon Lightning Deals, Deep Discounts & Real-Time Price Drop Alerts
+  </h1>
+  <p class="lead mb-2">
+    Amazon Super Search is your free, no-signup tool for uncovering Prime-only offers, filtering by free shipping, sorting by top customer ratings and setting custom discount thresholds—all in one intuitive interface.
+  </p>
+  <p class="mb-0">
+    Save this page to your bookmarks 🔖 and share it with everyone you know—never miss another deal! 🚀
+  </p>
+</section>
 
 <form id="amazon-search-form">
 <!-- Step 1: What are you shopping for -->
@@ -627,7 +586,6 @@
         const data = new FormData(this);
         const params = new URLSearchParams();
         const rh = [];
-        // after initializing rh…
 
         // 2) Department & node
 const dept = data.get('i');
@@ -646,13 +604,21 @@ if (node) rh.push(`n:${node}`);
         if (q) params.set('k', q);
 
        // 2) Core Filters (exact cents)
-const low  = data.get('min-price')?.trim(),
-      high = data.get('max-price')?.trim();
-if (low && high) {
-  const lowCents  = Math.round(parseFloat(low)  * 100);
-  const highCents = Math.round(parseFloat(high) * 100);
-  rh.push(`p_36:${lowCents}-${highCents}`);
+const min = data.get('min-price')?.trim();
+const max = data.get('max-price')?.trim();
+
+if (min && max) {
+  const minCents = Math.round(parseFloat(min) * 100);
+  const maxCents = Math.round(parseFloat(max) * 100);
+  rh.push(`p_36:${minCents}-${maxCents}`);
+} else if (min) {
+  const minCents = Math.round(parseFloat(min) * 100);
+  rh.push(`p_36:${minCents}-`);
+} else if (max) {
+  const maxCents = Math.round(parseFloat(max) * 100);
+  rh.push(`p_36:0-${maxCents}`);
 }
+
 if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('percent-off')}`);
 
         if (data.get('min-rating')) rh.push(`p_72:${data.get('min-rating')}00`);
@@ -678,19 +644,38 @@ if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('perc
         try { incArr = JSON.parse(data.get('brand-include')||'[]').map(o=>encodeURIComponent(o.value)); } catch{}
         try { excArr = JSON.parse(data.get('brand-exclude')||'[]').map(o=>`-${encodeURIComponent(o.value)}`); } catch{}
         if (incArr.length) {
-          rh.push( incOnly
-            ? incArr.map(v=>`p_89:${v}`).join(',')
-            : `p_89:${incArr.join('|')}`
-          );
-        }
-        if (excArr.length) rh.push(`p_89:${excArr.join('|')}`);
+  if (incOnly) {
+    // Add multiple AND match-only filters (split into multiple keys)
+    incArr.forEach(v => rh.push(`p_89:${v}`));
+  } else {
+    // OR search
+    rh.push(`p_89:${incArr.join('|')}`);
+  }
+}
+
+if (excArr.length) {
+  // Negation with minus prefix
+  rh.push(`p_89:${excArr.join('|')}`);
+}
+
 
         // 5) Deal-Hunter Goodies
-        if (data.get('price-drop')?.trim())     rh.push(`p_n_pct-off-with-discount:${data.get('price-drop')}`);
-        if (data.get('below-avg-30')?.trim())   rh.push(`p_n_pct-off-with-discount:${data.get('below-avg-30')}`);
-        if (data.get('below-avg-60')?.trim())   rh.push(`p_n_pct-off-with-discount:${data.get('below-avg-60')}`);
-        if (data.get('below-avg-90')?.trim())   rh.push(`p_n_pct-off-with-discount:${data.get('below-avg-90')}`);
-        if (data.get('max-volatility-7')?.trim()) rh.push(`p_n_pct-off-with-discount:${data.get('max-volatility-7')}`);
+       // 5) Deal-Hunter Goodies
+const discounts = [
+  data.get('price-drop'),
+  data.get('below-avg-30'),
+  data.get('below-avg-60'),
+  data.get('below-avg-90'),
+  data.get('max-volatility-7')
+]
+  .map(v => parseFloat(v))
+  .filter(v => !isNaN(v));
+
+if (discounts.length > 0) {
+  const maxDiscount = Math.max(...discounts);
+  rh.push(`p_n_pct-off-with-discount:${maxDiscount}`);
+}
+
         if (data.get('coupon-only')==='on')     rh.push('p_n_coupons_available:1');
         if (data.get('warehouse-refurb')==='on') rh.push('p_n_warehouse_refurbished:1');
 
@@ -755,6 +740,95 @@ if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('perc
     }
   });
 </script>
+<script>
+    // Main form-submit logic
+    document.getElementById('amazon-search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data   = new FormData(this);
+      const params = new URLSearchParams();
+      const rh     = [];
+
+      // 2) Department & node
+      const dept = data.get('i');
+      const node = data.get('node');
+      if (dept) params.set('i', dept);
+      if (node) rh.push(`n:${node}`);
+
+      // 1) Boolean keywords
+      let q = (data.get('q')||'').trim();
+      if (data.get('enable-boolean')==='on' && q) {
+        const q2 = q.replace(/\bAND\b/gi,' ').replace(/\bNOT\b/gi,'-');
+        params.set('bop','enable');
+        params.set('k', q2);
+      } else if (q) {
+        params.set('k', q);
+      }
+
+      // 2) Core Filters (exact cents)
+      const min = data.get('min-price')?.trim(),
+            max = data.get('max-price')?.trim();
+      if (min && max) {
+        const minC = Math.round(parseFloat(min)*100),
+              maxC = Math.round(parseFloat(max)*100);
+        rh.push(`p_36:${minC}-${maxC}`);
+      } else if (min) {
+        rh.push(`p_36:${Math.round(parseFloat(min)*100)}-`);
+      } else if (max) {
+        rh.push(`p_36:0-${Math.round(parseFloat(max)*100)}`);
+      }
+      if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('percent-off')}`);
+      if (data.get('min-rating'))  rh.push(`p_72:${data.get('min-rating')}00`);
+      if (data.get('sort'))        params.set('s', data.get('sort'));
+
+      // 3) Checkbox flags
+      if (data.get('prime-only')==='on')    rh.push('p_n_feature_fulfilled_by_amazon:1');
+      if (data.get('in-stock')==='on')      rh.push('p_n_availability:1248879011');
+      if (data.get('free-shipping')==='on') rh.push('p_76:13184787011');
+      if (data.get('lightning-deals')==='on') rh.push('p_n_specials_match:4366');
+      if (data.get('coupons')==='on')       rh.push('p_n_coupons_available:1');
+
+      // 4) Brand include/exclude
+      const incOnly = data.get('include-only')==='on';
+      let incArr = [], excArr = [];
+      try { incArr = JSON.parse(data.get('brand-include')||'[]').map(o=>o.value); } catch{}
+      try { excArr = JSON.parse(data.get('brand-exclude')||'[]').map(o=>`-${o.value}`); } catch{}
+      if (incArr.length) {
+        if (incOnly) incArr.forEach(v=>rh.push(`p_89:${v}`));
+        else         rh.push(`p_89:${incArr.join('|')}`);
+      }
+      if (excArr.length) rh.push(`p_89:${excArr.join('|')}`);
+
+      // 5) Deal-Hunter Goodies
+      const discounts = [
+        data.get('price-drop'),
+        data.get('below-avg-30'),
+        data.get('below-avg-60'),
+        data.get('below-avg-90'),
+        data.get('max-volatility-7')
+      ].map(v=>parseFloat(v)).filter(v=>!isNaN(v));
+      if (discounts.length) rh.push(`p_n_pct-off-with-discount:${Math.max(...discounts)}`);
+      if (data.get('coupon-only')==='on')     rh.push('p_n_coupons_available:1');
+      if (data.get('warehouse-refurb')==='on') rh.push('p_n_warehouse_refurbished:1');
+
+      // 6) Power-User & Comparison
+      if (data.get('field-filters')?.trim()) rh.push(data.get('field-filters'));
+      if (data.get('direct-lookup')?.trim()) rh.push(`asin:${data.get('direct-lookup')}`);
+      if (data.get('side-by-side')==='on')   rh.push('comparison-specs:enabled');
+      if (data.get('verified-only')==='on')  rh.push('review-verified:1');
+
+      // 7) AI/Personalization
+      if (data.get('predictive-score')==='on') rh.push('predictive-score:1');
+      if (data.get('restock-forecast')?.trim()) rh.push(`restock:${data.get('restock-forecast')}`);
+      if (data.get('emotion-feedback')==='on') rh.push('emotion-feedback:1');
+
+      // 8) Combine & open
+      if (rh.length) params.set('rh', rh.join(','));
+      params.set('tag','echolover25-20');
+      window.open(`https://www.amazon.com/s?${params.toString()}`,'_blank');
+    });
+  });
+</script>
+
 
 </body>
 </html>
