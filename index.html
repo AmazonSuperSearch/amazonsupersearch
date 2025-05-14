@@ -379,6 +379,10 @@
     You’re all set! Click the button below to view your filtered results directly on Amazon.
   </p>
   <div class="text-center">
+    <div id="filter-warning" style="display:none; color: orange; font-weight: bold; padding: 10px;">
+  ⚠️ Too many filters may return no results. Try removing a few for better results.
+</div>
+
     <button 
       type="submit" 
       form="amazon-search-form" 
@@ -971,6 +975,39 @@ if (discounts.length > 0) {
       });
     });
   });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('amazon-search-form');
+  const warning = document.getElementById('filter-warning');
+  const inputs = form.querySelectorAll('input, select');
+
+  function countFilters() {
+    let count = 0;
+    inputs.forEach(input => {
+      if ((input.type === 'checkbox' || input.type === 'radio') && input.checked) {
+        count++;
+      } else if ((input.type === 'text' || input.type === 'number') && input.value.trim() !== "") {
+        count++;
+      } else if (input.tagName === 'SELECT' && input.value.trim() !== "") {
+        count++;
+      }
+    });
+    return count;
+  }
+
+  function updateWarning() {
+    const activeCount = countFilters();
+    warning.style.display = activeCount >= 5 ? 'block' : 'none';
+  }
+
+  inputs.forEach(input => {
+    input.addEventListener('input', updateWarning);
+    input.addEventListener('change', updateWarning);
+  });
+
+  updateWarning(); // Run immediately on load
+});
 </script>
 
 
