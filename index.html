@@ -103,7 +103,9 @@
   opacity: 1;
   cursor: pointer;
 }
-
+#voiceSearchBtn.active {
+  background-color: #ffc107;
+}
     /* Pulse animations */
     @keyframes pulse-glow {0%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);}50%{box-shadow:0 0 20px 10px rgba(13,110,253,0.5);}100%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);} }
     .pulse-glow {animation:pulse-glow 2s infinite;transition:box-shadow .3s ease-in-out;}
@@ -118,44 +120,58 @@
 
   </head>
 <body>
-<!-- Attention-Grabbing Banner -->
-<div class="bg-warning text-dark text-center py-3 shadow-sm" style="font-size: 1.4rem; font-weight: bold; border-bottom: 3px solid #000;">
-  🔎 Amazon Super Search – <span style="color: #d62828;">The Smart Way to Find Amazon Products</span>
-</div>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <!-- Hero / SEO-Rich Intro -->
+  <div class="bg-warning text-dark text-center py-2 shadow-sm">
+    🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
+  </div>
 
-  <section class="container text-center my-4">
-  <h1 class="fw-bold mb-3">
-    Discover Live In-Stock Amazon Lightning Deals, Deep Discounts & Real-Time Price Drop Alerts
+ <section class="container text-center my-5">
+  <h1 class="display-5 fw-bold mb-3">
+    Effortless Amazon Searches: In-Stock Lightning Deals, Deep Discounts & Real-Time Price Drop Alerts
   </h1>
-  <p class="lead mb-2">
-    Amazon Super Search is your free, no-signup tool for uncovering Prime-only offers, filtering by free shipping, sorting by top customer ratings and setting custom discount thresholds—all in one intuitive interface.
+  <p class="lead mb-4">
+    Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds. Filter by price, brand, Prime-only, free shipping, top ratings—and never miss another deal. No signup, no fluff—just the products you crave, right now.
   </p>
-  <p class="mb-0">
+  <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
+    🎯 Start Your Custom Search
+  </a>
+  <p class="mt-3 text-muted">
     Save this page to your bookmarks 🔖 and share it with everyone you know—never miss another deal! 🚀
   </p>
 </section>
 
 <form id="amazon-search-form">
-<!-- Step 1: What are you shopping for -->
 <div class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 1: What are you shopping for?</h2>
-  <p class="text-muted mb-3">Type a product name, keyword, category, ASIN, ISBN, or UPC to start your search.</p>
+  <p class="text-muted mb-3">
+    Type a product name, keyword, category, ASIN, ISBN, or UPC to start your search.
+  </p>
 
   <div class="card p-3">
-   <input
-  type="text"
-  class="form-control"
-  id="mainSearchInput"
-  name="q"
-  placeholder="e.g. wireless headphones"
-  autocomplete="off">
-
+    <div class="input-group">
+      <!-- Mic on left -->
+      <button class="btn btn-outline-secondary" type="button" id="voiceSearchBtn">
+        🎤
+      </button>
+      <!-- Then the text input -->
+      <input
+        type="text"
+        class="form-control"
+        id="mainSearchInput"
+        name="q"
+        placeholder="e.g. wireless headphones"
+        autocomplete="off"
+      >
+    </div>
     <small class="form-text text-muted mt-2">
       Supports Boolean operators: <code>AND</code>, <code>OR</code>, <code>NOT</code>
       (e.g. <em>wireless AND headphones NOT bluetooth</em>).
     </small>
   </div>
 </div>
+
+
 
 
       <!-- Step 2 heading ABOVE the card box -->
@@ -576,10 +592,10 @@
 
   
         <!-- Share With Friends -->
-  <section id="share" class="mb-5">
+ <section id="share" class="mb-5 mt-5 text-center">
     <h2>Share With Friends</h2>
     <p>Spread the word about Amazon Super Search:</p>
-    <div class="d-flex flex-wrap gap-2 mb-3">
+    <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center">
       <a href="#"
          class="btn btn-primary"
          onclick="window.open(
@@ -609,18 +625,14 @@
         Share via SMS
       </a>
     </div>
-    <label class="form-label" for="shareLink">Copy Link</label>
-    <div class="input-group mb-3">
-      <input type="text"
-             class="form-control"
-             id="shareLink"
-             readonly>
-      <button class="btn btn-outline-secondary pulse-orange"
-              type="button"
-              onclick="navigator.clipboard.writeText(document.getElementById('shareLink').value)">
-        Copy URL
-      </button>
-    </div>
+   <div class="input-group mb-3 mx-auto" style="max-width: 400px;">
+  <input type="text" class="form-control" id="shareLink" readonly>
+  <button class="btn btn-outline-secondary pulse-orange" type="button"
+          onclick="navigator.clipboard.writeText(document.getElementById('shareLink').value)">
+    Copy URL
+  </button>
+</div>
+
     <script>
       // Populate the shareLink field on load
       document.addEventListener('DOMContentLoaded', function() {
@@ -788,10 +800,11 @@ if (discounts.length > 0) {
 
 <!-- Visitor Question -->
 <section id="visitor-question" class="mb-4 text-center">
-  <h3>✨ Question for You ✨</h3>
+  <h3>✨ Join the Conversation: How Can We Make Amazon Super Search Even Better? ✨</h3>
   <p class="lead mb-4">
-    Which deal-hunting feature has you most excited, and what new tools or filters would make your Amazon searches even smarter? Share your thoughts, ideas, and suggestions below—we’re all ears! 👂✨
+    If you like our page, share, share, share the love! ❤️
   </p>
+</section>
 
 <!-- Comments -->
 <div id="disqus_thread"></div>
@@ -912,6 +925,50 @@ if (discounts.length > 0) {
       if (rh.length) params.set('rh', rh.join(','));
       params.set('tag','echolover25-20');
       window.open(`https://www.amazon.com/s?${params.toString()}`,'_blank');
+    });
+  });
+</script>
+<script>
+  const btn = document.getElementById('voiceSearchBtn');
+  const input = document.getElementById('mainSearchInput');
+
+  // Check for browser support
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    btn.disabled = true;
+    btn.title = 'Voice search not supported';
+  } else {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recog = new SpeechRecognition();
+    recog.continuous = false;
+    recog.lang = 'en-US';
+    recog.interimResults = false;
+    recog.maxAlternatives = 1;
+
+    btn.addEventListener('click', () => {
+      recog.start();
+      btn.classList.add('active');
+    });
+
+    recog.addEventListener('result', (e) => {
+      const transcript = e.results[0][0].transcript;
+      input.value = transcript;
+      recog.stop();
+    });
+
+    recog.addEventListener('end', () => {
+      btn.classList.remove('active');
+    });
+  }
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickSound = document.getElementById('clickSound');
+    // Attach to every <button>
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
     });
   });
 </script>
