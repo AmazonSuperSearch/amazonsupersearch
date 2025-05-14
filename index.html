@@ -57,6 +57,32 @@
   <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
 
   <style>
+      /* ——— AMAZON-ORANGE PULSING HEADING ——— */
+    @keyframes text-pulse {
+      0%   { text-shadow: 0 0 5px rgba(255,153,0,0.7), 0 0 10px rgba(255,153,0,0.5); }
+      50%  { text-shadow: 0 0 20px rgba(255,153,0,0.9), 0 0 30px rgba(255,153,0,0.7); }
+      100% { text-shadow: 0 0 5px rgba(255,153,0,0.7), 0 0 10px rgba(255,153,0,0.5); }
+    }
+
+    .text-pulse {
+      color: #FF9900;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+      animation: text-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes orange-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,153,0, 0); }
+      50%  { box-shadow: 0 0 12px 6px rgba(255,153,0, 0.7); }
+      100% { box-shadow: 0 0 0 0 rgba(255,153,0, 0); }
+    }
+
+    .pulse-orange {
+      animation: orange-pulse 2s infinite ease-in-out;
+    }
     /* Fancy frames */
     .card, .accordion-item {
       border: 3px solid #007bff !important;
@@ -112,6 +138,18 @@
     @keyframes orange-pulse {0%{box-shadow:0 0 0 0 rgba(255,153,0,0);}50%{box-shadow:0 0 12px 6px rgba(255,153,0,0.7);}100%{box-shadow:0 0 0 0 rgba(255,153,0,0);} }
     .pulse-orange {animation:orange-pulse 2s infinite ease-in-out;}
   </style>
+  <style>
+  .coming-soon input[type="checkbox"] {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .coming-soon label small {
+    color: #6c757d;
+    font-style: italic;
+  }
+</style>
+
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
 <!-- helper to fire events -->
@@ -123,7 +161,11 @@
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
     🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
   </div>
-
+<div class="text-center my-3">
+  <h2 class="text-pulse display-6 fw-bold">
+    🔥 Find Lightning Deals & Filter Instantly on Amazon!
+  </h2>
+</div>
  <section class="container text-center my-5">
   <h1 class="display-5 fw-bold mb-3">
     Effortless Amazon Searches: In-Stock Lightning Deals, Deep Discounts & Real-Time Price Drop Alerts
@@ -321,52 +363,120 @@
   </p>
 
   <div class="card mb-4 p-3">
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly">
-      <label class="form-check-label" for="primeOnly">Prime Only</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="in-stock" id="inStock">
-      <label class="form-check-label" for="inStock">In Stock</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping">
-      <label class="form-check-label" for="freeShipping">Free Shipping</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly">
-      <label class="form-check-label" for="fbaOnly">Sold & Shipped by Amazon</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals">
-      <label class="form-check-label" for="lightningDeals">Lightning Deals</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="coupons" id="coupons">
-      <label class="form-check-label" for="coupons">Coupons Available</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave">
-      <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice">
-      <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller">
-      <label class="form-check-label" for="bestSeller">Best Seller</label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns">
-      <label class="form-check-label" for="freeReturns">Free Returns</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap">
-      <label class="form-check-label" for="giftWrap">Gift Wrap Available</label>
-    </div>
-  </div>
-</section>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+      <!-- Most Popular Filters -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly">
+        <label class="form-check-label" for="primeOnly">Prime Only</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping">
+        <label class="form-check-label" for="freeShipping">Free Shipping</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="in-stock" id="inStock">
+        <label class="form-check-label" for="inStock">In Stock</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="coupons" id="coupons">
+        <label class="form-check-label" for="coupons">Coupons Available</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals">
+        <label class="form-check-label" for="lightningDeals">Lightning Deals</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="todays-deals" id="todaysDeals">
+        <label class="form-check-label" for="todaysDeals">Today's Deals Only</label>
+      </div>
+
+      <!-- Other Available Filters -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave">
+        <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice">
+        <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller">
+        <label class="form-check-label" for="bestSeller">Best Seller</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly">
+        <label class="form-check-label" for="fbaOnly">Sold & Shipped by Amazon</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns">
+        <label class="form-check-label" for="freeReturns">Free Returns</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap">
+        <label class="form-check-label" for="giftWrap">Gift Wrap Available</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="small-business" id="smallBusiness">
+        <label class="form-check-label" for="smallBusiness">Small Business Products</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="amazon-brands" id="amazonBrands">
+        <label class="form-check-label" for="amazonBrands">Amazon Brands Only</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="low-rating" id="lowRating">
+        <label class="form-check-label" for="lowRating">Low Rating Products (⚠️)</label>
+      </div>
+
+      <!-- Coming Soon Filters -->
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="ships-fast" id="shipsFast">
+        <label class="form-check-label" for="shipsFast">Ships in 24 Hours <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="back-in-stock" id="backInStock">
+        <label class="form-check-label" for="backInStock">Back in Stock Today <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="made-in-usa" id="madeInUsa">
+        <label class="form-check-label" for="madeInUsa">Made in USA <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="eco-friendly" id="ecoFriendly">
+        <label class="form-check-label" for="ecoFriendly">Eco-Friendly Products <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="trending-now" id="trendingNow">
+        <label class="form-check-label" for="trendingNow">Trending Right Now <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="new-last-week" id="newLastWeek">
+        <label class="form-check-label" for="newLastWeek">New Arrivals (Last 7 Days) <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="top-category" id="topCategory">
+        <label class="form-check-label" for="topCategory">Top 1% of Category <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="hidden-coupon" id="hiddenCoupon">
+        <label class="form-check-label" for="hiddenCoupon">Hidden Coupons Only <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="giftable" id="giftable">
+        <label class="form-check-label" for="giftable">Highly Giftable Items <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="bundle-match" id="bundleMatch">
+        <label class="form-check-label" for="bundleMatch">Frequently Bought Together <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="low-stock" id="lowStock">
+        <label class="form-check-label" for="lowStock">Low Inventory Left (Urgent) <small>(Coming Soon)</small></label>
+      </div>
+ </div> <!-- end of .row -->
+</div> <!-- end of .card -->
+</section> <!-- end of Step 5 section -->
 
   <!-- Step 6: Search Amazon -->
 <section class="container text-start mb-5">
@@ -738,6 +848,26 @@ if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('perc
         if (data.get('best-seller')==='on')   rh.push('p_n_feature_browse-bin:15527981011');
         if (data.get('free-returns')==='on')  rh.push('p_n_free_returns_option:1');
         if (data.get('gift-wrap')==='on')     rh.push('p_n_gift_wrap_available:1');
+       // ✅ Extra Smart Filters (Supported)
+if (data.get('todays-deals') === 'on')      rh.push('p_n_deals_ii:2499179011');
+if (data.get('small-business') === 'on')    rh.push('p_n_c_is_small_business:1');
+if (data.get('amazon-brands') === 'on')     rh.push('p_n_is_amazon_brand:1');
+if (data.get('low-rating') === 'on')        rh.push('p_72:1100');
+
+// 🚧 Coming Soon Filters (not yet supported in URL)
+if (data.get('ships-fast') === 'on')        console.log('Ships in 24 Hours — Coming Soon');
+if (data.get('back-in-stock') === 'on')     console.log('Back in Stock Today — Coming Soon');
+if (data.get('made-in-usa') === 'on')       console.log('Made in USA — Coming Soon');
+if (data.get('eco-friendly') === 'on')      console.log('Eco-Friendly Products — Coming Soon');
+if (data.get('trending-now') === 'on')      console.log('Trending Right Now — Coming Soon');
+if (data.get('new-last-week') === 'on')     console.log('New Arrivals (Last 7 Days) — Coming Soon');
+if (data.get('top-category') === 'on')      console.log('Top 1% of Category — Coming Soon');
+if (data.get('hidden-coupon') === 'on')     console.log('Hidden Coupons Only — Coming Soon');
+if (data.get('giftable') === 'on')          console.log('Highly Giftable Items — Coming Soon');
+if (data.get('bundle-match') === 'on')      console.log('Frequently Bought Together — Coming Soon');
+if (data.get('low-stock') === 'on')         console.log('Low Inventory Left — Coming Soon');
+
+
        
 
         // 4) Brand Include/Exclude
