@@ -156,9 +156,31 @@
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
 <!-- helper to fire events -->
-
+   <!-- ① Auto-detect and set the cookie before Translate loads -->
+  <script>
+    (function(){
+      // grab e.g. “en”, “es”, “fr”, “de”, etc.
+      var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
+      // tell Google Translate to go from English → userLang
+      document.cookie = "googtrans=/en/" + userLang + "; path=/";
+    })();
+  </script>
+  <!-- Google Translate widget (all languages) -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
+  <!-- Google Translate dropdown -->
+  <div id="google_translate_element" class="text-end p-2"></div>
+
+  <!-- Click sound audio -->
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
@@ -1163,18 +1185,6 @@ if (discounts.length > 0) {
   }
 </script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickSound = document.getElementById('clickSound');
-    // Attach to every <button>
-    document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-  });
-</script>
-<script>
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('amazon-search-form');
   const warning = document.getElementById('filter-warning');
@@ -1206,6 +1216,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateWarning(); // Run immediately on load
 });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickSound = document.getElementById('clickSound');
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  });
+</script>
+<script>
+  // Also play click sound when language selector is used
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickSound = document.getElementById('clickSound');
+    document.getElementById('google_translate_element')
+      .addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+  });
 </script>
 
 
