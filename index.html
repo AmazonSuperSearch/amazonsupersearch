@@ -13,17 +13,19 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Amazon Search Filter Tool – Find In-Stock Deals, Apply Filters, Track Price Drops</title>
+ <title>Amazon Super Search – Filter Lightning Deals & Price Trends</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- Intro paragraph -->
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Amazon Super Search is the fastest way to find in-stock deals, apply filters, track price drops, sort by reviews, and uncover Prime-only or coupon-enabled items. No signup, always free.">
-  <meta name="keywords" content="Amazon search filter, in-stock Amazon deals, Amazon price tracker, Amazon coupon finder, Amazon Prime filter, Amazon sort by rating, search Amazon by brand, exclude brands on Amazon, advanced Amazon search tool, Amazon deal finder, Amazon lightning deals tracker, Amazon filter tool, Amazon price drop alerts">
+  <meta name="description" content="Amazon Super Search is the fastest way to find in-stock deals, apply filters, filter by past price trends, sort by reviews, and uncover Prime-only or coupon-enabled items. No signup, always free.">
+  <meta name="keywords" content="Amazon search filter, in-stock Amazon deals, Amazon price tracker, Amazon coupon finder, Amazon Prime filter, Amazon sort by rating, search Amazon by brand, exclude brands on Amazon, advanced Amazon search tool, Amazon deal finder, Amazon lightning deals tracker, Amazon filter tool, Amazon price trend filters
+">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://amazonsupersearch.com/">
 
   <!-- Open Graph / Social -->
-  <meta property="og:title" content="Amazon Search Filter Tool – Find In-Stock Deals, Apply Filters, Track Price Drops">
+  <meta property="og:title" content="Amazon Search Filter Tool – Find In-Stock Deals, Apply Filters, Filter by Past Price Trends">
   <meta property="og:description"
         content="Use Amazon Super Search to find in-stock lightning deals, set discount and price-drop alerts, filter free shipping only, and sort by highest ratings.">
   <meta property="og:url" content="https://amazonsupersearch.com/">
@@ -32,9 +34,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Advanced Amazon Filter Search Tool">
-  <meta name="twitter:description"
-        content="Discover Amazon’s best live deals: free shipping filters, deep discounts, lightning deals in stock & price drop alerts.">
+ <meta name="twitter:title" content="Advanced Amazon Filter Search Tool">
+ <meta name="twitter:description" content="Discover Amazon’s best live deals: free shipping filters, deep discounts, lightning deals in stock & filters based on past price trends.">
   <meta name="twitter:image" content="https://amazonsupersearch.com/thumbnail.png">
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -45,7 +46,7 @@
     "url": "https://www.amazonsupersearch.com/",
     "applicationCategory": "WebApplication",
     "operatingSystem": "All",
-    "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, track price drops, and sort by top customer ratings."
+    "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings."
   }
   </script>
 
@@ -171,7 +172,7 @@
 </div>
  <section class="container text-center my-5">
   <h1 class="display-5 fw-bold mb-3">
-    Effortless Amazon Searches: In-Stock Lightning Deals, Deep Discounts & Real-Time Price Drop Alerts
+    Effortless Amazon Searches: Filter by Brand, Reviews, Shipping Options, and More — Always Free
   </h1>
   <p class="lead mb-4">
     Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds. Filter by price, brand, Prime-only, free shipping, top ratings—and never miss another deal. No signup, no fluff—just the products you crave, right now.
@@ -207,10 +208,6 @@
         autocomplete="off"
       >
     </div>
-    <small class="form-text text-muted mt-2">
-      Supports Boolean operators: <code>AND</code>, <code>OR</code>, <code>NOT</code>
-      (e.g. <em>wireless AND headphones NOT bluetooth</em>).
-    </small>
   </div>
 </div>
 
@@ -512,98 +509,129 @@
 </section>
 
       <!-- Power-User Tools -->
-      <section>
-        <div class="accordion mb-4" id="accordionPower">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingPower">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePower">
-                Power-User Tools
-              </button>
-            </h2>
-            <div id="collapsePower" class="accordion-collapse collapse" data-bs-parent="#accordionPower">
-              <div class="accordion-body">
-                <div class="form-check mb-2"><input class="form-check-input" type="checkbox" name="enable-boolean" id="enableBoolean"><label class="form-check-label" for="enableBoolean">Enable Boolean Operators</label></div>
-                <div class="mb-2"><label class="form-label">Field Filters</label><input type="text" class="form-control" name="field-filters" placeholder="e.g. field-brand:Sony"></div>
-                <div class="mb-2"><label class="form-label">ASIN / ISBN Direct Lookup</label><input type="text" class="form-control" name="direct-lookup" placeholder="Enter ASIN, ISBN or UPC"></div>
-              </div>
-            </div>
+<section>
+  <div class="accordion mb-4" id="accordionPower">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingPower">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePower">
+          Power-User Tools
+        </button>
+      </h2>
+      <div id="collapsePower" class="accordion-collapse collapse" data-bs-parent="#accordionPower">
+        <div class="accordion-body">
+          <p><strong>🧠 How to Use Power-User Tools</strong><br>
+          This section gives you extra control to target exactly what you want—like using “search magic.” Here's how each option works:</p>
+
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Enable Boolean Operators</strong><br>
+          ✅ Check this box if you want to combine keywords with logic.<br>
+          Type your keywords in the main search box using:</p>
+
+          <ul>
+            <li><strong>AND</strong>: Must include both words (e.g., camera AND tripod)</li>
+            <li><strong>OR</strong>: Show either word (e.g., headphones OR earbuds)</li>
+            <li><strong>NOT</strong>: Exclude something (e.g., tablet NOT refurbished)</li>
+          </ul>
+
+          <p><strong>Field Filters</strong><br>
+          📅 Click the input box.<br>
+          Type something like:</p>
+
+          <ul>
+            <li>field-brand:Sony to only show Sony products.</li>
+            <li>field-title:Bluetooth to only show items with "Bluetooth" in the title.</li>
+          </ul>
+
+          <p>🔍 This lets you drill down with precision.</p>
+
+          <p><strong>ASIN / ISBN Direct Lookup</strong><br>
+          💡 Got a specific product code?<br>
+          Paste the ASIN (Amazon product ID) or ISBN (for books).<br>
+          Example: B08N5WRWNW</p>
+
+          <p>🔍 It will take you straight to that product in filtered results.</p>
+
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="enable-boolean" id="enableBoolean">
+            <label class="form-check-label" for="enableBoolean">Enable Boolean Operators</label>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Field Filters</label>
+            <input type="text" class="form-control" name="field-filters" placeholder="e.g. field-brand:Sony">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">ASIN / ISBN Direct Lookup</label>
+            <input type="text" class="form-control" name="direct-lookup" placeholder="Enter ASIN, ISBN or UPC">
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-     <!-- Deal-Hunter Goodies -->
+<!-- Deal-Hunter Goodies -->
 <section>
   <div class="accordion mb-4" id="accordionDeal">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingDeal">
-        <button class="accordion-button collapsed" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#collapseDeal">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeal">
           Deal-Hunter Goodies
         </button>
       </h2>
-      <div id="collapseDeal" 
-           class="accordion-collapse collapse" 
-           data-bs-parent="#accordionDeal">
+      <div id="collapseDeal" class="accordion-collapse collapse" data-bs-parent="#accordionDeal">
         <div class="accordion-body">
+          <p><strong>💸 How to Use Deal-Hunter Goodies</strong><br>
+          This section is for finding major discounts, coupons, and bargains based on past pricing history.</p>
+
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Discount (%) from 90-Day Avg Price</strong><br>
+          💰 Type a number like 25 to only see items at least 25% cheaper than their average over the last 90 days.<br>
+          📉 Helps you spot real deals—not just fake markdowns.</p>
+
+          <p><strong>Coupon-Clippable Only</strong><br>
+          ✅ Check this to only see products that offer a visible coupon at checkout.</p>
+
+          <p><strong>Warehouse / Open-Box</strong><br>
+          ✅ Check this to find gently used or open-box items sold directly by Amazon at a discount.</p>
+
+          <p><strong>Other Discount (%) Boxes</strong><br>
+          Enter percentages like:<br>
+          30 under “30-Day Avg” to see items 30% cheaper than last month.<br>
+          You can fill in 1, 2, or all of them.<br>
+          🔄 The more you fill in, the better chance you’ll find big-time deals.</p>
+
+          <p><strong>Max Daily Price Volatility (%)</strong><br>
+          📉 Want price stability? Type something like 10 to filter out products that constantly jump in price.<br>
+          Helps avoid unstable or manipulated listings.</p>
+
           <div class="mb-3">
             <label class="form-label">Discount (%) from 90-Day Avg Price</label>
-            <input type="number" 
-                   class="form-control" 
-                   name="price-drop" 
-                   placeholder="e.g. 20">
+            <input type="number" class="form-control" name="price-drop" placeholder="e.g. 20">
           </div>
           <div class="form-check mb-2">
-            <input class="form-check-input" 
-                   type="checkbox" 
-                   name="coupon-only" 
-                   id="couponOnly">
-            <label class="form-check-label" for="couponOnly">
-              Coupon-Clippable Only
-            </label>
+            <input class="form-check-input" type="checkbox" name="coupon-only" id="couponOnly">
+            <label class="form-check-label" for="couponOnly">Coupon-Clippable Only</label>
           </div>
           <div class="form-check mb-2">
-            <input class="form-check-input" 
-                   type="checkbox" 
-                   name="warehouse-refurb" 
-                   id="warehouseRefurb">
-            <label class="form-check-label" for="warehouseRefurb">
-              Warehouse / Open-Box
-            </label>
+            <input class="form-check-input" type="checkbox" name="warehouse-refurb" id="warehouseRefurb">
+            <label class="form-check-label" for="warehouseRefurb">Warehouse / Open-Box</label>
           </div>
           <div class="row g-3 mt-3">
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 30-Day Avg</label>
-              <input type="number" 
-                     min="0" 
-                     class="form-control" 
-                     name="below-avg-30" 
-                     placeholder="e.g. 20">
+              <input type="number" min="0" class="form-control" name="below-avg-30" placeholder="e.g. 20">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 60-Day Avg</label>
-              <input type="number" 
-                     min="0" 
-                     class="form-control" 
-                     name="below-avg-60" 
-                     placeholder="e.g. 15">
+              <input type="number" min="0" class="form-control" name="below-avg-60" placeholder="e.g. 15">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 90-Day Avg</label>
-              <input type="number" 
-                     min="0" 
-                     class="form-control" 
-                     name="below-avg-90" 
-                     placeholder="e.g. 10">
+              <input type="number" min="0" class="form-control" name="below-avg-90" placeholder="e.g. 10">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Max Daily Price Volatility (%)</label>
-              <input type="number" 
-                     min="0" 
-                     class="form-control" 
-                     name="max-volatility-7" 
-                     placeholder="e.g. 5">
+              <input type="number" min="0" class="form-control" name="max-volatility-7" placeholder="e.g. 5">
             </div>
           </div>
         </div>
@@ -612,26 +640,53 @@
   </div>
 </section>
 
-
+  
       <!-- Personalization & AI-Driven -->
-      <section>
-        <div class="accordion mb-4" id="accordionPersonal">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingPersonal">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonal">
-                Personalization &amp; AI-Driven
-              </button>
-            </h2>
-            <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
-              <div class="accordion-body">
-                <div class="form-check mb-2"><input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore"><label class="form-check-label" for="predictiveScore">Buy-Now-or-Wait Score</label></div>
-                <div class="mb-2"><label class="form-label">Restock Forecasts (ASIN)</label><input type="text" class="form-control" name="restock-forecast" placeholder="Enter ASIN"></div>
-                <div class="form-check"><input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback"><label class="form-check-label" for="emotionFeedback">Emotion-Feedback Loop</label></div>
-              </div>
-            </div>
+<section>
+  <div class="accordion mb-4" id="accordionPersonal">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingPersonal">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonal">
+          Personalization &amp; AI-Driven
+        </button>
+      </h2>
+      <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
+        <div class="accordion-body">
+          <p><strong>🤖 How to Use Personalization & AI-Driven Tools</strong><br>
+          This section uses AI to help you shop smarter—even if you're not tech-savvy.</p>
+
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Buy-Now-or-Wait Score</strong><br>
+          ✅ Check this to activate our smart AI that tells you whether now is a good time to buy, or if prices usually drop further.<br>
+          It’s like having a price advisor built-in.</p>
+
+          <p><strong>Restock Forecasts (ASIN)</strong><br>
+          Paste the ASIN (Amazon product ID) of a product that’s out of stock.<br>
+          Example: B08N5WRWNW<br>
+          🤖 The AI checks trends and predicts when it might come back.</p>
+
+          <p><strong>Emotion-Feedback Loop</strong><br>
+          ✅ Check this to let the system learn from what you like.<br>
+          It improves results each time you interact—like a smart assistant that gets better with you.</p>
+
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore">
+            <label class="form-check-label" for="predictiveScore">Buy-Now-or-Wait Score</label>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Restock Forecasts (ASIN)</label>
+            <input type="text" class="form-control" name="restock-forecast" placeholder="Enter ASIN">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback">
+            <label class="form-check-label" for="emotionFeedback">Emotion-Feedback Loop</label>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <!-- Visual & Voice Interfaces -->
       <section>
