@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amazonsupersearch.com/sitemap.xml
