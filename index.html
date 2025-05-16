@@ -1295,7 +1295,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
 
     // ✅ Open in new tab
-    window.open(finalUrl, '_blank');
+window.open(finalUrl, '_blank');
+
+// ✅ Refresh this page
+window.location.reload();
   });
 });
 </script>
