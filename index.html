@@ -229,6 +229,24 @@
   box-shadow: 0 0 8px 2px rgba(255, 193, 7, 0.8);
   transition: box-shadow 0.5s ease-in-out;
 }
+.visually-hidden-focusable {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.visually-hidden-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  left: auto;
+  background: #ffffcc;
+  padding: 0.5rem;
+  z-index: 1000;
+}
 
 </style>
 
@@ -256,6 +274,8 @@
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
+  <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
+  <main id="main">
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
 
@@ -305,8 +325,10 @@
   <div class="card p-3">
     <div class="input-group">
       <!-- Mic on left -->
-      <button class="btn btn-outline-secondary" type="button" id="voiceSearchBtn">
-        🎤
+      <button class="btn btn-outline-secondary" type="button" id="voiceSearchBtn" aria-label="Activate voice search">
+  🎤
+</button>
+
       </button>
       <!-- Then the text input -->
       <input
@@ -320,9 +342,6 @@
     </div>
   </div>
 </div>
-
-
-
 
       <!-- Step 2 heading ABOVE the card box -->
 <div class="container text-start mb-4">
@@ -468,65 +487,66 @@
 
       <!-- Most Popular Filters -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly">
+        <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly" aria-label="Filter by Prime Only items">
+
         <label class="form-check-label" for="primeOnly">Prime Only</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping">
+        <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping" aria-label="Filter by Free Shipping only">
         <label class="form-check-label" for="freeShipping">Free Shipping</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="in-stock" id="inStock">
+       <input class="form-check-input" type="checkbox" name="in-stock" id="inStock" aria-label="Show only in-stock items">
         <label class="form-check-label" for="inStock">In Stock</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="coupons" id="coupons">
+        <input class="form-check-input" type="checkbox" name="coupons" id="coupons" aria-label="Show items with available coupons">
         <label class="form-check-label" for="coupons">Coupons Available</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals">
+       <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals" aria-label="Show Lightning Deals only">
         <label class="form-check-label" for="lightningDeals">Lightning Deals</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="todays-deals" id="todaysDeals">
+        <input class="form-check-input" type="checkbox" name="todays-deals" id="todaysDeals" aria-label="Show Today’s Deals only">
         <label class="form-check-label" for="todaysDeals">Today's Deals Only</label>
       </div>
 
       <!-- Other Available Filters -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave">
+        <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave" aria-label="Show Subscribe & Save items">
         <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice">
+       <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
         <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly">
+        <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
         <label class="form-check-label" for="fbaOnly">Sold & Shipped by Amazon</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns">
+        <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns" aria-label="Show items with Free Returns">
         <label class="form-check-label" for="freeReturns">Free Returns</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap">
+        <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap" aria-label="Show items with Gift Wrap available">
         <label class="form-check-label" for="giftWrap">Gift Wrap Available</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="small-business" id="smallBusiness">
+        <input class="form-check-input" type="checkbox" name="small-business" id="smallBusiness" aria-label="Show Small Business Products only">
         <label class="form-check-label" for="smallBusiness">Small Business Products</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="amazon-brands" id="amazonBrands">
+        <input class="form-check-input" type="checkbox" name="amazon-brands" id="amazonBrands" aria-label="Show Amazon Brand items only">
         <label class="form-check-label" for="amazonBrands">Amazon Brands Only</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="low-rating" id="lowRating">
+        <input class="form-check-input" type="checkbox" name="low-rating" id="lowRating" aria-label="Include Low Rating Products">
         <label class="form-check-label" for="lowRating">Low Rating Products (⚠️)</label>
       </div>
 
@@ -592,12 +612,18 @@
   ⚠️ Too many filters may return no results. Try removing a few for better results.
 </div>
 
-    <button 
-      type="submit" 
-      form="amazon-search-form" 
-      class="btn btn-primary btn-lg w-100 pulse-glow">
-      🔍 Search Amazon
-    </button>
+   <button 
+  type="submit" 
+  form="amazon-search-form" 
+  class="btn btn-primary btn-lg w-100 pulse-glow"
+  aria-label="Search Amazon with selected filters">
+  🔍 Search Amazon
+</button>
+
+    <p class="text-warning mt-2 text-center" style="font-weight: bold;">
+  ⚠️ Too many filters may return no results.
+</p>
+
   </div>
 </section>
 
@@ -857,6 +883,10 @@
       class="btn btn-success btn-lg w-100 pulse-glow">
       🔍 Search Amazon Again
     </button>
+    <p class="text-warning mt-2 text-center" style="font-weight: bold;">
+  ⚠️ Too many filters may return no results.
+</p>
+
   </div>
 </section>
 
@@ -868,160 +898,7 @@
     </script>
 </form>
 
-<script>
-  // Track checkbox toggles
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.form-check-input').forEach(cb => {
-      cb.addEventListener('change', e => {
-        trackClick(
-          'Filter Toggle',
-          `filter_${e.target.name}`,
-          e.target.checked ? 'on' : 'off'
-        );
-      });
-    });
 
-    // Track form submissions
-    document.getElementById('amazon-search-form')
-      .addEventListener('submit', () => {
-        trackClick(
-          'Form',
-          'search_submitted',
-          window.location.search
-        );
-      });
-  });
-</script>
-
-  <script>
-        // 2) Department & node
-const dept = data.get('i');
-const node = data.get('node');
-if (dept) params.set('i', dept);
-if (node) rh.push(`n:${node}`);
-
-
-
-        // 1) Boolean keywords
-        let q = (data.get('q') || '').trim();
-        if (data.get('enable-boolean') === 'on' && q) {
-          q = q.replace(/\bAND\b/gi, ' ').replace(/\bNOT\b/gi, '-');
-          params.set('bop','enable');
-        }
-        if (q) params.set('k', q);
-
-       // 2) Core Filters (exact cents)
-const min = data.get('min-price')?.trim();
-const max = data.get('max-price')?.trim();
-
-if (min && max) {
-  const minCents = Math.round(parseFloat(min) * 100);
-  const maxCents = Math.round(parseFloat(max) * 100);
-  rh.push(`p_36:${minCents}-${maxCents}`);
-} else if (min) {
-  const minCents = Math.round(parseFloat(min) * 100);
-  rh.push(`p_36:${minCents}-`);
-} else if (max) {
-  const maxCents = Math.round(parseFloat(max) * 100);
-  rh.push(`p_36:0-${maxCents}`);
-}
-
-if (data.get('percent-off')) rh.push(`p_n_pct-off-with-discount:${data.get('percent-off')}`);
-
-        if (data.get('min-rating')) rh.push(`p_72:${data.get('min-rating')}00`);
-        if (data.get('sort')) params.set('s', data.get('sort'));
-
-        // 3) Checkbox Flags
-        if (data.get('prime-only')==='on')    rh.push('p_n_feature_fulfilled_by_amazon:1');
-        if (data.get('in-stock')==='on')      rh.push('p_n_availability:1248879011');
-        if (data.get('free-shipping')==='on') rh.push('p_76:13184787011');
-        if (data.get('fba-only')==='on')      rh.push('p_6:ATVPDKIKX0DER');
-        if (data.get('lightning-deals')==='on') rh.push('p_n_specials_match:4366');
-        if (data.get('coupons')==='on')       rh.push('p_n_coupons_available:1');
-        if (data.get('subscribe-save')==='on') rh.push('p_n_subscribe:8');
-        if (data.get('amazon-choice')==='on') rh.push('p_n_feature_browse-bin:15527960011');
-        if (data.get('best-seller')==='on')   rh.push('p_n_feature_browse-bin:15527981011');
-        if (data.get('free-returns')==='on')  rh.push('p_n_free_returns_option:1');
-        if (data.get('gift-wrap')==='on')     rh.push('p_n_gift_wrap_available:1');
-       // ✅ Extra Smart Filters (Supported)
-if (data.get('todays-deals') === 'on')      rh.push('p_n_deals_ii:2499179011');
-if (data.get('small-business') === 'on')    rh.push('p_n_c_is_small_business:1');
-if (data.get('amazon-brands') === 'on')     rh.push('p_n_is_amazon_brand:1');
-if (data.get('low-rating') === 'on')        rh.push('p_72:1100');
-
-// 🚧 Coming Soon Filters (not yet supported in URL)
-if (data.get('ships-fast') === 'on')        console.log('Ships in 24 Hours — Coming Soon');
-if (data.get('back-in-stock') === 'on')     console.log('Back in Stock Today — Coming Soon');
-if (data.get('made-in-usa') === 'on')       console.log('Made in USA — Coming Soon');
-if (data.get('eco-friendly') === 'on')      console.log('Eco-Friendly Products — Coming Soon');
-if (data.get('trending-now') === 'on')      console.log('Trending Right Now — Coming Soon');
-if (data.get('new-last-week') === 'on')     console.log('New Arrivals (Last 7 Days) — Coming Soon');
-if (data.get('top-category') === 'on')      console.log('Top 1% of Category — Coming Soon');
-if (data.get('hidden-coupon') === 'on')     console.log('Hidden Coupons Only — Coming Soon');
-if (data.get('giftable') === 'on')          console.log('Highly Giftable Items — Coming Soon');
-if (data.get('bundle-match') === 'on')      console.log('Frequently Bought Together — Coming Soon');
-if (data.get('low-stock') === 'on')         console.log('Low Inventory Left — Coming Soon');
-
-
-       
-
-        // 4) Brand Include/Exclude
-        const incOnly = data.get('include-only') === 'on';
-        let incArr = [], excArr = [];
-        try { incArr = JSON.parse(data.get('brand-include')||'[]').map(o=>encodeURIComponent(o.value)); } catch{}
-        try { excArr = JSON.parse(data.get('brand-exclude')||'[]').map(o=>`-${encodeURIComponent(o.value)}`); } catch{}
-        if (incArr.length) {
-  if (incOnly) {
-    // Add multiple AND match-only filters (split into multiple keys)
-    incArr.forEach(v => rh.push(`p_89:${v}`));
-  } else {
-    // OR search
-    rh.push(`p_89:${incArr.join('|')}`);
-  }
-}
-
-if (excArr.length) {
-  // Negation with minus prefix
-  rh.push(`p_89:${excArr.join('|')}`);
-}
-
-       // 5) Deal-Hunter Goodies
-const discounts = [
-  data.get('price-drop'),
-  data.get('below-avg-30'),
-  data.get('below-avg-60'),
-  data.get('below-avg-90'),
-  data.get('max-volatility-7')
-]
-  .map(v => parseFloat(v))
-  .filter(v => !isNaN(v));
-
-if (discounts.length > 0) {
-  const maxDiscount = Math.max(...discounts);
-  rh.push(`p_n_pct-off-with-discount:${maxDiscount}`);
-}
-
-        if (data.get('coupon-only')==='on')     rh.push('p_n_coupons_available:1');
-        if (data.get('warehouse-refurb')==='on') rh.push('p_n_warehouse_refurbished:1');
-
-        // 6) Power-User & Comparison
-        if (data.get('field-filters')?.trim()) rh.push(data.get('field-filters'));
-        if (data.get('direct-lookup')?.trim()) rh.push(`asin:${data.get('direct-lookup')}`);
-        if (data.get('side-by-side')==='on')   rh.push('comparison-specs:enabled');
-        if (data.get('verified-only')==='on')  rh.push('review-verified:1');
-
-        // 7) AI/Personalization
-        if (data.get('predictive-score')==='on')  rh.push('predictive-score:1');
-        if (data.get('restock-forecast')?.trim()) rh.push(`restock:${data.get('restock-forecast')}`);
-        if (data.get('emotion-feedback')==='on')  rh.push('emotion-feedback:1');
-
-        // 8) Combine & open
-        if (rh.length) params.set('rh', rh.join(','));
-        params.set('tag', 'echolover25-20');
-        window.open(`https://www.amazon.com/s?${params.toString()}`, '_blank');
-      });  /* ← close form submit listener */
-    });    /* ← close outer DOMContentLoaded */
-  </script>
     <!-- …your search-logic <script> closes here… -->
  <!-- end of search logic -->
 
@@ -1110,17 +987,6 @@ if (discounts.length > 0) {
   }
 </script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickSound = document.getElementById('clickSound');
-    document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-  });
-</script>
-<script>
   // Also play click sound when language selector is used
   document.addEventListener('DOMContentLoaded', function() {
     const clickSound = document.getElementById('clickSound');
@@ -1184,121 +1050,137 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });     
 </script>
-<script>  
+<!-- All your HTML content above... -->
+
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-  // ✅ Form submit logic
   const form = document.getElementById('amazon-search-form');
+  const warningBox = document.getElementById('filter-warning');
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+
+    // ✅ Count checked checkboxes
+    const checked = [...form.elements].filter(el =>
+      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
+    ).length;
+
+    // ✅ Show warning if too many filters
+    if (checked > 2) {
+      if (warningBox) warningBox.style.display = 'block';
+      return;
+    } else {
+      if (warningBox) warningBox.style.display = 'none';
+    }
+
+    // ✅ Proceed with Amazon search
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
+
+    if (data.get('prime-only') === 'on') rh.push('p_n_feature_fulfilled_by_amazon:1');
+    if (data.get('in-stock') === 'on') rh.push('p_n_availability:1248879011');
+    if (data.get('free-shipping') === 'on') rh.push('p_76:13184787011');
+ 
+// ✅ Handle brand include/exclude filters
+const brandIncludeRaw = data.get('brand-include')?.trim();
+const brandExcludeRaw = data.get('brand-exclude')?.trim();
+const includeOnly = data.get('include-only') === 'on';
+
+if (brandIncludeRaw) {
+  const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+  brands.forEach(b => rh.push(`p_89:${b}`));
+  if (includeOnly) {
+    // Nothing else to add — already filtered only by selected brands
+  }
+}
+
+if (brandExcludeRaw) {
+  const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
+  brands.forEach(b => params.append('brand-exclude', b));
+}
+
+
+    const query = data.get('q')?.trim();
+    if (query) params.set('k', query);
+
+    if (rh.length) params.set('rh', rh.join(','));
+    params.set('tag', 'echolover25-20');
+
+    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    window.open(finalUrl, '_blank');
+    window.location.reload();
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('amazon-search-form');
+  const warningBox = document.getElementById('filter-warning');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // ✅ Count checked checkboxes (excluding coming soon)
+    const checked = [...form.elements].filter(el =>
+      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
+    ).length;
+
+    if (checked > 2) {
+      if (warningBox) warningBox.style.display = 'block';
+      return;
+    } else {
+      if (warningBox) warningBox.style.display = 'none';
+    }
+
+    // ✅ Sync Tagify input values before using FormData
+    ['brandInclude', 'brandExclude'].forEach(id => {
+      const tagifyInput = document.getElementById(id);
+      if (tagifyInput && tagifyInput._tagify) {
+        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
+      }
+    });
 
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
-   
-  
-    // ✅ Search query
-    let q = (data.get('q') || '').trim();
-    if (data.get('enable-boolean') === 'on' && q) {
-      q = q.replace(/\bAND\b/gi, ' ').replace(/\bNOT\b/gi, '-');
-      params.set('bop', 'enable');
-    }
-    if (q) params.set('k', q);
 
-    // ✅ Department / node
-    const dept = data.get('i'), node = data.get('node');
-    if (dept) params.set('i', dept);
-    if (node) rh.push(`n:${node}`);
+    if (data.get('prime-only') === 'on') rh.push('p_n_feature_fulfilled_by_amazon:1');
+    if (data.get('in-stock') === 'on') rh.push('p_n_availability:1248879011');
+    if (data.get('free-shipping') === 'on') rh.push('p_76:13184787011');
 
-    // ✅ Price range (dollars to cents)
-    const min = data.get('min-price')?.trim();
-    const max = data.get('max-price')?.trim();
-    if (min && max) rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
-    else if (min) rh.push(`p_36:${Math.round(min * 100)}-`);
-    else if (max) rh.push(`p_36:0-${Math.round(max * 100)}`);
+    // ✅ Handle brand filters
+    const brandIncludeRaw = data.get('brand-include')?.trim();
+    const brandExcludeRaw = data.get('brand-exclude')?.trim();
+    const includeOnly = data.get('include-only') === 'on';
 
-    // ✅ Rating
-    if (data.get('min-rating')) {
-      const rating = parseInt(data.get('min-rating'), 10);
-      if (!isNaN(rating)) rh.push(`p_72:${rating * 100}-`);
+    if (brandIncludeRaw) {
+      const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+      brands.forEach(b => rh.push(`p_89:${b}`));
+      if (includeOnly) {
+        // Already restricted to selected brands
+      }
     }
 
-    // ✅ Sort
-    if (data.get('sort')) params.set('s', data.get('sort'));
-
-    // ✅ Checkbox filters
-    const flags = {
-      'prime-only': 'p_n_feature_fulfilled_by_amazon:1',
-      'in-stock': 'p_n_availability:1248879011',
-      'free-shipping': 'p_76:13184787011',
-      'coupons': 'p_n_coupons_available:1',
-      'lightning-deals': 'p_n_specials_match:4366',
-      'todays-deals': 'p_n_deals_ii:2499179011',
-      'small-business': 'p_n_c_is_small_business:1',
-      'amazon-brands': 'p_n_is_amazon_brand:1',
-      'low-rating': 'p_72:1100'
-    };
-    Object.entries(flags).forEach(([name, val]) => {
-      if (data.get(name) === 'on') rh.push(val);
-    });
-
-    // ✅ Brands
-    const incOnly = data.get('include-only') === 'on';
-    let incArr = [], excArr = [];
-    try {
-      incArr = JSON.parse(data.get('brand-include') || '[]').map(o => encodeURIComponent(o.value));
-    } catch {}
-    try {
-      excArr = JSON.parse(data.get('brand-exclude') || '[]').map(o => `-${encodeURIComponent(o.value)}`);
-    } catch {}
-
-    if (incArr.length) {
-      if (incOnly) incArr.forEach(v => rh.push(`p_89:${v}`));
-      else rh.push(`p_89:${incArr.join('|')}`);
-    }
-    if (excArr.length) rh.push(`p_89:${excArr.join('|')}`);
-
-    // ✅ Deal filters (only if value > 0)
-    const discountInputs = [
-      data.get('price-drop'),
-      data.get('below-avg-30'),
-      data.get('below-avg-60'),
-      data.get('below-avg-90'),
-      data.get('max-volatility-7'),
-      data.get('percent-off')
-    ];
-    const validDiscounts = discountInputs.map(v => parseFloat(v)).filter(v => !isNaN(v) && v > 0);
-    if (validDiscounts.length) rh.push(`p_n_pct-off-with-discount:${Math.max(...validDiscounts)}`);
-
-    if (data.get('coupon-only') === 'on') rh.push('p_n_coupons_available:1');
-    if (data.get('warehouse-refurb') === 'on') rh.push('p_n_warehouse_refurbished:1');
-
-    // ✅ Power-user filters
-    const field = data.get('field-filters')?.trim();
-    if (field) rh.push(field);
-
-    const direct = data.get('direct-lookup')?.trim();
-    if (direct) rh.push(`asin:${direct}`);
-
-    if (data.get('side-by-side') === 'on') rh.push('comparison-specs:enabled');
-    if (data.get('verified-only') === 'on') rh.push('review-verified:1');
-
-    // ✅ AI/personalization
-    if (data.get('predictive-score') === 'on') rh.push('predictive-score:1');
-    if (data.get('emotion-feedback') === 'on') rh.push('emotion-feedback:1');
-    if (data.get('restock-forecast')?.trim()) {
-      rh.push(`restock:${data.get('restock-forecast')}`);
+    if (brandExcludeRaw) {
+      const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
+      brands.forEach(b => params.append('brand-exclude', b));
     }
 
-    // ✅ Build final Amazon URL
+    // ✅ Advanced filters
+    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
+    if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
+    if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
+
+    const query = data.get('q')?.trim();
+    if (query) params.set('k', query);
+
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
+
     const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-
-    // ✅ Open in new tab
-window.open(finalUrl, '_blank');
-
-// ✅ Refresh this page
-window.location.reload();
+    window.open(finalUrl, '_blank');
+    window.location.reload();
   });
 });
 </script>
