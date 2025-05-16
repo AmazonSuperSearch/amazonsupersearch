@@ -29,7 +29,7 @@
   <!-- Open Graph / Social -->
   <meta property="og:title" content="Amazon Search Filter Tool – Find In-Stock Deals, Apply Filters, Filter by Past Price Trends">
   <meta property="og:description"
-        content="Use Amazon Super Search to find in-stock lightning deals, set discount and price-drop alerts, filter free shipping only, and sort by highest ratings.">
+      content="Use Amazon Super Search to find in-stock lightning deals, set discount thresholds, filter free shipping only, and sort by highest ratings.">
   <meta property="og:url" content="https://amazonsupersearch.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://amazonsupersearch.com/thumbnail.png">
@@ -151,6 +151,36 @@
     color: #6c757d;
     font-style: italic;
   }
+    /* Floating share panel */
+.floating-share {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 200px;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.95);
+  border: 2px solid #007bff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+.floating-share h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.floating-share .share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.floating-share .share-buttons a {
+  flex: 1 1 48%;
+  font-size: 0.85rem;
+  padding: 0.3rem;
+  text-align: center;
+}
 </style>
 
 <!-- … your existing GA4 snippet on lines 82–88 … -->
@@ -174,7 +204,7 @@
       }, 'google_translate_element');
     }
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
   <!-- Google Translate dropdown -->
@@ -196,8 +226,10 @@
 </div>
  <section class="container text-center my-5">
   <h1 class="display-5 fw-bold mb-3">
-  Simplicity Meets Power: Advanced Amazon Search &amp; Instant Filter Options
+  Advanced Amazon Search &amp; Instant Filter Options —<br>
+  Simplicity Meets Power!
 </h1>
+
   <p class="lead mb-4">
     Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds. Filter by price, brand, Prime-only, free shipping, top ratings—and never miss another deal. No signup, no fluff—just the products you crave, right now.
   </p>
@@ -783,50 +815,6 @@
   </div>
 </section>
 
-
-  
-        <!-- Share With Friends -->
- <section id="share" class="mb-5 mt-5 text-center">
-    <h2>Share With Friends</h2>
-    <p>Spread the word about Amazon Super Search:</p>
-    <div class="d-flex flex-wrap gap-2 mb-3 justify-content-center">
-      <a href="#"
-         class="btn btn-primary"
-         onclick="window.open(
-           'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://amazonsupersearch.com/'),
-           '_blank'
-         ); return false;">
-        Share on Facebook
-      </a>
-      <a href="#"
-         class="btn btn-info"
-         onclick="window.open(
-           'https://twitter.com/intent/tweet?url='+encodeURIComponent('https://amazonsupersearch.com/')+'&text='+encodeURIComponent('Check out Amazon Super Search!'),
-           '_blank'
-         ); return false;">
-        Share on Twitter
-      </a>
-      <a href="mailto:?subject=Amazon%20Super%20Search&amp;body=Check%20out%20Amazon%20Super%20Search%3A%20https%3A%2F%2Famazonsupersearch.com%2F"
-         class="btn btn-secondary">
-        Share via Email
-      </a>
-      <a href="#"
-         class="btn btn-success"
-         onclick="window.open(
-           'sms:?&body='+encodeURIComponent('Check out Amazon Super Search: https://amazonsupersearch.com/'),
-           '_blank'
-         ); return false;">
-        Share via SMS
-      </a>
-    </div>
-   <div class="input-group mb-3 mx-auto" style="max-width: 400px;">
-  <input type="text" class="form-control" id="shareLink" readonly>
-  <button class="btn btn-outline-secondary pulse-orange" type="button"
-          onclick="navigator.clipboard.writeText(document.getElementById('shareLink').value)">
-    Copy URL
-  </button>
-</div>
-
     <script>
       // Populate the shareLink field on load
       document.addEventListener('DOMContentLoaded', function() {
@@ -1239,6 +1227,46 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 </script>
+<!-- Floating Share Panel -->
+<div class="floating-share">
+  <h2>Share With Friends</h2>
+  <div class="share-buttons">
+    <a href="#"
+       onclick="window.open(
+         'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-primary btn-sm">
+      Facebook
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)
+         +'&text='+encodeURIComponent(document.title),
+         '_blank'
+       ); return false;"
+       class="btn btn-info btn-sm">
+      Twitter
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'mailto:?subject='+encodeURIComponent(document.title)
+         +'&body='+encodeURIComponent(window.location.href),
+         '_self'
+       ); return false;"
+       class="btn btn-secondary btn-sm">
+      Email
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'sms:?&body='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-success btn-sm">
+      SMS
+    </a>
+  </div>
+</div>
 
 
 </body>
