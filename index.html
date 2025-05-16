@@ -13,18 +13,14 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Amazon Super Search – Filter Lightning Deals & Trends</title>
+ <title>Amazon Super Search – Filter Lightning Deals & Price Trends</title>
 <link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
 <link rel="manifest" href="/site.webmanifest">
 
   <!-- Intro paragraph -->
 
   <!-- SEO Meta Tags -->
-  <!-- Before (195 chars) -->
-<meta name="description" content="Amazon Super Search is the fastest way to find in-stock deals, apply filters, filter by past price trends, sort by reviews, and uncover Prime-only or coupon-enabled items. No signup, always free.">
-
-<!-- After (~150 chars) -->
-<meta name="description" content="Find in-stock Amazon deals fast—filter by price, reviews, Prime-only items, and price history. No signup required. Always free.">
+  <meta name="description" content="Amazon Super Search is the fastest way to find in-stock deals, apply filters, filter by past price trends, sort by reviews, and uncover Prime-only or coupon-enabled items. No signup, always free.">
   <meta name="keywords" content="Amazon search filter, in-stock Amazon deals, Amazon price tracker, Amazon coupon finder, Amazon Prime filter, Amazon sort by rating, search Amazon by brand, exclude brands on Amazon, advanced Amazon search tool, Amazon deal finder, Amazon lightning deals tracker, Amazon filter tool, Amazon price trend filters
 ">
   <meta name="robots" content="index, follow">
@@ -326,21 +322,24 @@
     Type a product name, keyword, category, ASIN, ISBN, or UPC to start your search.
   </p>
 
-  <!-- New sub-heading + input card -->
-<h3 class="h5 mb-2">Search Input</h3>
-<div class="card p-3">
-  <div class="input-group">
-    <button class="btn btn-outline-secondary" type="button" id="voiceSearchBtn" aria-label="Activate voice search">
-      🎤
-    </button>
-    <input
-      type="text"
-      class="form-control"
-      id="mainSearchInput"
-      name="q"
-      placeholder="e.g. wireless headphones"
-      autocomplete="off"
-    >
+  <div class="card p-3">
+    <div class="input-group">
+      <!-- Mic on left -->
+      <button class="btn btn-outline-secondary" type="button" id="voiceSearchBtn" aria-label="Activate voice search">
+  🎤
+</button>
+
+      </button>
+      <!-- Then the text input -->
+      <input
+        type="text"
+        class="form-control"
+        id="mainSearchInput"
+        name="q"
+        placeholder="e.g. wireless headphones"
+        autocomplete="off"
+      >
+    </div>
   </div>
 </div>
 
@@ -349,9 +348,7 @@
   <h2 class="mb-2">✅ Step 2: Set your price range ($)</h2>
   <p class="text-muted mb-3">Choose the minimum and maximum price you're willing to spend.</p>
 
- 
   <div class="card p-3">
-     <h3 class="h6 mb-2">Currency</h3>
     <div class="row g-3 align-items-end">
   <!-- Currency -->
   <div class="col-12 col-lg-2">
@@ -365,7 +362,6 @@
     </select>
   </div>
   <!-- Min -->
-        <h3 class="h6 mb-2">Price Range</h3>
   <div class="col-12 col-lg-5">
     <label class="form-label">Min</label>
     <input type="number" step="0.01" class="form-control" name="min-price" placeholder="Min">
@@ -382,60 +378,57 @@
 <!-- Step 3: Customize your deal filters -->
 <div class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 3: Customize your deal filters</h2>
-  <p class="text-muted mb-3">
-    Pick a minimum discount, customer rating, and how you want the results sorted.
-  </p>
+  <p class="text-muted mb-3">Pick a minimum discount, customer rating, and how you want the results sorted.</p>
 
-  <div class="card p-3">
-    <!-- Sub-section: % Off -->
-    <h3 class="h6 mb-2">% Off</h3>
-    <div class="row g-3">
-      <div class="col-12 col-lg-4">
-        <label class="form-label" for="percentOff">% Off</label>
-        <select class="form-select" name="percent-off" id="percentOff">
-          <option value="">Any</option>
-          <option value="10">10% or more</option>
-          <option value="20">20% or more</option>
-          <option value="30">30% or more</option>
-          <option value="40">40% or more</option>
-          <option value="50">50% or more</option>
-          <option value="60">60% or more</option>
-          <option value="70">70% or more</option>
-          <option value="80">80% or more</option>
-        </select>
-      </div>
+ <div class="card p-3">
+  <div class="row g-3">
+    <!-- % Off -->
+    <div class="col-12 col-lg-4">
+      <label class="form-label" for="percentOff">% Off</label>
+      <select class="form-select" name="percent-off" id="percentOff">
+        <option value="">Any</option>
+        <option value="10">10% or more</option>
+        <option value="20">20% or more</option>
+        <option value="30">30% or more</option>
+        <option value="40">40% or more</option>
+        <option value="50">50% or more</option>
+        <option value="60">60% or more</option>
+        <option value="70">70% or more</option>
+        <option value="80">80% or more</option>
+      </select>
+    </div>
 
-      <!-- Sub-section: Customer Review -->
-      <h3 class="h6 mb-2">Customer Review</h3>
-      <div class="col-12 col-lg-4">
-        <label class="form-label" for="minRating">Customer Review</label>
-        <select class="form-select" name="min-rating" id="minRating">
-          <option value="">Any</option>
-          <option value="1">1★ & up</option>
-          <option value="2">2★ & up</option>
-          <option value="3">3★ & up</option>
-          <option value="4">4★ & up</option>
-          <option value="5">5★ & up</option>
-        </select>
-      </div>
+    <!-- Customer Review -->
+<div class="col-12 col-lg-4">
+  <label class="form-label" for="minRating">
+    Customer Review <span class="text-warning" style="font-size: 0.85rem;">⚠️ May cause 0 results</span>
+  </label>
+  <select class="form-select" name="min-rating" id="minRating">
+    <option value="">Any</option>
+    <option value="1">1★ & up</option>
+    <option value="2">2★ & up</option>
+    <option value="3">3★ & up</option>
+    <option value="4">4★ & up</option>
+    <option value="5">5★ & up</option>
+  </select>
+</div>
 
-      <!-- Sub-section: Sort By -->
-      <h3 class="h6 mb-2">Sort By</h3>
-      <div class="col-12 col-lg-4">
-        <label class="form-label" for="sort">Sort By</label>
-        <select class="form-select" name="sort" id="sort">
-          <option value="">Relevance</option>
-          <option value="price-asc-rank">Price: Low → High</option>
-          <option value="price-desc-rank">Price: High → Low</option>
-          <option value="review-rank">Avg. Customer Review</option>
-          <option value="date-desc-rank">Newest Arrivals</option>
-          <option value="salesrank">Best Sellers</option>
-        </select>
-      </div>
+
+    <!-- Sort By -->
+    <div class="col-12 col-lg-4">
+      <label class="form-label" for="sort">Sort By</label>
+      <select class="form-select" name="sort" id="sort">
+        <option value="">Relevance</option>
+        <option value="price-asc-rank">Price: Low → High</option>
+        <option value="price-desc-rank">Price: High → Low</option>
+        <option value="review-rank">Avg. Customer Review</option>
+        <option value="date-desc-rank">Newest Arrivals</option>
+        <option value="salesrank">Best Sellers</option>
+      </select>
     </div>
   </div>
 </div>
-
+</div>
 
    <!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
@@ -445,9 +438,7 @@
   </p>
 
   <div class="card border-success shadow-sm mb-4 p-3">
-    <!-- Sub-section: Include Brands -->
-    <h3 class="h6 mb-2">Include Brands</h3>
-    <div class="row g-3 mb-3">
+    <div class="row g-3">
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandInclude">Include Brands</label>
         <input
@@ -469,11 +460,6 @@
           </label>
         </div>
       </div>
-    </div>
-
-    <!-- Sub-section: Exclude Brands -->
-    <h3 class="h6 mb-2">Exclude Brands</h3>
-    <div class="row g-3">
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandExclude">Exclude Brands</label>
         <input
@@ -489,7 +475,7 @@
 </section>
 
 
-<!-- Step 5: Fine-tune your preferences -->
+ <!-- Step 5: Fine-tune your preferences -->
 <section class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 5: Fine-tune your preferences</h2>
   <p class="text-muted mb-3">
@@ -497,90 +483,123 @@
   </p>
 
   <div class="card mb-4 p-3">
-    <!-- Sub-section: Most Popular Filters -->
-    <h3 class="h6 mb-2">Most Popular Filters</h3>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+      <!-- Most Popular Filters -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly">
+        <input class="form-check-input" type="checkbox" name="prime-only" id="primeOnly" aria-label="Filter by Prime Only items">
+
         <label class="form-check-label" for="primeOnly">Prime Only</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping">
+        <input class="form-check-input" type="checkbox" name="free-shipping" id="freeShipping" aria-label="Filter by Free Shipping only">
         <label class="form-check-label" for="freeShipping">Free Shipping</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="in-stock" id="inStock">
+       <input class="form-check-input" type="checkbox" name="in-stock" id="inStock" aria-label="Show only in-stock items">
         <label class="form-check-label" for="inStock">In Stock</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="coupons" id="coupons">
+        <input class="form-check-input" type="checkbox" name="coupons" id="coupons" aria-label="Show items with available coupons">
         <label class="form-check-label" for="coupons">Coupons Available</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals">
+       <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals" aria-label="Show Lightning Deals only">
         <label class="form-check-label" for="lightningDeals">Lightning Deals</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="todays-deals" id="todaysDeals">
+        <input class="form-check-input" type="checkbox" name="todays-deals" id="todaysDeals" aria-label="Show Today’s Deals only">
         <label class="form-check-label" for="todaysDeals">Today's Deals Only</label>
       </div>
-    </div>
 
-    <!-- Sub-section: Other Available Filters -->
-    <h3 class="h6 mb-2">Other Available Filters</h3>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-4">
+      <!-- Other Available Filters -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave">
-        <label class="form-check-label" for="subscribeSave">Subscribe &amp; Save</label>
+        <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave" aria-label="Show Subscribe & Save items">
+        <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice">
+       <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
         <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly">
-        <label class="form-check-label" for="fbaOnly">Sold &amp; Shipped by Amazon</label>
+        <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
+        <label class="form-check-label" for="fbaOnly">Sold & Shipped by Amazon</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns">
+        <input class="form-check-input" type="checkbox" name="free-returns" id="freeReturns" aria-label="Show items with Free Returns">
         <label class="form-check-label" for="freeReturns">Free Returns</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap">
+        <input class="form-check-input" type="checkbox" name="gift-wrap" id="giftWrap" aria-label="Show items with Gift Wrap available">
         <label class="form-check-label" for="giftWrap">Gift Wrap Available</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="small-business" id="smallBusiness">
+        <input class="form-check-input" type="checkbox" name="small-business" id="smallBusiness" aria-label="Show Small Business Products only">
         <label class="form-check-label" for="smallBusiness">Small Business Products</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="amazon-brands" id="amazonBrands">
+        <input class="form-check-input" type="checkbox" name="amazon-brands" id="amazonBrands" aria-label="Show Amazon Brand items only">
         <label class="form-check-label" for="amazonBrands">Amazon Brands Only</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="low-rating" id="lowRating">
-        <label class="form-check-label" for="lowRating">Low Rating Products</label>
+        <input class="form-check-input" type="checkbox" name="low-rating" id="lowRating" aria-label="Include Low Rating Products">
+        <label class="form-check-label" for="lowRating">Low Rating Products (⚠️)</label>
       </div>
-    </div>
 
-    <!-- Sub-section: Coming Soon Filters -->
-    <h3 class="h6 mb-2">Coming Soon Filters</h3>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-      <!-- repeat your .form-check coming-soon items here -->
+      <!-- Coming Soon Filters -->
       <div class="form-check coming-soon">
         <input class="form-check-input" type="checkbox" name="ships-fast" id="shipsFast">
         <label class="form-check-label" for="shipsFast">Ships in 24 Hours <small>(Coming Soon)</small></label>
       </div>
-      <!-- etc. -->
-    </div>
-  </div>
-</section>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="back-in-stock" id="backInStock">
+        <label class="form-check-label" for="backInStock">Back in Stock Today <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="made-in-usa" id="madeInUsa">
+        <label class="form-check-label" for="madeInUsa">Made in USA <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="eco-friendly" id="ecoFriendly">
+        <label class="form-check-label" for="ecoFriendly">Eco-Friendly Products <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="trending-now" id="trendingNow">
+        <label class="form-check-label" for="trendingNow">Trending Right Now <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="new-last-week" id="newLastWeek">
+        <label class="form-check-label" for="newLastWeek">New Arrivals (Last 7 Days) <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="top-category" id="topCategory">
+        <label class="form-check-label" for="topCategory">Top 1% of Category <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="hidden-coupon" id="hiddenCoupon">
+        <label class="form-check-label" for="hiddenCoupon">Hidden Coupons Only <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="giftable" id="giftable">
+        <label class="form-check-label" for="giftable">Highly Giftable Items <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="bundle-match" id="bundleMatch">
+        <label class="form-check-label" for="bundleMatch">Frequently Bought Together <small>(Coming Soon)</small></label>
+      </div>
+      <div class="form-check coming-soon">
+        <input class="form-check-input" type="checkbox" name="low-stock" id="lowStock">
+        <label class="form-check-label" for="lowStock">Low Inventory Left (Urgent) <small>(Coming Soon)</small></label>
+      </div>
+ </div> <!-- end of .row -->
+</div> <!-- end of .card -->
+</section> <!-- end of Step 5 section -->
 
- <!-- Step 6: Begin Your Amazon Search or Continue Below Using Advanced Settings -->
+  <!-- Step 6: Search Amazon -->
 <section class="container text-start mb-5">
   <h2 class="mb-2">
     ✅ Step 6: Begin Your Amazon Search or Continue Below Using Advanced Settings
@@ -588,31 +607,25 @@
   <p class="text-muted mb-3">
     You’re all set! Click the button below to view your filtered results directly on Amazon.
   </p>
-
   <div class="text-center">
-    <!-- Sub-section: Filter Warning -->
-    <h3 class="h6 mb-2">Filter Warning</h3>
     <div id="filter-warning" style="display:none; color: orange; font-weight: bold; padding: 10px;">
-      ⚠️ Too many filters may return no results. Try removing a few for better results.
-    </div>
+  ⚠️ Too many filters may return no results. Try removing a few for better results.
+</div>
 
-    <!-- Sub-section: Search Action -->
-    <h3 class="h6 mb-2">Search Action</h3>
-    <button
-      type="submit"
-      form="amazon-search-form"
-      class="btn btn-primary btn-lg w-100 pulse-glow"
-      aria-label="Search Amazon with selected filters"
-    >
-      🔍 Search Amazon
-    </button>
+   <button 
+  type="submit" 
+  form="amazon-search-form" 
+  class="btn btn-primary btn-lg w-100 pulse-glow"
+  aria-label="Search Amazon with selected filters">
+  🔍 Search Amazon
+</button>
 
     <p class="text-warning mt-2 text-center" style="font-weight: bold;">
-      ⚠️ Too many filters may return no results.
-    </p>
+  ⚠️ Too many filters may return no results.
+</p>
+
   </div>
 </section>
-
 
 <!-- Step 7: Advanced Settings -->
 <section class="container text-start mb-4">
@@ -623,7 +636,6 @@
 </section>
 
       <!-- Power-User Tools -->
-<!-- Power-User Tools -->
 <section>
   <div class="accordion mb-4" id="accordionPower">
     <div class="accordion-item">
@@ -634,24 +646,38 @@
       </h2>
       <div id="collapsePower" class="accordion-collapse collapse" data-bs-parent="#accordionPower">
         <div class="accordion-body">
-          <!-- Sub-section: Enable Boolean Operators -->
-          <h3 class="h6 mb-2">Enable Boolean Operators</h3>
-          <p>This lets you combine keywords with logic:</p>
+          <p><strong>🧠 How to Use Power-User Tools</strong><br>
+          This section gives you extra control to target exactly what you want—like using “search magic.” Here's how each option works:</p>
+
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Enable Boolean Operators</strong><br>
+          ✅ Check this box if you want to combine keywords with logic.<br>
+          Type your keywords in the main search box using:</p>
+
           <ul>
-            <li><strong>AND</strong>: Must include both words</li>
-            <li><strong>OR</strong>: Show either word</li>
-            <li><strong>NOT</strong>: Exclude terms</li>
+            <li><strong>AND</strong>: Must include both words (e.g., camera AND tripod)</li>
+            <li><strong>OR</strong>: Show either word (e.g., headphones OR earbuds)</li>
+            <li><strong>NOT</strong>: Exclude something (e.g., tablet NOT refurbished)</li>
           </ul>
 
-          <!-- Sub-section: Field Filters -->
-          <h3 class="h6 mb-2">Field Filters</h3>
-          <p>Type filters like <code>field-brand:Sony</code> to narrow to that field.</p>
+          <p><strong>Field Filters</strong><br>
+          📅 Click the input box.<br>
+          Type something like:</p>
 
-          <!-- Sub-section: ASIN / ISBN Direct Lookup -->
-          <h3 class="h6 mb-2">ASIN / ISBN Direct Lookup</h3>
-          <p>Paste an ASIN (e.g. <code>B08N5WRWNW</code>) or ISBN to jump straight to that product.</p>
+          <ul>
+            <li>field-brand:Sony to only show Sony products.</li>
+            <li>field-title:Bluetooth to only show items with "Bluetooth" in the title.</li>
+          </ul>
 
-          <!-- The existing form-check controls -->
+          <p>🔍 This lets you drill down with precision.</p>
+
+          <p><strong>ASIN / ISBN Direct Lookup</strong><br>
+          💡 Got a specific product code?<br>
+          Paste the ASIN (Amazon product ID) or ISBN (for books).<br>
+          Example: B08N5WRWNW</p>
+
+          <p>🔍 It will take you straight to that product in filtered results.</p>
+
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="enable-boolean" id="enableBoolean">
             <label class="form-check-label" for="enableBoolean">Enable Boolean Operators</label>
@@ -670,35 +696,41 @@
   </div>
 </section>
 
-
-<!-- Deal-Hunter Goodies -->
 <!-- Deal-Hunter Goodies -->
 <section>
   <div class="accordion mb-4" id="accordionDeal">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingDeal">
-        <button class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseDeal">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeal">
           Deal-Hunter Goodies
         </button>
       </h2>
       <div id="collapseDeal" class="accordion-collapse collapse" data-bs-parent="#accordionDeal">
         <div class="accordion-body">
-          <!-- Sub-section: 90-Day Avg Discount -->
-          <h3 class="h6 mb-2">90-Day Avg Discount</h3>
-          <p>Type a % to see items at least that much below their 90-day average price.</p>
+          <p><strong>💸 How to Use Deal-Hunter Goodies</strong><br>
+          This section is for finding major discounts, coupons, and bargains based on past pricing history.</p>
 
-          <!-- Sub-section: Coupon-Clippable Only -->
-          <h3 class="h6 mb-2">Coupon-Clippable Only</h3>
-          <p>Show only products offering a visible coupon at checkout.</p>
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Discount (%) from 90-Day Avg Price</strong><br>
+          💰 Type a number like 25 to only see items at least 25% cheaper than their average over the last 90 days.<br>
+          📉 Helps you spot real deals—not just fake markdowns.</p>
 
-          <!-- Sub-section: Warehouse / Open-Box -->
-          <h3 class="h6 mb-2">Warehouse / Open-Box</h3>
-          <p>Find gently used or open-box items sold directly by Amazon at a discount.</p>
+          <p><strong>Coupon-Clippable Only</strong><br>
+          ✅ Check this to only see products that offer a visible coupon at checkout.</p>
 
-          <!-- Your existing controls -->
+          <p><strong>Warehouse / Open-Box</strong><br>
+          ✅ Check this to find gently used or open-box items sold directly by Amazon at a discount.</p>
+
+          <p><strong>Other Discount (%) Boxes</strong><br>
+          Enter percentages like:<br>
+          30 under “30-Day Avg” to see items 30% cheaper than last month.<br>
+          You can fill in 1, 2, or all of them.<br>
+          🔄 The more you fill in, the better chance you’ll find big-time deals.</p>
+
+          <p><strong>Max Daily Price Volatility (%)</strong><br>
+          📉 Want price stability? Type something like 10 to filter out products that constantly jump in price.<br>
+          Helps avoid unstable or manipulated listings.</p>
+
           <div class="mb-3">
             <label class="form-label">Discount (%) from 90-Day Avg Price</label>
             <input type="number" class="form-control" name="price-drop" placeholder="e.g. 20">
@@ -711,25 +743,21 @@
             <input class="form-check-input" type="checkbox" name="warehouse-refurb" id="warehouseRefurb">
             <label class="form-check-label" for="warehouseRefurb">Warehouse / Open-Box</label>
           </div>
-
-          <!-- Sub-section: Multi-Period Discounts -->
-          <h3 class="h6 mb-2">Multi-Period Discounts</h3>
-          <p>Enter %s for 30, 60, or 90-day avg price comparisons.</p>
           <div class="row g-3 mt-3">
             <div class="col-6 col-md-3">
-              <label class="form-label">30-Day Avg</label>
+              <label class="form-label">Discount (%) from 30-Day Avg</label>
               <input type="number" min="0" class="form-control" name="below-avg-30" placeholder="e.g. 20">
             </div>
             <div class="col-6 col-md-3">
-              <label class="form-label">60-Day Avg</label>
+              <label class="form-label">Discount (%) from 60-Day Avg</label>
               <input type="number" min="0" class="form-control" name="below-avg-60" placeholder="e.g. 15">
             </div>
             <div class="col-6 col-md-3">
-              <label class="form-label">90-Day Avg</label>
+              <label class="form-label">Discount (%) from 90-Day Avg</label>
               <input type="number" min="0" class="form-control" name="below-avg-90" placeholder="e.g. 10">
             </div>
             <div class="col-6 col-md-3">
-              <label class="form-label">Max Daily Volatility (%)</label>
+              <label class="form-label">Max Daily Price Volatility (%)</label>
               <input type="number" min="0" class="form-control" name="max-volatility-7" placeholder="e.g. 5">
             </div>
           </div>
@@ -741,7 +769,6 @@
 
   
       <!-- Personalization & AI-Driven -->
-<!-- Personalization & AI-Driven -->
 <section>
   <div class="accordion mb-4" id="accordionPersonal">
     <div class="accordion-item">
@@ -752,25 +779,31 @@
       </h2>
       <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
         <div class="accordion-body">
-          <!-- Sub-section: Buy-Now-or-Wait Score -->
-          <h3 class="h6 mb-2">Buy-Now-or-Wait Score</h3>
-          <p>Check this to activate our smart AI that tells you whether now is a good time to buy, or if prices usually drop further—like having a price advisor built-in.</p>
+          <p><strong>🤖 How to Use Personalization & AI-Driven Tools</strong><br>
+          This section uses AI to help you shop smarter—even if you're not tech-savvy.</p>
+
+          <p><strong>✅ Step-by-Step:</strong><br>
+          <strong>Buy-Now-or-Wait Score</strong><br>
+          ✅ Check this to activate our smart AI that tells you whether now is a good time to buy, or if prices usually drop further.<br>
+          It’s like having a price advisor built-in.</p>
+
+          <p><strong>Restock Forecasts (ASIN)</strong><br>
+          Paste the ASIN (Amazon product ID) of a product that’s out of stock.<br>
+          Example: B08N5WRWNW<br>
+          🤖 The AI checks trends and predicts when it might come back.</p>
+
+          <p><strong>Emotion-Feedback Loop</strong><br>
+          ✅ Check this to let the system learn from what you like.<br>
+          It improves results each time you interact—like a smart assistant that gets better with you.</p>
+
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore">
             <label class="form-check-label" for="predictiveScore">Buy-Now-or-Wait Score</label>
           </div>
-
-          <!-- Sub-section: Restock Forecasts (ASIN) -->
-          <h3 class="h6 mb-2">Restock Forecasts (ASIN)</h3>
-          <p>Paste the ASIN (Amazon product ID) of an out-of-stock product (e.g. <code>B08N5WRWNW</code>), and our AI predicts when it might come back.</p>
           <div class="mb-2">
             <label class="form-label">Restock Forecasts (ASIN)</label>
             <input type="text" class="form-control" name="restock-forecast" placeholder="Enter ASIN">
           </div>
-
-          <!-- Sub-section: Emotion-Feedback Loop -->
-          <h3 class="h6 mb-2">Emotion-Feedback Loop</h3>
-          <p>Enable this to let the system learn from what you like—improving results each time you interact.</p>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback">
             <label class="form-check-label" for="emotionFeedback">Emotion-Feedback Loop</label>
@@ -782,36 +815,23 @@
 </section>
 
 
-
       <!-- Visual & Voice Interfaces -->
-      <!-- Visual & Voice Interfaces -->
-<section>
-  <div class="accordion mb-4" id="accordionVisual">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingVisual">
-        <button class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseVisual">
-          Visual &amp; Voice Interfaces <small class="text-muted">(coming soon)</small>
-        </button>
-      </h2>
-      <div id="collapseVisual" class="accordion-collapse collapse" data-bs-parent="#accordionVisual">
-        <div class="accordion-body">
-          <!-- Sub-section: Visual & Voice Interfaces -->
-          <h3 class="h6 mb-2">Visual & Voice Interfaces</h3>
-          <p class="text-muted">
-            We’re cooking up support for image‐based search and voice commands—stay tuned for a hands-free, camera-powered shopping experience!
-          </p>
+      <section>
+        <div class="accordion mb-4" id="accordionVisual">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingVisual">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVisual">
+                Visual &amp; Voice Interfaces <small class="text-muted">(coming soon)</small>
+              </button>
+            </h2>
+            <div id="collapseVisual" class="accordion-collapse collapse" data-bs-parent="#accordionVisual">
+              <div class="accordion-body text-muted">We’re cooking up visual & voice input—stay tuned!</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+      </section>
 
      <!-- Niche & Lifestyle Filters -->
-<!-- Niche & Lifestyle Filters -->
 <section>
   <div class="accordion mb-4" id="accordionNiche">
     <div class="accordion-item">
@@ -826,67 +846,47 @@
       <div id="collapseNiche"
            class="accordion-collapse collapse"
            data-bs-parent="#accordionNiche">
-        <div class="accordion-body">
-          <!-- Sub-section: Niche & Lifestyle Filters -->
-          <h3 class="h6 mb-2">Niche &amp; Lifestyle Filters</h3>
-          <p class="text-muted">
-            Filters for your hobbies &amp; lifestyles—like fitness, gaming, or eco-friendly products—are on the way!
-          </p>
+        <div class="accordion-body text-muted">
+          Filters for your hobbies &amp; lifestyles are on the way.
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 
       <!-- Social & Collaborative -->
-     <!-- Social & Collaborative -->
-<section>
-  <div class="accordion mb-4" id="accordionSocial">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingSocial">
-        <button class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseSocial">
-          Social &amp; Collaborative <small class="text-muted">(coming soon)</small>
-        </button>
-      </h2>
-      <div id="collapseSocial" class="accordion-collapse collapse" data-bs-parent="#accordionSocial">
-        <div class="accordion-body">
-          <!-- Sub-section: Social & Collaborative -->
-          <h3 class="h6 mb-2">Social &amp; Collaborative Features</h3>
-          <p class="text-muted">
-            Collaborative wish-lists, shared carts, and social shopping tools are on the way—bring your friends into the deal hunt!
-          </p>
+      <section>
+        <div class="accordion mb-4" id="accordionSocial">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSocial">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSocial">
+                Social &amp; Collaborative <small class="text-muted">(coming soon)</small>
+              </button>
+            </h2>
+            <div id="collapseSocial" class="accordion-collapse collapse" data-bs-parent="#accordionSocial">
+              <div class="accordion-body text-muted">Collaborative wish-lists and shared carts—very soon!</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+      </section>
 
 <section class="container text-start mb-5">
   <h2 class="mb-2">🔁 Quick Access: Search Again</h2>
   <p class="text-muted mb-3">
     Click below to run your current filter settings without scrolling.
   </p>
-
-  <!-- Sub-section: Quick Access Button -->
-  <h3 class="h6 mb-2">Quick Access Button</h3>
   <div class="text-center">
     <button
       type="submit"
       form="amazon-search-form"
-      class="btn btn-success btn-lg w-100 pulse-glow"
-      aria-label="Search Amazon Again with current filters"
-    >
+      class="btn btn-success btn-lg w-100 pulse-glow">
       🔍 Search Amazon Again
     </button>
     <p class="text-warning mt-2 text-center" style="font-weight: bold;">
-      ⚠️ Too many filters may return no results.
-    </p>
+  ⚠️ Too many filters may return no results.
+</p>
+
   </div>
 </section>
 
@@ -912,53 +912,32 @@
 <!-- Legal Disclaimer -->
 <footer class="text-center text-muted py-4" style="font-size: 0.9rem;">
   <hr>
+  <!-- Legal + Affiliate Disclaimer -->
   <div class="py-4">
     <hr>
-    <!-- Sub-section: Legal Disclaimer -->
-    <h3 class="h6 mb-2">Legal Disclaimer</h3>
-    <p>
-      This site is not affiliated with, endorsed by, or sponsored by Amazon.com or any of its subsidiaries. All trademarks are the property of their respective owners.
-    </p>
-
-    <!-- Sub-section: Affiliate Disclaimer -->
-    <h3 class="h6 mb-2">Affiliate Disclaimer</h3>
-    <p>
-      This site contains affiliate links. We may earn a small commission when you make a purchase, at no extra cost to you.
-    </p>
+    <p><strong>Disclaimer:</strong> This site is not affiliated with, endorsed by, or sponsored by Amazon.com or any of its subsidiaries. All trademarks are the property of their respective owners.</p>
+    <p><strong>Affiliate Disclaimer:</strong> This site contains affiliate links. We may earn a small commission when you make a purchase, at no extra cost to you.</p>
   </div>
 </footer>
 
-<!-- Comments Section -->
-<section>
-  <!-- Sub-section: Visitor Question -->
-  <h3 class="h6 mb-2">Visitor Question</h3>
-  <div id="visitor-question" class="mb-4 text-center">
-    <p class="lead mb-4">
-      ✨ Join the Conversation: How Can We Make Amazon Super Search Even Better? ✨
-    </p>
-  </div>
-
-  <!-- Sub-section: Comments -->
-  <h3 class="h6 mb-2">Comments</h3>
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url        = window.location.href;
-      this.page.identifier = 'amazon-super-search';
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://amazon-super-search-1.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head||d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>
-    Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-  </noscript>
-</section>
-
+<!-- Comments -->
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url        = window.location.href;
+    this.page.identifier = 'amazon-super-search';
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://amazon-super-search-1.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head||d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
