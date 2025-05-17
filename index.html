@@ -428,7 +428,38 @@
   </div>
 </div>
 </div>
+    <!-- Customer Review -->
+<div class="col-12 col-lg-4">
+  <label class="form-label" for="minRating">
+    Customer Review <span class="text-warning" style="font-size: 0.85rem;">⚠️ May cause 0 results</span>
+  </label>
+  <select class="form-select" name="min-rating" id="minRating">
+    <option value="">Any</option>
+    <option value="1">1★ & up</option>
+    <option value="2">2★ & up</option>
+    <option value="3">3★ & up</option>
+    <option value="4">4★ & up</option>
+    <option value="5">5★ & up</option>
+  </select>
+</div>
 
+
+    <!-- Sort By -->
+    <div class="col-12 col-lg-4">
+      <label class="form-label" for="sort">Sort By</label>
+      <select class="form-select" name="sort" id="sort">
+        <option value="">Relevance</option>
+        <option value="price-asc-rank">Price: Low → High</option>
+        <option value="price-desc-rank">Price: High → Low</option>
+        <option value="review-rank">Avg. Customer Review</option>
+        <option value="date-desc-rank">Newest Arrivals</option>
+        <option value="salesrank">Best Sellers</option>
+      </select>
+    </div>
+  </div>
+</div>
+</div>
+</form>
    <!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
@@ -889,15 +920,6 @@
   </div>
 </section>
 
-    <script>
-      // Populate the shareLink field on load
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('shareLink').value = 'https://amazonsupersearch.com/';
-      });
-    </script>
-</form>
-
-
     <!-- …your search-logic <script> closes here… -->
  <!-- end of search logic -->
 
@@ -943,18 +965,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
   
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('mainSearchInput');
-    if (searchInput) {
-      searchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          e.preventDefault(); // Block Enter from submitting the form
-        }
-      });
-    }
-  });
-</script>
-<script>
   const btn = document.getElementById('voiceSearchBtn');
   const input = document.getElementById('mainSearchInput');
 
@@ -985,17 +995,6 @@
       btn.classList.remove('active');
     });
   }
-</script>
-<script>
-  // Also play click sound when language selector is used
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickSound = document.getElementById('clickSound');
-    document.getElementById('google_translate_element')
-      .addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-  });
 </script>
 <!-- Floating Share Panel -->
 <div class="floating-share">
@@ -1037,19 +1036,6 @@
     </a>
   </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Init Tagify
-  new Tagify(document.querySelector('input[name="brand-include"]'), {
-    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
-    dropdown: { enabled: 0, maxItems: 10 }
-  });
-  new Tagify(document.querySelector('input[name="brand-exclude"]'), {
-    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
-    dropdown: { enabled: 0, maxItems: 10 }
-  });
-});     
-</script>
 <!-- All your HTML content above... -->
 
 <script>
@@ -1060,28 +1046,32 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // ✅ Count checked checkboxes
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
+ // ✅ Count checked checkboxes
+const checked = [...form.elements].filter(el =>
+  el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
+).length;
 
-    // ✅ Show warning if too many filters
-    if (checked > 2) {
-      if (warningBox) warningBox.style.display = 'block';
-      return;
-    } else {
-      if (warningBox) warningBox.style.display = 'none';
-    }
+if (warningBox) {
+  warningBox.style.display = (checked > 2) ? 'block' : 'none';
+}
 
-    // ✅ Proceed with Amazon search
-    const data = new FormData(form);
-    const params = new URLSearchParams();
-    const rh = [];
+// ✅ Proceed with Amazon search
+const data = new FormData(form);
+const params = new URLSearchParams();
+const rh = [];
 
-    if (data.get('prime-only') === 'on') rh.push('p_n_feature_fulfilled_by_amazon:1');
-    if (data.get('in-stock') === 'on') rh.push('p_n_availability:1248879011');
-    if (data.get('free-shipping') === 'on') rh.push('p_76:13184787011');
- 
+const min = data.get('min-price')?.trim();
+const max = data.get('max-price')?.trim();
+
+if (min && max) {
+  rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
+} else if (min) {
+  rh.push(`p_36:${Math.round(min * 100)}-`);
+} else if (max) {
+  rh.push(`p_36:-${Math.round(max * 100)}`);
+}
+
+
 // ✅ Handle brand include/exclude filters
 const brandIncludeRaw = data.get('brand-include')?.trim();
 const brandExcludeRaw = data.get('brand-exclude')?.trim();
@@ -1089,10 +1079,7 @@ const includeOnly = data.get('include-only') === 'on';
 
 if (brandIncludeRaw) {
   const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-  brands.forEach(b => rh.push(p_89:${b}));
-  if (includeOnly) {
-    // Nothing else to add — already filtered only by selected brands
-  }
+  brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
 }
 
 if (brandExcludeRaw) {
@@ -1100,19 +1087,36 @@ if (brandExcludeRaw) {
   brands.forEach(b => params.append('brand-exclude', b));
 }
 
+// ✅ Handle % Off filter
+const percentOff = data.get('percent-off');
+const discountMap = {
+  "10": "2665401011",
+  "20": "2665412011",
+  "30": "2665413011",
+  "40": "2665414011",
+  "50": "2665415011",
+  "60": "2665416011",
+  "70": "2665417011",
+  "80": "2665418011"
+};
+if (percentOff && discountMap[percentOff]) {
+  rh.push(`p_n_pct-off-with-tax:${discountMap[percentOff]}`);
+}
 
-    const query = data.get('q')?.trim();
-    if (query) params.set('k', query);
+// ✅ Handle Sort By filter
+const sort = data.get('sort');
+if (sort) params.set('s', sort);
 
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag', 'echolover25-20');
+const query = data.get('q')?.trim();
+if (query) params.set('k', query);
 
-    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-    window.open(finalUrl, '_blank');
-    window.location.reload();
-  });
-});
-</script>
+if (rh.length) params.set('rh', rh.join(','));
+params.set('tag', 'echolover25-20');
+
+const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+window.open(finalUrl, '_blank');
+
+  
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
@@ -1133,30 +1137,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (warningBox) warningBox.style.display = 'none';
     }
 
-    // ✅ Sync Tagify input values before using FormData
-    ['brandInclude', 'brandExclude'].forEach(id => {
-      const tagifyInput = document.getElementById(id);
-      if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
-      }
-    });
+   // ✅ Sync Tagify values BEFORE FormData
+['brandInclude', 'brandExclude'].forEach(id => {
+  const tagifyInput = document.getElementById(id);
+  if (tagifyInput && tagifyInput._tagify) {
+    tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
+  }
+});
 
-    const data = new FormData(form);
-    const params = new URLSearchParams();
-    const rh = [];
+// ✅ THEN call FormData
+const data = new FormData(form);
 
-    if (data.get('prime-only') === 'on') rh.push('p_n_feature_fulfilled_by_amazon:1');
-    if (data.get('in-stock') === 'on') rh.push('p_n_availability:1248879011');
-    if (data.get('free-shipping') === 'on') rh.push('p_76:13184787011');
+// ✅ Now safe to extract brand data
+const brandIncludeRaw = data.get('brand-include')?.trim();
+const brandExcludeRaw = data.get('brand-exclude')?.trim();
+const includeOnly = data.get('include-only') === 'on';
 
-    // ✅ Handle brand filters
-    const brandIncludeRaw = data.get('brand-include')?.trim();
-    const brandExcludeRaw = data.get('brand-exclude')?.trim();
-    const includeOnly = data.get('include-only') === 'on';
+
+    
 
     if (brandIncludeRaw) {
       const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-      brands.forEach(b => rh.push(p_89:${b}));
+      brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
       if (includeOnly) {
         // Already restricted to selected brands
       }
@@ -1173,20 +1175,58 @@ if (data.get('field-filters')) params.set('fields', data.get('field-filters').tr
 if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
 
 const query = data.get('q')?.trim();
-if (query) params.set('k', query);
+
+const includeOnly = data.get('include-only') === 'on';
 
 if (rh.length) params.set('rh', rh.join(','));
 params.set('tag', 'echolover25-20');
 
 const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
 window.open(finalUrl, '_blank');
-window.location.reload();
+
 
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('amazon-search-form');
+  const warningBox = document.getElementById('filter-warning');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // ✅ Count checked checkboxes
+    const checked = [...form.elements].filter(el =>
+      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
+    ).length;
+
+    // ✅ Show or hide warning, but don't block form submission
+    if (warningBox) {
+      warningBox.style.display = (checked > 10) ? 'block' : 'none';
+    }
+
+    // ✅ Continue with Amazon search (your existing logic goes here)
+    // For now just open a basic search so you can test:
+    const query = form.querySelector('input[name="q"]').value.trim();
+    const url = `https://www.amazon.com/s?k=${encodeURIComponent(query)}&tag=echolover25-20`;
+    window.open(url, '_blank');
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Init Tagify
+  new Tagify(document.querySelector('input[name="brand-include"]'), {
+    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
+    dropdown: { enabled: 0, maxItems: 10 }
+  });
+  new Tagify(document.querySelector('input[name="brand-exclude"]'), {
+    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
+    dropdown: { enabled: 0, maxItems: 10 }
+  });
+});     
+</script>
 
 </body>
 </html>
-
-
