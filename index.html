@@ -1174,16 +1174,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const clickSound = document.getElementById('clickSound');
+  const clickSound = document.getElementById('clickSound');
+  const form       = document.getElementById('amazon-search-form');
 
-    // play on ANY <button> click
-    document.body.addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      }
-    });
+  // play on any BUTTON click
+  document.body.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {/*ignore*/});
+    }
+  });
+
+  // intercept the Amazon‐search form submit
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // — your existing FormData → URLSearchParams → window.open code —
+
+    // play sound for the Search click, then reload
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {/*ignore*/});
+    setTimeout(() => window.location.reload(), 200);
   });
 </script>
 
