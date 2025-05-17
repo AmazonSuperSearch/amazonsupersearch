@@ -328,7 +328,7 @@
   🎤
 </button>
 
-      </button>
+    
       <!-- Then the text input -->
       <input
         type="text"
@@ -908,6 +908,7 @@
     If you like our page, share, share, share the love! ❤️
   </p>
 </section>
+</main>
 <!-- Legal Disclaimer -->
 <footer class="text-center text-muted py-4" style="font-size: 0.9rem;">
   <hr>
@@ -1166,20 +1167,21 @@ document.addEventListener('DOMContentLoaded', () => {
       brands.forEach(b => params.append('brand-exclude', b));
     }
 
-    // ✅ Advanced filters
-    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
-    if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
-    if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
+   // ✅ Advanced filters
+if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
+if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
+if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
 
-    const query = data.get('q')?.trim();
-    if (query) params.set('k', query);
+const query = data.get('q')?.trim();
+if (query) params.set('k', query);
 
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag', 'echolover25-20');
+if (rh.length) params.set('rh', rh.join(','));
+params.set('tag', 'echolover25-20');
 
-    const finalUrl = https://www.amazon.com/s?${params.toString()};
-    window.open(finalUrl, '_blank');
-    window.location.reload();
+const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+window.open(finalUrl, '_blank');
+window.location.reload();
+
   });
 });
 </script>
