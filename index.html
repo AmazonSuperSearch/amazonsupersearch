@@ -1082,7 +1082,8 @@ const includeOnly = data.get('include-only') === 'on';
 
 if (brandIncludeRaw) {
   const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-  brands.forEach(b => rh.push(`p_89:${b}`);
+   brands.forEach(b => rh.push(`p_89:${b}`));
+
 
   if (includeOnly) {
     // Nothing else to add — already filtered only by selected brands
