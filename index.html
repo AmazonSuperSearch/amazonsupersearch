@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1037,7 +1039,12 @@ document.addEventListener('DOMContentLoaded', () => {
         tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
       }
     });
-
+document.querySelectorAll('button, input[type="submit"]').forEach(el => {
+  el.addEventListener('click', () => {
+    const clickSound = document.getElementById('clickSound');
+    if (clickSound) clickSound.play().catch(() => {});
+  });
+});
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
