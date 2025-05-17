@@ -340,10 +340,6 @@
     </div>
   </div>
 </section>
-<!-- Sticky CTA -->
-<button id="stickyCTA" class="btn btn-warning btn-lg" style="position:fixed;bottom:1rem;right:1rem;z-index:1050;">
-  🚀 Try Amazon Super Search Now
-</button>
 
 <input type="hidden" name="i" value="">
 <form id="amazon-search-form" onsubmit="gtag('event', 'submit_search_form', {
@@ -535,9 +531,10 @@
         <label class="form-check-label" for="inStock">In Stock</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="coupons" id="coupons" aria-label="Show items with available coupons">
-        <label class="form-check-label" for="coupons">Coupons Available</label>
-      </div>
+  <input class="form-check-input" type="checkbox" name="coupons" id="coupons" aria-label="Show items with available coupons">
+  <label class="form-check-label" for="coupons">Coupons Available</label>
+</div>
+
       <div class="form-check">
        <input class="form-check-input" type="checkbox" name="lightning-deals" id="lightningDeals" aria-label="Show Lightning Deals only">
         <label class="form-check-label" for="lightningDeals">Lightning Deals</label>
@@ -644,7 +641,7 @@
   </p>
   <div class="text-center">
     <div id="filter-warning" style="display:none; color: orange; font-weight: bold; padding: 10px;">
-  ⚠️ Too many filters may return no results. Try removing a few for better results.
+  Too many filters may return no results. Try removing a few for better results.
 </div>
 
    <button 
@@ -1092,7 +1089,6 @@
   
 
 
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
@@ -1104,34 +1100,19 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-
-    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
-
-    ['brandInclude', 'brandExclude'].forEach(id => {
-      const tagifyInput = document.getElementById(id);
-      if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
-      }
-    });
-document.querySelectorAll('button, input[type="submit"]').forEach(el => {
-  el.addEventListener('click', () => {
-    const clickSound = document.getElementById('clickSound');
-    if (clickSound) clickSound.play().catch(() => {});
-  });
-});
+    // Initialize the form data and other parameters
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
 
+    // Handle price range filters
     const min = data.get('min-price')?.trim();
     const max = data.get('max-price')?.trim();
     if (min && max) rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
     else if (min) rh.push(`p_36:${Math.round(min * 100)}-`);
     else if (max) rh.push(`p_36:-${Math.round(max * 100)}`);
 
+    // Handle brand include/exclude filters
     const brandIncludeRaw = data.get('brand-include')?.trim();
     const brandExcludeRaw = data.get('brand-exclude')?.trim();
     if (brandIncludeRaw) {
@@ -1143,6 +1124,77 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
       brands.forEach(b => params.append('brand-exclude', b));
     }
 
+    // Check if "Low Rating Products" checkbox is selected
+    if (data.get('low-rating') === 'on') {
+    rh.push('p_n_ratings:low');  // Low Rating Products filter
+    }
+
+    // Check if "Amazon Brands Only" checkbox is selected
+    if (data.get('amazon-brands') === 'on') {
+    rh.push('p_89:amazon');  // Filter for Amazon-branded products
+    }
+
+    // Check if "Free Shipping" checkbox is selected
+    if (data.get('free-shipping') === 'on') {
+    rh.push('p_n_shipping:2665395011');  // Free Shipping filter
+    }
+
+    // Check if "In Stock" checkbox is selected
+    if (data.get('in-stock') === 'on') {
+    rh.push('p_n_availability:2931576011');  // In Stock filter
+    }
+
+    // Check if "Today's Deals Only" checkbox is selected
+    if (data.get('todays-deals') === 'on') {
+    rh.push('p_n_deal_type:23566065011');  // Today's Deals filter
+    }
+
+    // Check if "Best Seller" checkbox is selected
+    if (data.get('best-seller') === 'on') {
+    rh.push('p_n_rank:1');  // Best Seller filter
+    }
+
+    // Check if "Gift Wrap Available" checkbox is selected
+    if (data.get('gift-wrap') === 'on') {
+    rh.push('p_n_giftwrap_available:true');  // Gift Wrap Available filter
+    }
+
+    // Check if "Low Rating Products" checkbox is selected
+    if (data.get('low-rating') === 'on') {
+    rh.push('p_n_ratings:low');  // Low Rating Products filter
+    }
+  
+     // Check if "Sold & Shipped by Amazon" checkbox is selected
+     if (data.get('fba-only') === 'on') {
+     rh.push('p_n_vendor:Amazon');  // Filter for Sold & Shipped by Amazon
+    }
+
+    // Check if "Coupons Available" checkbox is selected
+    if (data.get('coupons') === 'on') {
+      rh.push('p_n_coupon_available:true');  // Apply filter for coupons
+    }
+
+    // Check if "Free Returns" checkbox is selected
+    if (data.get('free-returns') === 'on') {
+      rh.push('p_n_free_returns:2937117011');  // Free Returns filter
+    }
+  
+    // Handle the Subscribe & Save filter
+    if (data.get('subscribe-save') === 'on') {
+      rh.push('p_n_subscribe-save:3039453011');  // Subscribe & Save filter
+    }
+  
+    // Check if "Small Business Products" checkbox is selected
+    if (data.get('small-business') === 'on') {
+      rh.push('p_89:small-business');  // Small Business Products filter
+    }
+
+    // Check if "Amazon's Choice" checkbox is selected
+    if (data.get('amazon-choice') === 'on') {
+      rh.push('p_n_feature_thirty-two:2967583011');  // Amazon's Choice filter
+    }
+
+    // Handle discount percentage filter
     const percentOff = data.get('percent-off');
     const discountMap = {
       "10": "2665401011", "20": "2665412011", "30": "2665413011",
@@ -1153,28 +1205,20 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
       rh.push(`p_n_pct-off-with-tax:${discountMap[percentOff]}`);
     }
 
+    // Handle Lightning Deals filter
     if (data.get('lightning-deals') === 'on') {
       rh.push('p_n_deal_type:23566065011');
     }
 
-    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
-    if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
-    if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
-
-    const sort = data.get('sort');
-    if (sort) params.set('s', sort);
-
-    const query = data.get('q')?.trim();
-    if (query) params.set('k', query);
-
+    // Add the filters to the URL params
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
 
+    // Final URL construction
     const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
     window.open(finalUrl, '_blank');
-  });
 });
+  });
 </script>
-
 </body>
 </html>
