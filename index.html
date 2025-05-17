@@ -1008,194 +1008,88 @@
 </div>
 <!-- All your HTML content above... -->
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
- // ✅ Count checked checkboxes
-const checked = [...form.elements].filter(el =>
-  el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-).length;
-
-if (warningBox) {
-  warningBox.style.display = (checked > 2) ? 'block' : 'none';
-}
-
-// ✅ Proceed with Amazon search
-const data = new FormData(form);
-const params = new URLSearchParams();
-const rh = [];
-
-const min = data.get('min-price')?.trim();
-const max = data.get('max-price')?.trim();
-
-if (min && max) {
-  rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
-} else if (min) {
-  rh.push(`p_36:${Math.round(min * 100)}-`);
-} else if (max) {
-  rh.push(`p_36:-${Math.round(max * 100)}`);
-}
-
-
-// ✅ Handle brand include/exclude filters
-const brandIncludeRaw = data.get('brand-include')?.trim();
-const brandExcludeRaw = data.get('brand-exclude')?.trim();
-const includeOnly = data.get('include-only') === 'on';
-
-if (brandIncludeRaw) {
-  const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-  brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
-}
-
-if (brandExcludeRaw) {
-  const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
-  brands.forEach(b => params.append('brand-exclude', b));
-}
-
-// ✅ Handle % Off filter
-const percentOff = data.get('percent-off');
-const discountMap = {
-  "10": "2665401011",
-  "20": "2665412011",
-  "30": "2665413011",
-  "40": "2665414011",
-  "50": "2665415011",
-  "60": "2665416011",
-  "70": "2665417011",
-  "80": "2665418011"
-};
-if (percentOff && discountMap[percentOff]) {
-  rh.push(`p_n_pct-off-with-tax:${discountMap[percentOff]}`);
-}
-
-// ✅ Handle Sort By filter
-const sort = data.get('sort');
-if (sort) params.set('s', sort);
-
-const query = data.get('q')?.trim();
-if (query) params.set('k', query);
-
-if (rh.length) params.set('rh', rh.join(','));
-params.set('tag', 'echolover25-20');
-
-const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-window.open(finalUrl, '_blank');
 
   
+
+
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
 
+  new Tagify(document.querySelector('input[name="brand-include"]'));
+  new Tagify(document.querySelector('input[name="brand-exclude"]'));
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // ✅ Count checked checkboxes (excluding coming soon)
     const checked = [...form.elements].filter(el =>
       el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
     ).length;
 
-    if (checked > 2) {
-      if (warningBox) warningBox.style.display = 'block';
-      return;
-    } else {
-      if (warningBox) warningBox.style.display = 'none';
-    }
+    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
 
-   // ✅ Sync Tagify values BEFORE FormData
-['brandInclude', 'brandExclude'].forEach(id => {
-  const tagifyInput = document.getElementById(id);
-  if (tagifyInput && tagifyInput._tagify) {
-    tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
-  }
-});
+    ['brandInclude', 'brandExclude'].forEach(id => {
+      const tagifyInput = document.getElementById(id);
+      if (tagifyInput && tagifyInput._tagify) {
+        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
+      }
+    });
 
-// ✅ THEN call FormData
-const data = new FormData(form);
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
 
-// ✅ Now safe to extract brand data
-const brandIncludeRaw = data.get('brand-include')?.trim();
-const brandExcludeRaw = data.get('brand-exclude')?.trim();
-const includeOnly = data.get('include-only') === 'on';
+    const min = data.get('min-price')?.trim();
+    const max = data.get('max-price')?.trim();
+    if (min && max) rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
+    else if (min) rh.push(`p_36:${Math.round(min * 100)}-`);
+    else if (max) rh.push(`p_36:-${Math.round(max * 100)}`);
 
-
-    
-
+    const brandIncludeRaw = data.get('brand-include')?.trim();
+    const brandExcludeRaw = data.get('brand-exclude')?.trim();
     if (brandIncludeRaw) {
       const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
       brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
-      if (includeOnly) {
-        // Already restricted to selected brands
-      }
     }
-
     if (brandExcludeRaw) {
       const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
       brands.forEach(b => params.append('brand-exclude', b));
     }
 
-   // ✅ Advanced filters
-if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
-if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
-if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
-
-const query = data.get('q')?.trim();
-
-const includeOnly = data.get('include-only') === 'on';
-
-if (rh.length) params.set('rh', rh.join(','));
-params.set('tag', 'echolover25-20');
-
-const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-window.open(finalUrl, '_blank');
-
-
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // ✅ Count checked checkboxes
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-
-    // ✅ Show or hide warning, but don't block form submission
-    if (warningBox) {
-      warningBox.style.display = (checked > 10) ? 'block' : 'none';
+    const percentOff = data.get('percent-off');
+    const discountMap = {
+      "10": "2665401011", "20": "2665412011", "30": "2665413011",
+      "40": "2665414011", "50": "2665415011", "60": "2665416011",
+      "70": "2665417011", "80": "2665418011"
+    };
+    if (percentOff && discountMap[percentOff]) {
+      rh.push(`p_n_pct-off-with-tax:${discountMap[percentOff]}`);
     }
 
-    // ✅ Continue with Amazon search (your existing logic goes here)
-    // For now just open a basic search so you can test:
-    const query = form.querySelector('input[name="q"]').value.trim();
-    const url = `https://www.amazon.com/s?k=${encodeURIComponent(query)}&tag=echolover25-20`;
-    window.open(url, '_blank');
+    if (data.get('lightning-deals') === 'on') {
+      rh.push('p_n_deal_type:23566065011');
+    }
+
+    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
+    if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
+    if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
+
+    const sort = data.get('sort');
+    if (sort) params.set('s', sort);
+
+    const query = data.get('q')?.trim();
+    if (query) params.set('k', query);
+
+    if (rh.length) params.set('rh', rh.join(','));
+    params.set('tag', 'echolover25-20');
+
+    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    window.open(finalUrl, '_blank');
   });
 });
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Init Tagify
-  new Tagify(document.querySelector('input[name="brand-include"]'), {
-    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
-    dropdown: { enabled: 0, maxItems: 10 }
-  });
-  new Tagify(document.querySelector('input[name="brand-exclude"]'), {
-    whitelist: ["Sony","Samsung","LG","Acer","Apple","Dell"],
-    dropdown: { enabled: 0, maxItems: 10 }
-  });
-});     
 </script>
 
 </body>
