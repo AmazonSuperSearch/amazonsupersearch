@@ -1107,7 +1107,7 @@ if (brandExcludeRaw) {
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
 
-    const finalUrl = https://www.amazon.com/s?${params.toString()};
+    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
     window.open(finalUrl, '_blank');
     window.location.reload();
   });
