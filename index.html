@@ -36,8 +36,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
  <meta name="twitter:title" content="Advanced Amazon Filter Search Tool">
-<meta name="twitter:description" content="Discover Amazon’s best live deals: free shipping filters, deep discounts, lightning deals in stock &amp; filters based on past price trends.">
-
+ <meta name="twitter:description" content="Discover Amazon’s best live deals: free shipping filters, deep discounts, lightning deals in stock & filters based on past price trends.">
   <meta name="twitter:image" content="https://amazonsupersearch.com/thumbnail.png">
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -889,6 +888,13 @@
 
   </div>
 </section>
+
+    <script>
+      // Populate the shareLink field on load
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('shareLink').value = 'https://amazonsupersearch.com/';
+      });
+    </script>
 </form>
 
 
@@ -1082,9 +1088,7 @@ const includeOnly = data.get('include-only') === 'on';
 
 if (brandIncludeRaw) {
   const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-   brands.forEach(b => rh.push(`p_89:${b}`));
-
-
+  brands.forEach(b => rh.push(p_89:${b}));
   if (includeOnly) {
     // Nothing else to add — already filtered only by selected brands
   }
@@ -1102,7 +1106,7 @@ if (brandExcludeRaw) {
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
 
-    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    const finalUrl = https://www.amazon.com/s?${params.toString()};
     window.open(finalUrl, '_blank');
     window.location.reload();
   });
@@ -1149,14 +1153,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const brandExcludeRaw = data.get('brand-exclude')?.trim();
     const includeOnly = data.get('include-only') === 'on';
 
-   if (brandIncludeRaw) {
-  const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-  brands.forEach(b => rh.push(`p_89:${b}`)); // ✅ Fix: loop through brands
-  if (includeOnly) {
-    // Already restricted to selected brands
-  }
-}
-
+    if (brandIncludeRaw) {
+      const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+      brands.forEach(b => rh.push(p_89:${b}));
+      if (includeOnly) {
+        // Already restricted to selected brands
+      }
+    }
 
     if (brandExcludeRaw) {
       const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
@@ -1183,3 +1186,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
+
