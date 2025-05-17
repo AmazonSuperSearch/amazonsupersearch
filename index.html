@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +32,7 @@
   <meta property="og:url" content="https://amazonsupersearch.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://amazonsupersearch.com/thumbnail.png">
+  <meta property="og:image:alt" content="Screenshot of Amazon Super Search homepage">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -49,7 +48,11 @@
     "url": "https://www.amazonsupersearch.com/",
     "applicationCategory": "WebApplication",
     "operatingSystem": "All",
-    "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings."
+    "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings.",
+    "author": {
+      "@type": "Organization",
+      "name": "Amazon Super Search"
+    }
   }
   </script>
 
@@ -58,7 +61,7 @@
 
   <!-- Tagify CSS & JS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
-  <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
 
   <style>
       /* ——— AMAZON-ORANGE PULSING HEADING ——— */
@@ -272,7 +275,7 @@
       }, 'google_translate_element');
     }
   </script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script defer src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
@@ -315,10 +318,15 @@
     </div>
   </div>
 </section>
+<!-- Sticky CTA -->
+<button id="stickyCTA" class="btn btn-warning btn-lg" style="position:fixed;bottom:1rem;right:1rem;z-index:1050;">
+  🚀 Try Amazon Super Search Now
+</button>
+
 <input type="hidden" name="i" value="">
 <form id="amazon-search-form">
 <div class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 1: What are you shopping for?</h2>
+  <h2 id="step1" class="mb-2">✅ Step 1: What are you shopping for?</h2>
   <p class="text-muted mb-3">
     Type a product name, keyword, category, ASIN, ISBN, or UPC to start your search.
   </p>
@@ -346,7 +354,7 @@
 
       <!-- Step 2 heading ABOVE the card box -->
 <div class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 2: Set your price range ($)</h2>
+  <h2 id="step2" class="mb-2">✅ Step 2: Set your price range ($)</h2>
   <p class="text-muted mb-3">Choose the minimum and maximum price you're willing to spend.</p>
 
   <div class="card p-3">
@@ -378,7 +386,7 @@
 
 <!-- Step 3: Customize your deal filters -->
 <div class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 3: Customize your deal filters</h2>
+  <h2 id="step3" class="mb-2">✅ Step 3: Customize your deal filters</h2>
   <p class="text-muted mb-3">Pick a minimum discount, customer rating, and how you want the results sorted.</p>
 
  <div class="card p-3">
@@ -434,7 +442,7 @@
   
    <!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
+  <h2 id="step4" class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
   <p class="text-muted mb-3">
     Narrow results by including only certain brands or filtering out unwanted ones.
   </p>
@@ -479,7 +487,7 @@
 
  <!-- Step 5: Fine-tune your preferences -->
 <section class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 5: Fine-tune your preferences</h2>
+  <h2 id="step5" class="mb-2">✅ Step 5: Fine-tune your preferences</h2>
   <p class="text-muted mb-3">
     Select additional filters like Prime only, in stock, free shipping, coupons, and more.
   </p>
@@ -631,7 +639,7 @@
 
 <!-- Step 7: Advanced Settings -->
 <section class="container text-start mb-4">
-  <h2 class="mb-2">✅ Step 7: Advanced Settings</h2>
+  <h2 id="step7" class="mb-2">✅ Step 7: Advanced Settings</h2>
   <p class="text-muted mb-3">
     Explore advanced filters and tools to refine your search even further.
   </p>
