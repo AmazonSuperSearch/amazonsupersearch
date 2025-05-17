@@ -1,4 +1,4 @@
-
+verify: 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -277,10 +277,10 @@
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
   <main id="main">
   <!-- Google Translate dropdown -->
-   <div id="google_translate_element" class="text-end p-2"></div>
-   <!-- Click sound audio (once per page) -->
-   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <div id="google_translate_element" class="text-end p-2"></div>
 
+  <!-- Click sound audio -->
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
     🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
@@ -986,6 +986,17 @@
     });
   }
 </script>
+<script>
+  // Also play click sound when language selector is used
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickSound = document.getElementById('clickSound');
+    document.getElementById('google_translate_element')
+      .addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+  });
+</script>
 <!-- Floating Share Panel -->
 <div class="floating-share">
   <h2>Share With Friends</h2>
@@ -1078,7 +1089,7 @@ const includeOnly = data.get('include-only') === 'on';
 
 if (brandIncludeRaw) {
   const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-  brands.forEach(b => rh.push(`p_89:${b}`));
+  brands.forEach(b => rh.push(p_89:${b}));
   if (includeOnly) {
     // Nothing else to add — already filtered only by selected brands
   }
@@ -1096,7 +1107,7 @@ if (brandExcludeRaw) {
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
 
-    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    const finalUrl = https://www.amazon.com/s?${params.toString()};
     window.open(finalUrl, '_blank');
     window.location.reload();
   });
@@ -1145,7 +1156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (brandIncludeRaw) {
       const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-      brands.forEach(b => rh.push(`p_89:${b}`));
+      brands.forEach(b => rh.push(p_89:${b}));
       if (includeOnly) {
         // Already restricted to selected brands
       }
@@ -1167,116 +1178,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (rh.length) params.set('rh', rh.join(','));
     params.set('tag', 'echolover25-20');
 
-    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    const finalUrl = https://www.amazon.com/s?${params.toString()};
     window.open(finalUrl, '_blank');
     window.location.reload();
-  });
-});
-</script>
-<script>
-  const clickSound = document.getElementById('clickSound');
-  const form       = document.getElementById('amazon-search-form');
-
-  // play on any BUTTON click
-  document.body.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(() => {/*ignore*/});
-    }
-  });
-
-  // intercept the Amazon‐search form submit
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    // — your existing FormData → URLSearchParams → window.open code —
-
-    // play sound for the Search click, then reload
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {/*ignore*/});
-    setTimeout(() => window.location.reload(), 200);
-  });
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
-  const clickSound = document.getElementById('clickSound');
-
-  // Prevent Enter from submitting
-  document.getElementById('mainSearchInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') e.preventDefault();
-  });
-
-  // Voice-search button already wired elsewhere…
-
-  // Intercept submit
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    // Count checked (excluding coming-soon)
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-
-    if (checked > 2) {
-      warningBox.style.display = 'block';
-      return;
-    }
-    warningBox.style.display = 'none';
-
-    // Sync Tagify fields
-    ['brandInclude','brandExclude'].forEach(id => {
-      const inp = document.getElementById(id);
-      if (inp && inp._tagify) inp.value = JSON.stringify(inp._tagify.value);
-    });
-
-    const data = new FormData(form);
-    const params = new URLSearchParams();
-    const rh = [];
-
-    // Basic filters
-    if (data.get('prime-only'))         rh.push('p_n_feature_fulfilled_by_amazon:1');
-    if (data.get('in-stock'))           rh.push('p_n_availability:1248879011');
-    if (data.get('free-shipping'))      rh.push('p_76:13184787011');
-
-    // Brand-include
-    if (data.get('brand-include')) {
-      JSON.parse(data.get('brand-include')).forEach(b =>
-        rh.push(`p_89:${b.value}`)
-      );
-    }
-    // Brand-exclude
-    if (data.get('brand-exclude')) {
-      JSON.parse(data.get('brand-exclude')).forEach(b =>
-        params.append('brand-exclude', b.value)
-      );
-    }
-
-    // Boolean / field / ASIN
-    if (data.get('enable-boolean'))     params.set('boolean','on');
-    if (data.get('field-filters'))      params.set('fields', data.get('field-filters').trim());
-    if (data.get('direct-lookup'))      params.set('asin', data.get('direct-lookup').trim());
-
-    // Core query
-    const q = data.get('q')?.trim();
-    if (q) params.set('k', q);
-
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag','echolover25-20');
-
-    // Play sound, open & reload
-    clickSound.currentTime = 0;
-    clickSound.play().catch(()=>{});
-    window.open(`https://www.amazon.com/s?${params}`, '_blank');
-    setTimeout(() => window.location.reload(), 200);
-  });
-
-  // Click any button → play
-  document.body.addEventListener('click', e => {
-    if (e.target.closest('button')) {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(()=>{});
-    }
   });
 });
 </script>
