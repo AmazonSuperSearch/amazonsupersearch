@@ -1189,6 +1189,11 @@ document.addEventListener('DOMContentLoaded', () => {
       rh.push('p_n_feature_thirty-two:2967583011');  // Amazon's Choice filter
     }
 
+    // Check if "Prime Only" checkbox is selected
+    if (data.get('prime-only') === 'on') {
+     rh.push('p_n_prime:1000');  // Prime Only filter
+    }
+
     // Handle discount percentage filter
     const percentOff = data.get('percent-off');
     const discountMap = {
