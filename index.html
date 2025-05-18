@@ -1055,6 +1055,15 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
     const params = new URLSearchParams();
     const rh = [];
     
+ // Coupon-Clippable Only Filter
+if (data.get('coupon-only') === 'on') {
+  rh.push('p_n_coupon:1');  // Only items with available coupons
+}
+
+// Warehouse / Open-Box Filter
+if (data.get('warehouse-refurb') === 'on') {
+  rh.push('p_n_feature_browse-bin:Warehouse-Deals');  // Warehouse or Open-Box items
+}
 // --- Prime Only Filter Logic ---
   if (data.get('prime-only') === 'on') {
     rh.push('p_n_prime:1');  // Add Prime Only filter if checked
