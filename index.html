@@ -1055,6 +1055,23 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
     const params = new URLSearchParams();
     const rh = [];
     
+// --- Enable Boolean Operators ---
+if (data.get('enable-boolean') === 'on') {
+  params.set('boolean', 'on');  // Enable Boolean search if checked
+}
+
+// --- Field Filters Logic ---
+const fieldFilters = data.get('field-filters')?.trim();
+if (fieldFilters) {
+  params.set('fields', fieldFilters);  // Add field filters if provided
+}
+
+// --- ASIN / ISBN Direct Lookup ---
+const directLookup = data.get('direct-lookup')?.trim();
+if (directLookup) {
+  params.set('asin', directLookup);  // Direct lookup for ASIN, ISBN, or UPC
+}
+
  // Coupon-Clippable Only Filter
 if (data.get('coupon-only') === 'on') {
   rh.push('p_n_coupon:1');  // Only items with available coupons
