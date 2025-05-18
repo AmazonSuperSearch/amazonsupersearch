@@ -1228,5 +1228,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
   });
 </script>
+  <script>
+  const form = document.getElementById('amazon-search-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
+
+    // Ensure keyword (q) is being handled properly
+    const keyword = data.get('q')?.trim(); // Ensure we're capturing the keyword
+    if (keyword) params.set('k', keyword); // Ensure it's added as 'k'
+
+    // Handle price range
+    const min = data.get('min-price')?.trim();
+    const max = data.get('max-price')?.trim();
+    if (min && max) rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
+    else if (min) rh.push(`p_36:${Math.round(min * 100)}-`);
+    else if (max) rh.push(`p_36:-${Math.round(max * 100)}`);
+
+    // Handle other filters (coupons, lightning deals, etc.)
+    if (data.get('coupon-only')) rh.push('p_n_coupon_available:true');
+    if (data.get('lightning-deals')) rh.push('p_n_deal_type:23566065011');
+
+    // Add the filters to the URL
+    if (rh.length > 0) params.set('rh', rh.join(','));
+
+    // Create the search URL with the filters
+    const searchUrl = `https://www.amazon.com/s?${params.toString()}`;
+    window.open(searchUrl, '_blank'); // Open search results in a new tab
+  });
+</script>
+
 </body>
 </html>
