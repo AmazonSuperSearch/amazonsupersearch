@@ -1090,6 +1090,20 @@ const min = data.get('min-price')?.trim(),
 if      (min && max) rh.push(`p_36:${Math.round(min*100)}-${Math.round(max*100)}`);
 else if (min)        rh.push(`p_36:${Math.round(min*100)}-`);
 else if (max)        rh.push(`p_36:-${Math.round(max*100)}`);
+    
+    // Deal-Hunter Goodies: discounts vs 30/60/90-day avg, and volatility
+const d30 = data.get('below-avg-30')?.trim();
+if (d30) rh.push(`p_n_discount_30day:${Math.round(d30)}`);
+
+const d60 = data.get('below-avg-60')?.trim();
+if (d60) rh.push(`p_n_discount_60day:${Math.round(d60)}`);
+
+const d90 = data.get('below-avg-90')?.trim();
+if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);        // re-uses your 90-day avg param
+
+const vol = data.get('max-volatility-7')?.trim();
+if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
+
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
 if (data.get('enable-boolean') === 'on') params.set('boolean','on');
