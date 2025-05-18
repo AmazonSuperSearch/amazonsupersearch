@@ -1081,11 +1081,10 @@ const discount90Day = data.get('price-drop');
 if (discount90Day) {
   rh.push(`p_n_discount:${discount90Day}`);  // Apply Discount from 90-Day Avg filter if provided
 }
-  // --- Buy-Now-or-Wait Score Logic ---
-    const buyNowOrWait = document.getElementById('predictiveScore');  // Find the checkbox
+     // --- Check if "Buy-Now-or-Wait Score" checkbox is checked ---
+    const buyNowOrWait = document.getElementById('predictiveScore');  // Reference to Buy-Now-or-Wait Score checkbox
     if (buyNowOrWait.checked) {
-      // If checked, we add a parameter to the search query for predictive score
-      rh.push('p_n_predictive-score:1');  // Example value, adjust accordingly
+      rh.push('p_n_predictive-score:1');  // Example value, adjust as necessary
     }
 
     // --- Other Filters (Prime, Field Filters, etc.) ---
