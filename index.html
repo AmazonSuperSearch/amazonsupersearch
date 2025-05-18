@@ -1118,7 +1118,41 @@ if (data.get('warehouse-refurb') === 'on') {
   if (data.get('prime-only') === 'on') {
     rh.push('p_n_prime:1');  // Add Prime Only filter if checked
   }
-    if (data.get('free-shipping') === 'on') {
+    // Discount from 90-Day Avg Price
+  const discount90Day = data.get('price-drop');
+  if (discount90Day) {
+    rh.push(`p_n_discount:${discount90Day}`);  // Apply Discount from 90-Day Avg filter if provided
+  }
+
+  // Coupon-Clippable Only Filter
+  if (data.get('coupon-only') === 'on') {
+    rh.push('p_n_coupon:1');  // Only show products with coupon available
+  }
+
+  // Warehouse / Open-Box Filter
+  if (data.get('warehouse-refurb') === 'on') {
+    rh.push('p_n_feature_browse-bin:Warehouse-Open-Box');  // Show Warehouse/Open-box products
+  }
+
+  // Discount from 30-Day Avg Price
+  const discount30Day = data.get('below-avg-30');
+  if (discount30Day) {
+    rh.push(`p_n_discount_30day:${discount30Day}`);  // Apply Discount from 30-Day Avg filter if provided
+  }
+
+  // Discount from 60-Day Avg Price
+  const discount60Day = data.get('below-avg-60');
+  if (discount60Day) {
+    rh.push(`p_n_discount_60day:${discount60Day}`);  // Apply Discount from 60-Day Avg filter if provided
+  }
+
+  // Max Daily Price Volatility
+  const maxVolatility = data.get('max-volatility-7');
+  if (maxVolatility) {
+    rh.push(`p_n_price-volatility:${maxVolatility}`);  // Apply Max Daily Price Volatility filter if provided
+  }
+
+if (data.get('free-shipping') === 'on') {
   rh.push('p_n_shipping:free');  // Free shipping filter
 }
 if (data.get('in-stock') === 'on') {
