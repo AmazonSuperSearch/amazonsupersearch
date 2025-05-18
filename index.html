@@ -1074,6 +1074,28 @@ Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
     rh.push(`${param}:${val}`);
   }
 });
+  Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
+    if (data.get(field) === 'on') {
+      rh.push(`${param}:${val}`);
+    }
+  });
+
+  // ─── AI-DRIVEN FILTERS ───
+  // Buy-Now-or-Wait Score
+  if (data.get('predictive-score') === 'on') {
+    rh.push('p_n_predictive-score:1');
+  }
+  // Restock Forecasts (ASIN)
+  const restockASIN = data.get('restock-forecast')?.trim();
+  if (restockASIN) {
+    params.set('restock_asin', restockASIN);
+  }
+  // Emotion-Feedback Loop
+  if (data.get('emotion-feedback') === 'on') {
+    rh.push('p_n_emotion-feedback:1');
+  }
+
+  // ─── continue with percentage-off, price range, etc. ───
 
 // percentage-off dropdown
 const pct = data.get('percent-off');
