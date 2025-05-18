@@ -301,7 +301,7 @@
       </h1>
       <p class="lead mb-4">
         Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds.
-        Filter by price, brand, , free shipping, top ratings—and never miss another deal.
+        Filter by price, brand, free shipping, top ratings—and never miss another deal.
         No signup, no fluff—just the products you crave, right now.
       </p>
       <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
@@ -609,7 +609,7 @@
   </p>
   <div class="text-center">
     <div id="filter-warning" style="display:none; color: orange; font-weight: bold; padding: 10px;">
-  ⚠️ Too many filters may return no results. Try removing a few for better results.
+   Too many filters may return no results. Try removing a few for better results.
 </div>
 
    <button 
@@ -992,7 +992,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
+
 
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
@@ -1003,8 +1003,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const checked = [...form.elements].filter(el =>
       el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
     ).length;
-
-    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
 
     ['brandInclude', 'brandExclude'].forEach(id => {
       const tagifyInput = document.getElementById(id);
@@ -1049,11 +1047,6 @@ Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
     rh.push(`${param}:${val}`);
   }
 });
-  Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-    if (data.get(field) === 'on') {
-      rh.push(`${param}:${val}`);
-    }
-  });
 
   // ─── AI-DRIVEN FILTERS ───
   // Buy-Now-or-Wait Score
