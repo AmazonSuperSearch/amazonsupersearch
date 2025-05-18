@@ -1115,6 +1115,67 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
 });
 </script>
 <script>
+    document.querySelectorAll('button, input[type="submit"]').forEach(el => {
+      el.addEventListener('click', () => {
+        const clickSound = document.getElementById('clickSound');
+        if (clickSound) clickSound.play().catch(() => {});
+      });
+    });
+
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
+
+    const min = data.get('min-price')?.trim();
+    const max = data.get('max-price')?.trim();
+    if (min && max) rh.push(`p_36:${Math.round(min * 100)}-${Math.round(max * 100)}`);
+    else if (min) rh.push(`p_36:${Math.round(min * 100)}-`);
+    else if (max) rh.push(`p_36:-${Math.round(max * 100)}`);
+
+    const brandIncludeRaw = data.get('brand-include')?.trim();
+    const brandExcludeRaw = data.get('brand-exclude')?.trim();
+    if (brandIncludeRaw) {
+      const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+      brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+    }
+    if (brandExcludeRaw) {
+      const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
+      brands.forEach(b => params.append('brand-exclude', b));
+    }
+
+    const percentOff = data.get('percent-off');
+    const discountMap = {
+      "10": "2665401011", "20": "2665412011", "30": "2665413011",
+      "40": "2665414011", "50": "2665415011", "60": "2665416011",
+      "70": "2665417011", "80": "2665418011"
+    };
+    if (percentOff && discountMap[percentOff]) {
+      rh.push(`p_n_pct-off-with-tax:${discountMap[percentOff]}`);
+    }
+
+    if (data.get('lightning-deals') === 'on') {
+      rh.push('p_n_deal_type:23566065011');
+    }
+
+    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
+    if (data.get('field-filters')) params.set('fields', data.get('field-filters').trim());
+    if (data.get('direct-lookup')) params.set('asin', data.get('direct-lookup').trim());
+
+    const sort = data.get('sort');
+    if (sort) params.set('s', sort);
+
+    const query = data.get('q')?.trim();
+    if (query) params.set('k', query);
+
+    if (rh.length) params.set('rh', rh.join(','));
+    params.set('tag', 'echolover25-20');
+
+    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+    window.open(finalUrl, '_blank');
+  });
+});
+</script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
@@ -1137,6 +1198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
       }
     });
+
     document.querySelectorAll('button, input[type="submit"]').forEach(el => {
       el.addEventListener('click', () => {
         const clickSound = document.getElementById('clickSound');
