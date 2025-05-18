@@ -1015,28 +1015,7 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
 
-  new Tagify(document.querySelector('input[name="brand-include"]'));
-  new Tagify(document.querySelector('input[name="brand-exclude"]'));
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-
-    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
-
-    ['brandInclude', 'brandExclude'].forEach(id => {
-      const tagifyInput = document.getElementById(id);
-      if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
-      }
-    });
 document.querySelectorAll('button, input[type="submit"]').forEach(el => {
   el.addEventListener('click', () => {
     const clickSound = document.getElementById('clickSound');
@@ -1096,6 +1075,114 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
   });
 });
 </script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('amazon-search-form');
+    const warningBox = document.getElementById('filter-warning');
+    
+    // Initialize Tagify for brand include and exclude fields
+    new Tagify(document.querySelector('input[name="brand-include"]'));
+    new Tagify(document.querySelector('input[name="brand-exclude"]'));
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();  // Prevent form from submitting the normal way
+        
+        // Initialize the query parameters
+        const params = new URLSearchParams();
+        
+        // Capture the selected filters from Step 5
+        const filters = [
+            { id: 'primeOnly', param: 'prime-only', query: 'on' },
+            { id: 'freeShipping', param: 'free-shipping', query: 'on' },
+            { id: 'inStock', param: 'in-stock', query: 'on' },
+            { id: 'coupons', param: 'coupons', query: 'on' },
+            { id: 'lightningDeals', param: 'lightning-deals', query: 'on' },
+            { id: 'todaysDeals', param: 'todays-deals', query: 'on' },
+            { id: 'subscribeSave', param: 'subscribe-save', query: 'on' },
+            { id: 'amazonChoice', param: 'amazon-choice', query: 'on' },
+            { id: 'bestSeller', param: 'best-seller', query: 'on' },
+            { id: 'fbaOnly', param: 'fba-only', query: 'on' },
+            { id: 'freeReturns', param: 'free-returns', query: 'on' },
+            { id: 'giftWrap', param: 'gift-wrap', query: 'on' },
+            { id: 'smallBusiness', param: 'small-business', query: 'on' },
+            { id: 'amazonBrands', param: 'amazon-brands', query: 'on' }
+        ];
+
+        // Loop through the filters and check which ones are selected
+        filters.forEach(filter => {
+            const checkbox = document.getElementById(filter.id);
+            if (checkbox && checkbox.checked) {
+                params.set(filter.param, filter.query);
+            }
+        });
+        
+        // If the warning box should be shown based on the number of filters selected
+        const checked = filters.filter(filter => document.getElementById(filter.id)?.checked).length;
+        if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
+        
+        // Capture brand filters (brand include and exclude)
+        ['brandInclude', 'brandExclude'].forEach(id => {
+            const tagifyInput = document.getElementById(id);
+            if (tagifyInput && tagifyInput._tagify) {
+                tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
+            }
+        });
+
+        // Capture other form data
+        const data = new FormData(form);
+
+        // Handle the price range filter
+        const min = data.get('min-price')?.trim();
+        const max = data.get('max-price')?.trim();
+        if (min && max) {
+            params.set('p_36', `${Math.round(min * 100)}-${Math.round(max * 100)}`);
+        } else if (min) {
+            params.set('p_36', `${Math.round(min * 100)}-`);
+        } else if (max) {
+            params.set('p_36', `-${Math.round(max * 100)}`);
+        }
+
+        // Handle the percent off filter
+        const percentOff = data.get('percent-off');
+        const discountMap = {
+            "10": "2665401011", "20": "2665412011", "30": "2665413011",
+            "40": "2665414011", "50": "2665415011", "60": "2665416011",
+            "70": "2665417011", "80": "2665418011"
+        };
+        if (percentOff && discountMap[percentOff]) {
+            params.set('p_n_pct-off-with-tax', discountMap[percentOff]);
+        }
+
+        // Handle the sort filter
+        const sort = data.get('sort');
+        if (sort) {
+            params.set('s', sort);
+        }
+
+        // Handle the query field
+        const query = data.get('q')?.trim();
+        if (query) {
+            params.set('k', query);
+        }
+
+        // Handle the brand include/exclude filters (if any)
+        const brandIncludeRaw = data.get('brand-include')?.trim();
+        const brandExcludeRaw = data.get('brand-exclude')?.trim();
+        if (brandIncludeRaw) {
+            const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+            brands.forEach(b => params.append('brand-include', b));
+        }
+        if (brandExcludeRaw) {
+            const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
+            brands.forEach(b => params.append('brand-exclude', b));
+        }
+
+        // If we have any filters, append them to the query string
+        if (params.toString()) {
+            const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+            window.open(finalUrl, '_blank');
+        }
+    });
+});
 
 </body>
 </html>
