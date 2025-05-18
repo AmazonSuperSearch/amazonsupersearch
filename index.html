@@ -1081,7 +1081,19 @@ const discount90Day = data.get('price-drop');
 if (discount90Day) {
   rh.push(`p_n_discount:${discount90Day}`);  // Apply Discount from 90-Day Avg filter if provided
 }
+  // --- Buy-Now-or-Wait Score Logic ---
+    const buyNowOrWait = document.getElementById('predictiveScore');  // Find the checkbox
+    if (buyNowOrWait.checked) {
+      // If checked, we add a parameter to the search query for predictive score
+      rh.push('p_n_predictive-score:1');  // Example value, adjust accordingly
+    }
 
+    // --- Other Filters (Prime, Field Filters, etc.) ---
+    // For example, Discount from 90-Day Avg Price:
+    const discount90Day = data.get('price-drop');
+    if (discount90Day) {
+      rh.push(`p_n_discount:${discount90Day}`);
+    }
 // --- Coupon-Clippable Only Filter ---
 if (data.get('coupon-only') === 'on') {
   rh.push('p_n_coupon:1');  // Only show products with coupon available
