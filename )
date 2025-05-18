@@ -301,7 +301,7 @@
       </h1>
       <p class="lead mb-4">
         Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds.
-        Filter by price, brand, Prime-only, free shipping, top ratings—and never miss another deal.
+        Filter by price, brand, , free shipping, top ratings—and never miss another deal.
         No signup, no fluff—just the products you crave, right now.
       </p>
       <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
@@ -1046,6 +1046,53 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
+    
+// --- Prime Only Filter Logic ---
+  if (data.get('prime-only') === 'on') {
+    rh.push('p_n_prime:1');  // Add Prime Only filter if checked
+  }
+    if (data.get('free-shipping') === 'on') {
+  rh.push('p_n_shipping:free');  // Free shipping filter
+}
+if (data.get('in-stock') === 'on') {
+  rh.push('p_n_in_stock:1');  // Only in-stock items
+}
+if (data.get('coupons') === 'on') {
+  rh.push('p_n_coupon:1');  // Only items with coupons
+}
+if (data.get('lightning-deals') === 'on') {
+  rh.push('p_n_deal_type:23566065011');  // Lightning Deals filter
+}
+if (data.get('todays-deals') === 'on') {
+  rh.push('p_n_deal_type:23566065011');  // Today’s Deals filter
+}
+if (data.get('subscribe-save') === 'on') {
+  rh.push('p_n_feature_browse-bin:Subscribe-Save');  // Subscribe & Save filter
+}
+if (data.get('amazon-choice') === 'on') {
+  rh.push('p_n_feature_browse-bin:Amazon-Choice');  // Amazon's Choice filter
+}
+if (data.get('best-seller') === 'on') {
+  rh.push('p_n_feature_browse-bin:Best-Sellers');  // Best Seller filter
+}
+if (data.get('fba-only') === 'on') {
+  rh.push('p_n_feature_browse-bin:Sold-and-Shipped-by-Amazon');  // Sold by Amazon filter
+}
+if (data.get('free-returns') === 'on') {
+  rh.push('p_n_feature_browse-bin:Free-Returns');  // Free Returns filter
+}
+if (data.get('gift-wrap') === 'on') {
+  rh.push('p_n_feature_browse-bin:Gift-Wrap');  // Gift Wrap Available filter
+}
+if (data.get('small-business') === 'on') {
+  rh.push('p_n_feature_browse-bin:Small-Business');  // Small Business Products filter
+}
+if (data.get('amazon-brands') === 'on') {
+  rh.push('p_n_feature_browse-bin:Amazon-Brands');  // Amazon Brands filter
+}
+if (data.get('low-rating') === 'on') {
+  rh.push('p_n_feature_browse-bin:Low-Rating');  // Low Rating Products filter
+}
 
     const min = data.get('min-price')?.trim();
     const max = data.get('max-price')?.trim();
