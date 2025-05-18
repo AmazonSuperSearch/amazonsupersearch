@@ -1124,11 +1124,6 @@ document.addEventListener('DOMContentLoaded', () => {
       brands.forEach(b => params.append('brand-exclude', b));
     }
 
-    // Check if "Low Rating Products" checkbox is selected
-    if (data.get('low-rating') === 'on') {
-    rh.push('p_n_ratings:low');  // Low Rating Products filter
-    }
-
     // Check if "Amazon Brands Only" checkbox is selected
     if (data.get('amazon-brands') === 'on') {
     rh.push('p_89:amazon');  // Filter for Amazon-branded products
