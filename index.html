@@ -275,16 +275,15 @@
   <div class="container">
     <div class="row">
       
-      <!-- LEFT: Main search and form (8/12 width) -->
-      <div class="col-md-8">
-        <form id="amazon-search-form">
-          <!-- … all of your Step 1–7 HTML here … -->
-          </form>
-
-      </div>
+      <!-- LEFT: Main search and form (full-width on mobile, 8/12 on md+, stays first) -->
+<div class="col-12 col-md-8 order-1 order-md-1">
+  <form id="amazon-search-form">
+    <!-- …Step 1–7 HTML… -->
+  </form>
+</div>
       
-     <!-- RIGHT: FAQ sidebar (4/12 width) -->
-<div class="col-md-4">
+   <!-- RIGHT: FAQ sidebar (full-width on mobile, 4/12 on md+, drops below) -->
+<div class="col-12 col-md-4 order-2 order-md-2">
   <aside id="faq-sidebar" class="sticky-top" style="top:2rem;">
     <div class="card mb-4">
       <div class="card-header bg-primary text-white">
@@ -292,6 +291,108 @@
       </div>
       <div class="card-body p-3">
         <div class="accordion" id="faqAccordion">
+
+          <!-- Q1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading1">
+              <button class="accordion-button" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse1"
+                      aria-expanded="true" aria-controls="faqCollapse1">
+                What is Amazon Super Search?
+              </button>
+            </h2>
+            <div id="faqCollapse1" class="accordion-collapse collapse show"
+                 aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Amazon Super Search is our advanced filter tool that lets you find exactly what you want—no fluff, no signup.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading2">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse2"
+                      aria-expanded="false" aria-controls="faqCollapse2">
+                How do I filter by price range?
+              </button>
+            </h2>
+            <div id="faqCollapse2" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Use the min/max price fields in Step 2 to set your desired price range.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading3">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse3"
+                      aria-expanded="false" aria-controls="faqCollapse3">
+                How do I select item condition?
+              </button>
+            </h2>
+            <div id="faqCollapse3" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                In Step 3 choose New, Used, Refurbished, or Any from the Condition dropdown.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading4">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse4"
+                      aria-expanded="false" aria-controls="faqCollapse4">
+                Can I include or exclude specific brands?
+              </button>
+            </h2>
+            <div id="faqCollapse4" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Step 4 lets you type brands to include or exclude—plus you can toggle “Match only these brands.”
+              </div>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading5">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse5"
+                      aria-expanded="false" aria-controls="faqCollapse5">
+                How do I apply Prime, Free Shipping, or In-Stock filters?
+              </button>
+            </h2>
+            <div id="faqCollapse5" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Just check the Prime Only, Free Shipping, or In Stock boxes in Step 5.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading6">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse6"
+                      aria-expanded="false" aria-controls="faqCollapse6">
+                How do I start the search?
+              </button>
+            </h2>
+            <div id="faqCollapse6" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Click the “🔍 Search Amazon” button in Step 6 to open your results in a new tab.
+              </div>
+            </div>
+          </div>
 
           <!-- Q7 -->
           <div class="accordion-item">
@@ -305,7 +406,7 @@
             <div id="faqCollapse7" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading7" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Enable “Boolean Operators” in Step 7 and use <code>AND</code>, <code>OR</code>, <code>NOT</code> (e.g. <em>camera AND tripod NOT smartphone</em>).
+                Enable “Boolean Operators” in Step 7 and use <code>AND</code>, <code>OR</code>, <code>NOT</code>.
               </div>
             </div>
           </div>
@@ -322,7 +423,7 @@
             <div id="faqCollapse8" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading8" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Use the “ASIN / ISBN Direct Lookup” field in Power-User Tools to jump directly to that product.
+                Use the “ASIN / ISBN Direct Lookup” field in Power-User Tools.
               </div>
             </div>
           </div>
@@ -339,7 +440,7 @@
             <div id="faqCollapse9" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading9" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Field Filters let you target Amazon fields, e.g. <code>field-brand:Sony</code> or <code>field-title:Bluetooth</code>.
+                Field Filters let you target Amazon fields like <code>field-brand:Sony</code>.
               </div>
             </div>
           </div>
@@ -356,12 +457,12 @@
             <div id="faqCollapse10" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading10" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                In Step 5 check “Prime Only” or “Free Shipping” (under the hood they set <code>p_n_prime:1</code> or <code>p_n_shipping:free</code>).
+                Check “Prime Only” or “Free Shipping” in Step 5.
               </div>
             </div>
           </div>
 
-            <!-- Q11: Excluding Brands -->
+          <!-- Q11 -->
           <div class="accordion-item">
             <h2 class="accordion-header" id="faqHeading11">
               <button class="accordion-button collapsed" type="button"
@@ -373,12 +474,12 @@
             <div id="faqCollapse11" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading11" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Use the “Exclude Brands” field in Step 4 to filter out unwanted brands.
+                Use the “Exclude Brands” field in Step 4.
               </div>
             </div>
           </div>
 
-          <!-- Q12: Deal-Hunter Goodies -->
+          <!-- Q12 -->
           <div class="accordion-item">
             <h2 class="accordion-header" id="faqHeading12">
               <button class="accordion-button collapsed" type="button"
@@ -390,12 +491,12 @@
             <div id="faqCollapse12" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading12" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Compare current price vs. 30/60/90-day averages, set volatility filters, and spot real deals.
+                Compare current price vs. past averages to spot real deals.
               </div>
             </div>
           </div>
 
-          <!-- Q13: Filter by Item Condition -->
+          <!-- Q13 -->
           <div class="accordion-item">
             <h2 class="accordion-header" id="faqHeading13">
               <button class="accordion-button collapsed" type="button"
@@ -407,12 +508,12 @@
             <div id="faqCollapse13" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading13" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                In Step 3 select the “Condition” dropdown and choose New, Used, Refurbished, etc.
+                Select your condition in Step 3.
               </div>
             </div>
           </div>
 
-          <!-- Q14: Combining Multiple Filters -->
+          <!-- Q14 -->
           <div class="accordion-item">
             <h2 class="accordion-header" id="faqHeading14">
               <button class="accordion-button collapsed" type="button"
@@ -424,21 +525,17 @@
             <div id="faqCollapse14" class="accordion-collapse collapse"
                  aria-labelledby="faqHeading14" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Absolutely—select any combination of Steps 3–5 filters and they’ll all apply.
+                Yes—select any combination of filters from Steps 3–5.
               </div>
             </div>
           </div>
 
-        </div> <!-- /.accordion #faqAccordion -->
+        </div> <!-- /.accordion -->
       </div> <!-- /.card-body -->
     </div> <!-- /.card -->
   </aside>
-</div> <!-- /.col-md-4 -->
-
-
-    </div> <!-- /.row -->
-  </div> <!-- /.container -->
-
+</div> <!-- /.col -->
+      
   <!-- Click sound audio -->
   <audio id="clickSound" src="click.mp3" preload="auto"></audio>
   <!-- Hero / SEO-Rich Intro -->
