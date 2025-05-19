@@ -282,163 +282,158 @@
         </form>
       </div>
       
-      <!-- RIGHT: FAQ sidebar (4/12 width) -->
-      <div class="col-md-4">
-        <aside id="faq-sidebar" class="sticky-top" style="top: 2rem;">
-          <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
-              <h2 class="mb-0">🔍 Frequently Asked Questions</h5>
-            </div>
-            <div class="card-body p-3">
-              <div class="accordion" id="faqAccordion">
-                <!-- … your FAQ accordion items here … -->
-                  <!-- Q7: Boolean Operators -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading7">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse7"
-              aria-expanded="false" aria-controls="faqCollapse7">
-        How do I use Boolean operators to refine my search?
-      </button>
-    </h2>
-    <div id="faqCollapse7" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading7" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        In Step 1 you can enable “Boolean Operators” and then type <code>AND</code>, <code>OR</code>, or <code>NOT</code> in your query—e.g. <em>camera AND tripod NOT smartphone</em>—to drill down more precisely.
+     <!-- RIGHT: FAQ sidebar (4/12 width) -->
+<div class="col-md-4">
+  <aside id="faq-sidebar" class="sticky-top" style="top:2rem;">
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">🔍 Frequently Asked Questions</h2>
       </div>
-    </div>
-  </div>
+      <div class="card-body p-3">
+        <div class="accordion" id="faqAccordion">
 
-  <!-- Q8: ASIN / ISBN Direct Lookup -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading8">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse8"
-              aria-expanded="false" aria-controls="faqCollapse8">
-        Can I go straight to a product using its ASIN or ISBN?
-      </button>
-    </h2>
-    <div id="faqCollapse8" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading8" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        Yes—check “ASIN / ISBN Direct Lookup” in the Power-User Tools, paste your ASIN or ISBN, and our tool will filter directly to that exact product on Amazon.
-      </div>
-    </div>
-  </div>
-
-  <!-- Q9: Field Filters -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading9">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse9"
-              aria-expanded="false" aria-controls="faqCollapse9">
-        What are Field Filters and how do I use them?
-      </button>
-    </h2>
-    <div id="faqCollapse9" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading9" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        Field Filters let you filter by specific Amazon fields—e.g. <code>field-brand:Sony</code> or <code>field-title:Bluetooth</code>. Enable them in Power-User Tools and type your filter syntax into the field input.
-      </div>
-    </div>
-      <!-- Q10: Free Shipping & Prime Only -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading10">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse10"
-              aria-expanded="false" aria-controls="faqCollapse10">
-        How do I filter for Prime-only or free-shipping items?
-      </button>
-    </h2>
-    <div id="faqCollapse10" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading10" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        In Step 5, just check “Prime Only” or “Free Shipping.”  
-        Under the hood we add the appropriate <code>p_n_prime:1</code> or <code>p_n_shipping:free</code> filter so you’ll only see those listings.
-      </div>
-    </div>
-  </div>
-
-  <!-- Q11: Excluding Brands -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading11">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse11"
-              aria-expanded="false" aria-controls="faqCollapse11">
-        Can I exclude specific brands from my search?
-      </button>
-    </h2>
-    <div id="faqCollapse11" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading11" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        Yes—under Step 4, enter brands to exclude (e.g. “Apple, Acer”).  
-        We translate that into the <code>field-brand</code> exclusion parameters so those brands never show up.
-      </div>
-    </div>
-  </div>
-
-   <!-- Q12: Deal-Hunter Goodies -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading12">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse12"
-              aria-expanded="false" aria-controls="faqCollapse12">
-        What are Deal-Hunter Goodies and how do they work?
-      </button>
-    </h2>
-    <div id="faqCollapse12" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading12" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        Deal-Hunter Goodies let you compare today’s price against 30/60/90-day averages or filter by price volatility.  
-        Enter a percentage in the “30-Day Avg” box (like 20) and we’ll only show items at least 20% below their 30-day average (<code>p_n_discount_30day:20</code>), and so on.
-      </div>
-    </div>
-  </div>
-
-  <!-- Q13: Filter by Item Condition -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading13">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse13"
-              aria-expanded="false" aria-controls="faqCollapse13">
-        How do I filter by item condition (New, Used, etc.)?
-      </button>
-    </h2>
-    <div id="faqCollapse13" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading13" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        In Step 3 just choose “Condition” and pick Any, New, Used, Refurbished or Collectible. That adds the correct <code>p_n_condition-type</code> filter so Amazon only shows those listings.
-      </div>
-    </div>
-  </div>
-
-  <!-- Q14: Combining Multiple Filters -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="faqHeading14">
-      <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#faqCollapse14"
-              aria-expanded="false" aria-controls="faqCollapse14">
-        Can I combine multiple filters at once?
-      </button>
-    </h2>
-    <div id="faqCollapse14" class="accordion-collapse collapse"
-         aria-labelledby="faqHeading14" data-bs-parent="#faqAccordion">
-      <div class="accordion-body">
-        Yes — check as many Step 3–5 filters as you like. They’ll all get joined into the URL’s 
-        <code>rh=</code> parameter so your results honor every filter you select.
-      </div>
-    </div>
-  </div>
-</div>  <!-- <-- THIS closes #faqAccordion -->
-  </div>
-
-  </div>
-
+          <!-- Q7 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading7">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse7"
+                      aria-expanded="false" aria-controls="faqCollapse7">
+                How do I use Boolean operators to refine my search?
+              </button>
+            </h2>
+            <div id="faqCollapse7" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading7" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Enable “Boolean Operators” in Step 7 and use <code>AND</code>, <code>OR</code>, <code>NOT</code> (e.g. <em>camera AND tripod NOT smartphone</em>).
               </div>
             </div>
           </div>
-        </aside>
-      </div>
+
+          <!-- Q8 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading8">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse8"
+                      aria-expanded="false" aria-controls="faqCollapse8">
+                Can I go straight to a product using its ASIN or ISBN?
+              </button>
+            </h2>
+            <div id="faqCollapse8" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading8" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Use the “ASIN / ISBN Direct Lookup” field in Power-User Tools to jump directly to that product.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q9 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading9">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse9"
+                      aria-expanded="false" aria-controls="faqCollapse9">
+                What are Field Filters and how do I use them?
+              </button>
+            </h2>
+            <div id="faqCollapse9" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading9" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Field Filters let you target Amazon fields, e.g. <code>field-brand:Sony</code> or <code>field-title:Bluetooth</code>.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q10 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading10">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse10"
+                      aria-expanded="false" aria-controls="faqCollapse10">
+                How do I filter for Prime-only or free-shipping items?
+              </button>
+            </h2>
+            <div id="faqCollapse10" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading10" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                In Step 5 check “Prime Only” or “Free Shipping” (under the hood they set <code>p_n_prime:1</code> or <code>p_n_shipping:free</code>).
+              </div>
+            </div>
+          </div>
+
+            <!-- Q11: Excluding Brands -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading11">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse11"
+                      aria-expanded="false" aria-controls="faqCollapse11">
+                Can I exclude specific brands from my search?
+              </button>
+            </h2>
+            <div id="faqCollapse11" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading11" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Use the “Exclude Brands” field in Step 4 to filter out unwanted brands.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q12: Deal-Hunter Goodies -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading12">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse12"
+                      aria-expanded="false" aria-controls="faqCollapse12">
+                What are Deal-Hunter Goodies and how do they work?
+              </button>
+            </h2>
+            <div id="faqCollapse12" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading12" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Compare current price vs. 30/60/90-day averages, set volatility filters, and spot real deals.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q13: Filter by Item Condition -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading13">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse13"
+                      aria-expanded="false" aria-controls="faqCollapse13">
+                How do I filter by item condition (New, Used, etc.)?
+              </button>
+            </h2>
+            <div id="faqCollapse13" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading13" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                In Step 3 select the “Condition” dropdown and choose New, Used, Refurbished, etc.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q14: Combining Multiple Filters -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading14">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse14"
+                      aria-expanded="false" aria-controls="faqCollapse14">
+                Can I combine multiple filters at once?
+              </button>
+            </h2>
+            <div id="faqCollapse14" class="accordion-collapse collapse"
+                 aria-labelledby="faqHeading14" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutely—select any combination of Steps 3–5 filters and they’ll all apply.
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /.accordion #faqAccordion -->
+      </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+  </aside>
+</div> <!-- /.col-md-4 -->
+
 
     </div> <!-- /.row -->
   </div> <!-- /.container -->
@@ -1467,7 +1462,24 @@ params.set('tag','echolover25-20');
 
 const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
 window.open(finalUrl, '_blank');
+ // gather any data you like — here we're just pinging “New visitor”
+      const payload = {
+        content: `🔍 User ran a search on your site at ${new Date().toLocaleString()}`
+      };
 
+      try {
+        // send to Discord
+        await fetch(DISCORD_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Discord webhook failed', err);
+      }
+  
+      // finally, continue with the normal form submission
+      form.submit();
   });
 });
 </script>
