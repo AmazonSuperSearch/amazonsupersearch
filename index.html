@@ -1128,6 +1128,23 @@ const PCT_MAP = {
 };
 if (PCT_MAP[pct]) rh.push(`p_n_pct-off-with-tax:${PCT_MAP[pct]}`);
 
+// 1) Grab the selected condition
+const conditionSelect = document.getElementById('condition');
+const condition = conditionSelect.value;  // "" | "new" | "used" | "refurbished" | "collectible"
+
+// 2) Map to Amazon’s p_n_condition-type codes
+const conditionMap = {
+  new:           'p_n_condition-type:3000',  // New
+  used:          'p_n_condition-type:3001',  // Used
+  refurbished:   'p_n_condition-type:3002',  // Renewed / Refurbished
+  collectible:   'p_n_condition-type:3003'   // Collectible
+};
+
+// 3) If they chose one, add to your Request-Headers filters
+if (condition && conditionMap[condition]) {
+  rh.push(conditionMap[condition]);
+}
+    
 // price range
 const min = data.get('min-price')?.trim(),
       max = data.get('max-price')?.trim();
