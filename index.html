@@ -307,7 +307,7 @@
       </h1>
       <p class="lead mb-4">
         Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds.
-        Filter by price, brand, , free shipping, top ratings—and never miss another deal.
+        Filter by price, , , free shipping, top ratings—and never miss another deal.
         No signup, no fluff—just the products you crave, right now.
       </p>
       <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
@@ -436,7 +436,7 @@
 </div>
    
   
-   <!-- Step 4: Brand Filters -->
+ <!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
   <p class="text-muted mb-3">
@@ -454,17 +454,9 @@
           id="brandInclude"
           placeholder="e.g. Sony, LG"
         >
-        <div class="form-check mt-2">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="include-only"
-            id="includeOnly"
-          >
-          <label class="form-check-label" for="includeOnly">
-            Match only these brands
-          </label>
-        </div>
+        <small class="form-text text-muted">
+          Enter one or more brands (comma-separated or via tagify).
+        </small>
       </div>
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandExclude">Exclude Brands</label>
@@ -475,10 +467,14 @@
           id="brandExclude"
           placeholder="e.g. Acer, Apple"
         >
+        <small class="form-text text-muted">
+          Any brands here will be stripped client-side (for future use).
+        </small>
       </div>
     </div>
   </div>
 </section>
+
 
 
  <!-- Step 5: Fine-tune your preferences -->
