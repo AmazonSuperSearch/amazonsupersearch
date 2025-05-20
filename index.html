@@ -1442,26 +1442,36 @@ if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);
 const vol = data.get('max-volatility-7')?.trim();
 if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
 
-// ✅ Brand Inclusion Logic (always use p_89)
-const brandIncludeRaw = data.get('brand-include')?.trim();
-if (brandIncludeRaw) {
-  const brands = JSON.parse(brandIncludeRaw)
-                   .map(obj => obj.value.trim())
-                   .filter(Boolean);
+// ✅ Brand Inclusion Logic
+const rawInclude = data.get('brand-include')?.trim();
+if (rawInclude) {
+  let brands = [];
 
-  // Amazon’s “brand” filter is always p_89:<BrandName>
-  brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
-}
-
-
-// ✅ Brand Exclusion Logic (custom param – not supported by Amazon but useful for client-side filtering or future use)
-const brandExcludeRaw = data.get('brand-exclude')?.trim();
-if (brandExcludeRaw) {
-  const excludeBrands = JSON.parse(brandExcludeRaw).map(obj => obj.value.trim()).filter(Boolean);
-  if (excludeBrands.length) {
-    params.set('excludeBrands', excludeBrands.join(','));
+  // Tagify may output JSON or a comma-list; try both
+  try {
+    brands = JSON.parse(rawInclude).map(o => o.value.trim());
+  } catch {
+    brands = rawInclude.split(',').map(s => s.trim());
   }
+
+  brands
+    .filter(b => b)
+    .forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
 }
+
+
+// Brand Exclusion (for your NOT logic)
+const rawExclude = data.get('brand-exclude')?.trim();
+if (rawExclude) {
+  let exclude = [];
+  try {
+    exclude = JSON.parse(rawExclude).map(o => o.value.trim());
+  } catch {
+    exclude = rawExclude.split(',').map(s => s.trim());
+  }
+  // …then use exclude for your NOT or client-side prune…
+}
+
 
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
