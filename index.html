@@ -436,7 +436,7 @@
 </div>
    
   
- <!-- Step 4: Brand Filters -->
+<!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
   <p class="text-muted mb-3">
@@ -445,6 +445,8 @@
 
   <div class="card border-success shadow-sm mb-4 p-3">
     <div class="row g-3">
+
+      <!-- Include Brands -->
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandInclude">Include Brands</label>
         <input
@@ -454,10 +456,23 @@
           id="brandInclude"
           placeholder="e.g. Sony, LG"
         >
+        <div class="form-check mt-2">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="include-only"
+            id="includeOnly"
+          >
+          <label class="form-check-label" for="includeOnly">
+            Match only these brands
+          </label>
+        </div>
         <small class="form-text text-muted">
           Enter one or more brands (comma-separated or via tagify).
         </small>
       </div>
+
+      <!-- Exclude Brands -->
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandExclude">Exclude Brands</label>
         <input
@@ -471,6 +486,7 @@
           Any brands here will be stripped client-side (for future use).
         </small>
       </div>
+
     </div>
   </div>
 </section>
