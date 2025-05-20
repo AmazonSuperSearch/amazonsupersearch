@@ -1424,20 +1424,26 @@ const vol = data.get('max-volatility-7')?.trim();
 if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
 
 // ✅ Brand Inclusion Logic
-const brandIncludeRaw = data.get('brand-include')?.trim();
-const matchExact = form.querySelector('#includeOnly')?.checked;
+const includeTags = document
+  .getElementById('brandInclude')
+  ._tagify.value
+  .map(tag => tag.value.trim())
+  .filter(Boolean);
 
-if (brandIncludeRaw) {
-  const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value.trim()).filter(Boolean);
-
-  if (matchExact) {
-    // Use field-brand for exact matches
-    params.set('fields', brands.map(b => `field-brand:${b}`).join(','));
+if (includeTags.length) {
+  if (form.querySelector('#includeOnly').checked) {
+    // exact‐match brands
+    params.set(
+      'fields',
+      includeTags.map(b => `field-brand:${b}`).join(',')
+    );
   } else {
-    // Use standard brand filter
-    brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+    includeTags.forEach(b => {
+      rh.push(`p_89:${encodeURIComponent(b)}`);
+    });
   }
 }
+
 
 // ✅ Brand Exclusion Logic (custom param – not supported by Amazon but useful for client-side filtering or future use)
 const brandExcludeRaw = data.get('brand-exclude')?.trim();
