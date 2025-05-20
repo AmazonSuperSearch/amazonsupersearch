@@ -680,55 +680,72 @@
       </h2>
       <div id="collapsePower" class="accordion-collapse collapse" data-bs-parent="#accordionPower">
         <div class="accordion-body">
+
+          <!-- How-to instructions -->
           <p><strong>🧠 How to Use Power-User Tools</strong><br>
-          This section gives you extra control to target exactly what you want—like using “search magic.” Here's how each option works:</p>
-
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Enable Boolean Operators</strong><br>
-          ✅ Check this box if you want to combine keywords with logic.<br>
-          Type your keywords in the main search box using:</p>
-
+             This section gives you extra control to target exactly what you want—like using “search magic.” Here’s how:</p>
           <ul>
-            <li><strong>AND</strong>: Must include both words (e.g., camera AND tripod)</li>
-            <li><strong>OR</strong>: Show either word (e.g., headphones OR earbuds)</li>
-            <li><strong>NOT</strong>: Exclude something (e.g., tablet NOT refurbished)</li>
+            <li><strong>Enable Boolean Operators</strong><br>
+              Check the box and then use <code>AND</code>, <code>OR</code>, <code>NOT</code> in your main search.</li>
+            <li><strong>Field Filters</strong><br>
+              Type things like <code>field-brand:Sony</code> to only show that brand.</li>
+            <li><strong>ASIN / ISBN Lookup</strong><br>
+              Paste a product’s ASIN or ISBN (e.g. <code>B08N5WRWNW</code>) to go directly to it.</li>
           </ul>
+          <hr>
 
-          <p><strong>Field Filters</strong><br>
-          📅 Click the input box.<br>
-          Type something like:</p>
-
-          <ul>
-            <li>field-brand:Sony to only show Sony products.</li>
-            <li>field-title:Bluetooth to only show items with "Bluetooth" in the title.</li>
-          </ul>
-
-          <p>🔍 This lets you drill down with precision.</p>
-
-          <p><strong>ASIN / ISBN Direct Lookup</strong><br>
-          💡 Got a specific product code?<br>
-          Paste the ASIN (Amazon product ID) or ISBN (for books).<br>
-          Example: B08N5WRWNW</p>
-
-          <p>🔍 It will take you straight to that product in filtered results.</p>
-
+          <!-- LIVE features -->
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="enable-boolean" id="enableBoolean">
-            <label class="form-check-label" for="enableBoolean">Enable Boolean Operators</label>
+            <label class="form-check-label" for="enableBoolean">
+              Enable Boolean Operators
+            </label>
           </div>
+
           <div class="mb-2">
-            <label class="form-label">Field Filters</label>
-            <input type="text" class="form-control" name="field-filters" placeholder="e.g. field-brand:Sony">
+            <label class="form-label" for="field-filters">Field Filters</label>
+            <input
+              type="text"
+              class="form-control"
+              name="field-filters"
+              id="field-filters"
+              placeholder="e.g. field-brand:Sony">
           </div>
-          <div class="mb-2">
-            <label class="form-label">ASIN / ISBN Direct Lookup</label>
-            <input type="text" class="form-control" name="direct-lookup" placeholder="Enter ASIN, ISBN or UPC">
+
+          <div class="mb-4">
+            <label class="form-label" for="direct-lookup">ASIN / ISBN Direct Lookup</label>
+            <input
+              type="text"
+              class="form-control"
+              name="direct-lookup"
+              id="direct-lookup"
+              placeholder="Enter ASIN, ISBN or UPC">
           </div>
+
+          <!-- COMING SOON: everything below -->
+          <div class="coming-soon">
+            <p class="text-muted"><em>More filters coming soon:</em></p>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Discount (%) from 90-Day Avg Price <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Coupon-Clippable Only <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <!-- repeat for each unreal control… -->
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- Deal-Hunter Goodies -->
 <section>
