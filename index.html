@@ -1344,30 +1344,32 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
 // --- Prime Only Filter Logic ---
  // ——— consolidate filters into one place ———
 const FILTER_DEFS = {
-   // New condition filters:
+  // Condition filters
   'condition-new':         ['p_n_condition-type', '1248879011'],
   'condition-used':        ['p_n_condition-type', '1248877011'],
   'condition-refurbished': ['p_n_condition-type', '1248878111'],
   'condition-collectible': ['p_n_condition-type', '1248878011'],
-   // Other filters: (by popularity)
+
+  // Other filters
   'prime-only':        ['p_n_prime',               '1'],
   'free-shipping':     ['p_n_shipping',            'free'],
-  'in-stock':          ['p_n_in_stock',            '1'],
+  'in-stock':          ['p_n_availability',        '2661601011'],
   'coupons':           ['p_n_coupon',              '1'],
   'lightning-deals':   ['p_n_deal_type',           '23566065011'],
   'todays-deals':      ['p_n_deal_type',           '23566065011'],
-  'subscribe-save':    ['p_n_feature_browse-bin',  'Subscribe-Save'],
-  'amazon-choice':     ['p_n_feature_browse-bin',  'Amazon-Choice'],
-  'best-seller':       ['p_n_feature_browse-bin',  'Best-Sellers'],
-  'fba-only':          ['p_n_feature_browse-bin',  'Sold-and-Shipped-by-Amazon'],
-  'free-returns':      ['p_n_feature_browse-bin',  'Free-Returns'],
-  'gift-wrap':         ['p_n_feature_browse-bin',  'Gift-Wrap'],
-  'small-business':    ['p_n_feature_browse-bin',  'Small-Business'],
-  'amazon-brands':     ['p_n_feature_browse-bin',  'Amazon-Brands'],
-  'low-rating':        ['p_n_feature_browse-bin',  'Low-Rating'],
+  'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
+  'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
+  'best-seller':       ['p_n_feature_browse-bin',  '14826383011'],
+  'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
+  'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
+  'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
+  'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
+  'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
+  'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
   'coupon-only':       ['p_n_coupon',              '1'],
-  'warehouse-refurb':  ['p_n_feature_browse-bin',  'Warehouse-Open-Box'],
+  'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
 };
+
 
 Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
   if (data.get(field) === 'on') {
