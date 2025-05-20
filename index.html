@@ -1423,36 +1423,35 @@ if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);
 const vol = data.get('max-volatility-7')?.trim();
 if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
 
-// ✅ Brand Inclusion Logic
-const includeTags = document
-  .getElementById('brandInclude')
-  ._tagify.value
-  .map(tag => tag.value.trim())
-  .filter(Boolean);
+// ——— Brand Inclusion & Exclusion ———
+;(function(){
+  const includeEl = document.getElementById('brandInclude');
+  const excludeEl = document.getElementById('brandExclude');
 
-if (includeTags.length) {
-  if (form.querySelector('#includeOnly').checked) {
-    // exact‐match brands
-    params.set(
-      'fields',
-      includeTags.map(b => `field-brand:${b}`).join(',')
-    );
-  } else {
-    includeTags.forEach(b => {
-      rh.push(`p_89:${encodeURIComponent(b)}`);
-    });
+  const includeTags = includeEl._tagify.value
+    .map(t => t.value.trim())
+    .filter(Boolean);
+
+  if (includeTags.length) {
+    if (document.getElementById('includeOnly').checked) {
+      // exact-match brands
+      params.set(
+        'fields',
+        includeTags.map(b => `field-brand:${b}`).join(',')
+      );
+    } else {
+      includeTags.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+    }
   }
-}
 
+  const excludeTags = excludeEl._tagify.value
+    .map(t => t.value.trim())
+    .filter(Boolean);
 
-// ✅ Brand Exclusion Logic (custom param – not supported by Amazon but useful for client-side filtering or future use)
-const brandExcludeRaw = data.get('brand-exclude')?.trim();
-if (brandExcludeRaw) {
-  const excludeBrands = JSON.parse(brandExcludeRaw).map(obj => obj.value.trim()).filter(Boolean);
-  if (excludeBrands.length) {
-    params.set('excludeBrands', excludeBrands.join(','));
+  if (excludeTags.length) {
+    params.set('excludeBrands', excludeTags.join(','));
   }
-}
+})();
 
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
