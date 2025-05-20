@@ -758,42 +758,44 @@
       </h2>
       <div id="collapseDeal" class="accordion-collapse collapse" data-bs-parent="#accordionDeal">
         <div class="accordion-body">
+
+          <!-- How-to instructions -->
           <p><strong>💸 How to Use Deal-Hunter Goodies</strong><br>
-          This section is for finding major discounts, coupons, and bargains based on past pricing history.</p>
+             Spot real bargains and coupon opportunities using past price trends and open-box deals:</p>
+          <ul>
+            <li><strong>Discount from 90-Day Avg</strong><br>
+              Type a percentage (e.g. “25”) to see items at least that much below their three-month avg price.</li>
+            <li><strong>Coupon-Clippable Only</strong><br>
+              Check to show only products with a visible Amazon coupon at checkout.</li>
+            <li><strong>Warehouse / Open-Box</strong><br>
+              Check to include gently used or open-box items sold by Amazon at a discount.</li>
+            <li><strong>Discount from 30/60/90-Day Avg</strong><br>
+              Enter percentages to compare against one- or two-month averages.</li>
+            <li><strong>Max Daily Price Volatility</strong><br>
+              Set a threshold (e.g. “5”) to hide listings whose price jumps wildly day-to-day.</li>
+          </ul>
+          <hr>
 
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Discount (%) from 90-Day Avg Price</strong><br>
-          💰 Type a number like 25 to only see items at least 25% cheaper than their average over the last 90 days.<br>
-          📉 Helps you spot real deals—not just fake markdowns.</p>
-
-          <p><strong>Coupon-Clippable Only</strong><br>
-          ✅ Check this to only see products that offer a visible coupon at checkout.</p>
-
-          <p><strong>Warehouse / Open-Box</strong><br>
-          ✅ Check this to find gently used or open-box items sold directly by Amazon at a discount.</p>
-
-          <p><strong>Other Discount (%) Boxes</strong><br>
-          Enter percentages like:<br>
-          30 under “30-Day Avg” to see items 30% cheaper than last month.<br>
-          You can fill in 1, 2, or all of them.<br>
-          🔄 The more you fill in, the better chance you’ll find big-time deals.</p>
-
-          <p><strong>Max Daily Price Volatility (%)</strong><br>
-          📉 Want price stability? Type something like 10 to filter out products that constantly jump in price.<br>
-          Helps avoid unstable or manipulated listings.</p>
-
+          <!-- LIVE features -->
           <div class="mb-3">
             <label class="form-label">Discount (%) from 90-Day Avg Price</label>
             <input type="number" class="form-control" name="price-drop" placeholder="e.g. 20">
           </div>
+
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="coupon-only" id="couponOnly">
-            <label class="form-check-label" for="couponOnly">Coupon-Clippable Only</label>
+            <label class="form-check-label" for="couponOnly">
+              Coupon-Clippable Only
+            </label>
           </div>
+
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="warehouse-refurb" id="warehouseRefurb">
-            <label class="form-check-label" for="warehouseRefurb">Warehouse / Open-Box</label>
+            <label class="form-check-label" for="warehouseRefurb">
+              Warehouse / Open-Box
+            </label>
           </div>
+
           <div class="row g-3 mt-3">
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 30-Day Avg</label>
@@ -812,11 +814,25 @@
               <input type="number" min="0" class="form-control" name="max-volatility-7" placeholder="e.g. 5">
             </div>
           </div>
+
+          <!-- COMING SOON: future goodies -->
+          <div class="coming-soon mt-4">
+            <p class="text-muted"><em>More advanced goodies on the way:</em></p>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Price-Drop Alerts <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <!-- add other placeholders here as features are planned -->
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
   
       <!-- Personalization & AI-Driven -->
@@ -830,35 +846,57 @@
       </h2>
       <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
         <div class="accordion-body">
-          <p><strong>🤖 How to Use Personalization & AI-Driven Tools</strong><br>
-          This section uses AI to help you shop smarter—even if you're not tech-savvy.</p>
 
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Buy-Now-or-Wait Score</strong><br>
-          ✅ Check this to activate our smart AI that tells you whether now is a good time to buy, or if prices usually drop further.<br>
-          It’s like having a price advisor built-in.</p>
+          <!-- How-to instructions -->
+          <p><strong>🤖 How to Use Personalization &amp; AI-Driven Tools</strong><br>
+             Leverage AI insights to shop smarter:</p>
+          <ul>
+            <li><strong>Buy-Now-or-Wait Score</strong><br>
+              Check to get a recommendation if now is the best time to buy.</li>
+            <li><strong>Restock Forecasts (ASIN)</strong><br>
+              Paste an out-of-stock ASIN to predict when it’ll return.</li>
+            <li><strong>Emotion-Feedback Loop</strong><br>
+              Enable to teach the AI your tastes and improve future suggestions.</li>
+          </ul>
+          <hr>
 
-          <p><strong>Restock Forecasts (ASIN)</strong><br>
-          Paste the ASIN (Amazon product ID) of a product that’s out of stock.<br>
-          Example: B08N5WRWNW<br>
-          🤖 The AI checks trends and predicts when it might come back.</p>
-
-          <p><strong>Emotion-Feedback Loop</strong><br>
-          ✅ Check this to let the system learn from what you like.<br>
-          It improves results each time you interact—like a smart assistant that gets better with you.</p>
-
+          <!-- LIVE features -->
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore">
-            <label class="form-check-label" for="predictiveScore">Buy-Now-or-Wait Score</label>
+            <label class="form-check-label" for="predictiveScore">
+              Buy-Now-or-Wait Score
+            </label>
           </div>
+
           <div class="mb-2">
-            <label class="form-label">Restock Forecasts (ASIN)</label>
-            <input type="text" class="form-control" name="restock-forecast" placeholder="Enter ASIN">
+            <label class="form-label" for="restock-forecast">Restock Forecasts (ASIN)</label>
+            <input
+              type="text"
+              class="form-control"
+              name="restock-forecast"
+              id="restock-forecast"
+              placeholder="Enter ASIN">
           </div>
-          <div class="form-check">
+
+          <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback">
-            <label class="form-check-label" for="emotionFeedback">Emotion-Feedback Loop</label>
+            <label class="form-check-label" for="emotionFeedback">
+              Emotion-Feedback Loop
+            </label>
           </div>
+
+          <!-- COMING SOON: future AI features -->
+          <div class="coming-soon mt-4">
+            <p class="text-muted"><em>More AI-driven tools coming soon:</em></p>
+            <!-- example placeholder -->
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Visual Style Match <small>(Coming Soon)</small>
+              </label>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
