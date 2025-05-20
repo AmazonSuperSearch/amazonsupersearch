@@ -840,11 +840,16 @@
   <div class="accordion mb-4" id="accordionPersonal">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingPersonal">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonal">
+        <button class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsePersonal">
           Personalization &amp; AI-Driven
         </button>
       </h2>
-      <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
+      <div id="collapsePersonal"
+           class="accordion-collapse collapse"
+           data-bs-parent="#accordionPersonal">
         <div class="accordion-body">
 
           <!-- How-to instructions -->
@@ -860,35 +865,33 @@
           </ul>
           <hr>
 
-          <!-- LIVE features -->
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore">
-            <label class="form-check-label" for="predictiveScore">
-              Buy-Now-or-Wait Score
-            </label>
-          </div>
+          <!-- ALL controls disabled & marked coming soon -->
+          <div class="coming-soon">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Buy-Now-or-Wait Score <small>(Coming Soon)</small>
+              </label>
+            </div>
 
-          <div class="mb-2">
-            <label class="form-label" for="restock-forecast">Restock Forecasts (ASIN)</label>
-            <input
-              type="text"
-              class="form-control"
-              name="restock-forecast"
-              id="restock-forecast"
-              placeholder="Enter ASIN">
-          </div>
+            <div class="mb-2">
+              <label class="form-label">
+                Restock Forecasts (ASIN) <small>(Coming Soon)</small>
+              </label>
+              <input type="text"
+                     class="form-control"
+                     disabled
+                     placeholder="Enter ASIN">
+            </div>
 
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback">
-            <label class="form-check-label" for="emotionFeedback">
-              Emotion-Feedback Loop
-            </label>
-          </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Emotion-Feedback Loop <small>(Coming Soon)</small>
+              </label>
+            </div>
 
-          <!-- COMING SOON: future AI features -->
-          <div class="coming-soon mt-4">
-            <p class="text-muted"><em>More AI-driven tools coming soon:</em></p>
-            <!-- example placeholder -->
+            <p class="text-muted mt-4"><em>More AI-driven tools coming soon:</em></p>
             <div class="form-check mb-2">
               <input class="form-check-input" type="checkbox" disabled>
               <label class="form-check-label">
@@ -902,6 +905,7 @@
     </div>
   </div>
 </section>
+
 
 
       <!-- Visual & Voice Interfaces -->
