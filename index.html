@@ -1374,11 +1374,6 @@ Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
     rh.push(`${param}:${val}`);
   }
 });
-  Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-    if (data.get(field) === 'on') {
-      rh.push(`${param}:${val}`);
-    }
-  });
 
   // ─── AI-DRIVEN FILTERS ───
   // Buy-Now-or-Wait Score
