@@ -1328,7 +1328,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['brandInclude', 'brandExclude'].forEach(id => {
       const tagifyInput = document.getElementById(id);
       if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
+       tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
       }
     });
 document.querySelectorAll('button, input[type="submit"]').forEach(el => {
@@ -1420,6 +1420,21 @@ if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);        // re-uses your 90-d
 
 const vol = data.get('max-volatility-7')?.trim();
 if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
+
+    const brandIncludeRaw = data.get('brand-include')?.trim();
+const matchExact = form.querySelector('#includeOnly')?.checked;
+
+if (brandIncludeRaw) {
+  const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value.trim()).filter(Boolean);
+
+  if (matchExact) {
+    // Exact match = use field-brand (stronger filter)
+    params.set('fields', brands.map(b => `field-brand:${b}`).join(','));
+  } else {
+    // Default behavior = standard brand filter
+    brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+  }
+}
 
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
