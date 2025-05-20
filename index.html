@@ -277,11 +277,8 @@
   <main id="main">
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
-
- <!-- somewhere in <body> before `</body>` -->
-<audio id="clickSound" src="/click.mp3" preload="auto"></audio>
+ <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
 <script src="/form-tracking.js" defer></script>
-
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
     🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
@@ -515,6 +512,22 @@
       </div>
 
       <!-- Other Available Filters -->
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-new" id="conditionNew">
+        <label class="form-check-label" for="conditionNew">New</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-used" id="conditionUsed">
+        <label class="form-check-label" for="conditionUsed">Used</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-refurbished" id="conditionRefurbished">
+        <label class="form-check-label" for="conditionRefurbished">Refurbished</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-collectible" id="conditionCollectible">
+        <label class="form-check-label" for="conditionCollectible">Collectible</label>
+      </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave" aria-label="Show Subscribe & Save items">
         <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
@@ -1331,6 +1344,12 @@ document.querySelectorAll('button, input[type="submit"]').forEach(el => {
 // --- Prime Only Filter Logic ---
  // ——— consolidate filters into one place ———
 const FILTER_DEFS = {
+   // New condition filters:
+  'condition-new':         ['p_n_condition-type', '1248879011'],
+  'condition-used':        ['p_n_condition-type', '1248877011'],
+  'condition-refurbished': ['p_n_condition-type', '1248878111'],
+  'condition-collectible': ['p_n_condition-type', '1248878011'],
+   // Other filters: (by popularity)
   'prime-only':        ['p_n_prime',               '1'],
   'free-shipping':     ['p_n_shipping',            'free'],
   'in-stock':          ['p_n_in_stock',            '1'],
