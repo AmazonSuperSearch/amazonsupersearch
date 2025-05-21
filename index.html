@@ -52,7 +52,6 @@
   </script>
 
 
-
   <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
@@ -253,26 +252,28 @@
 
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
-<!-- helper to fire events -->
-   <!-- ① Auto-detect and set the cookie before Translate loads -->
+<!-- Google Translate Setup -->
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
   <script>
-    (function(){
-      // grab e.g. “en”, “es”, “fr”, “de”, etc.
-      var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
-      // tell Google Translate to go from English → userLang
-      document.cookie = "googtrans=/en/" + userLang + "; path=/";
-    })();
-  </script>
-  <!-- Google Translate widget (all languages) -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
+  (function() {
+    var lang = navigator.language || navigator.userLanguage;
+    lang = lang.split('-')[0]; // "en-US" → "en"
+    var supported = ['es','fr','de','pt','it','ja','ko','zh']; // Add more if needed
+    if (supported.includes(lang) && lang !== 'en') {
+      document.cookie = 'googtrans=/en/' + lang + '; path=/';
     }
-  </script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  })();
+</script>
+
+<script defer src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
@@ -280,6 +281,9 @@
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
  <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
+<audio id="checkboxSound" src="/select.mp3" preload="auto"></audio>
+
+<script src="/form-tracking.js" defer></script>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
     🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
@@ -422,7 +426,6 @@
         <option value="price-desc-rank">Price: High → Low</option>
         <option value="review-rank">Avg. Customer Review</option>
         <option value="date-desc-rank">Newest Arrivals</option>
-        <option value="salesrank">Best Sellers</option>
       </select>
     </div>
   </div>
@@ -548,10 +551,6 @@
       <div class="form-check">
        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
-        <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
@@ -1407,104 +1406,184 @@
 </div>
 <!-- All your HTML content above... -->
 
-
-
-  
-
-
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const form       = document.getElementById('amazon-search-form');
+  const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
-  const clickSound = document.getElementById('clickSound');
+ const clickSound = document.getElementById('clickSound');
+const checkboxSound = document.getElementById('checkboxSound');
 
-  // Initialize Tagify on your brand inputs
+if (clickSound || checkboxSound) {
+  document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
+    el.addEventListener('click', () => {
+      const sound = el.matches('input[type="checkbox"]') ? checkboxSound : clickSound;
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+      }
+    });
+  });
+}
+  // Tagify inputs
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
 
+  // Form submission logic
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    // 4) Core FILTER_DEFS mapping
+    const checked = [...form.elements].filter(el =>
+      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
+    ).length;
+
+    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
+
+    ['brandInclude', 'brandExclude'].forEach(id => {
+      const tagifyInput = document.getElementById(id);
+      if (tagifyInput && tagifyInput._tagify) {
+        tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
+      }
+    });
+
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
+
+    // Filter definitions
     const FILTER_DEFS = {
       'condition-new':         ['p_n_condition-type', '1248879011'],
       'condition-used':        ['p_n_condition-type', '1248877011'],
       'condition-refurbished': ['p_n_condition-type', '1248878111'],
       'condition-collectible': ['p_n_condition-type', '1248878011'],
-      'prime-only':            ['p_n_prime',               '1'],
-      'free-shipping':         ['p_n_shipping',            'free'],
-      'in-stock':              ['p_n_availability',        '2661601011'],
-      'coupons':               ['p_n_coupon',              '1'],
-      'lightning-deals':       ['p_n_deal_type',           '23566065011'],
-      'todays-deals':          ['p_n_deal_type',           '23566065011'],
-      'subscribe-save':        ['p_n_feature_browse-bin',  '15283820011'],
-      'amazon-choice':         ['p_n_feature_browse-bin',  '14826373011'],
-      'best-seller':           ['p_n_feature_browse-bin',  '14826383011'],
-      'fba-only':              ['p_n_feature_browse-bin',  '14674966011'],
-      'free-returns':          ['p_n_feature_browse-bin',  '14674972011'],
-      'gift-wrap':             ['p_n_feature_browse-bin',  '14674970011'],
-      'small-business':        ['p_n_feature_browse-bin',  '14674977011'],
-      'amazon-brands':         ['p_n_feature_browse-bin',  '14674969011'],
-      'low-rating':            ['p_n_feature_browse-bin',  '14674975011'],
-      'coupon-only':           ['p_n_coupon',              '1'],
-      'warehouse-refurb':      ['p_n_feature_browse-bin',  '14674978011']
+      'prime-only':        ['p_n_prime',               '1'],
+      'free-shipping':     ['p_n_shipping',            'free'],
+      'in-stock':          ['p_n_availability',        '2661601011'],
+      'coupons':           ['p_n_coupon',              '1'],
+      'lightning-deals':   ['p_n_deal_type',           '23566065011'],
+      'todays-deals':      ['p_n_deal_type',           '23566065011'],
+      'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
+      'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
+      'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
+      'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
+      'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
+      'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
+      'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
+      'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
+      'coupon-only':       ['p_n_coupon',              '1'],
+      'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
     };
-    Object.entries(FILTER_DEFS).forEach(([field, [param,val]]) => {
-      if (data.get(field) === 'on') rh.push(`${param}:${val}`);
-    });
 
-    // 5) Percentage-off dropdown
-    const pct = data.get('percent-off');
-    const PCT_MAP = {
-      10:'2665401011',20:'2665412011',30:'2665413011',
-      40:'2665414011',50:'2665415011',60:'2665416011',
-      70:'2665417011',80:'2665418011'
-    };
-    if (PCT_MAP[pct]) rh.push(`p_n_pct-off-with-tax:${PCT_MAP[pct]}`);
-
-    // 6) Price range
-    const min = data.get('min-price')?.trim(), max = data.get('max-price')?.trim();
-    if      (min && max) rh.push(`p_36:${Math.round(min*100)}-${Math.round(max*100)}`);
-    else if (min)        rh.push(`p_36:${Math.round(min*100)}-`);
-    else if (max)        rh.push(`p_36:-${Math.round(max*100)}`);
-
-    // 7) Deal-Hunter goodies: 30/60/90-day avg & volatility
-    ['below-avg-30','below-avg-60','below-avg-90','max-volatility-7'].forEach((name,i) => {
-      const v = data.get(name)?.trim();
-      if (v) {
-        const key = i===3 ? 'p_n_price-volatility' :
-          i===0 ? 'p_n_discount_30day' :
-          i===1 ? 'p_n_discount_60day' :
-                  'p_n_discount';
-        rh.push(`${key}:${Math.round(v)}`);
+    Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
+      if (data.get(field) === 'on') {
+        rh.push(`${param}:${val}`);
       }
     });
 
-    // 8) Brand include
-    const rawInc = data.get('brand-include')?.trim();
-    if (rawInc) {
-      let brands = [];
-      try { brands = JSON.parse(rawInc).map(o=>o.value.trim()); }
-      catch{ brands = rawInc.split(',').map(s=>s.trim()); }
-      brands.filter(b=>b).forEach(b=> rh.push(`p_89:${encodeURIComponent(b)}`));
-    }
+  // ─── AI-DRIVEN FILTERS ───
+  // Buy-Now-or-Wait Score
+  if (data.get('predictive-score') === 'on') {
+    rh.push('p_n_predictive-score:1');
+  }
+  // Restock Forecasts (ASIN)
+  const restockASIN = data.get('restock-forecast')?.trim();
+  if (restockASIN) {
+    params.set('restock_asin', restockASIN);
+  }
+  // Emotion-Feedback Loop
+  if (data.get('emotion-feedback') === 'on') {
+    rh.push('p_n_emotion-feedback:1');
+  }
 
-    // 9) Boolean / field-filters / ASIN / sort / search term
-    if (data.get('enable-boolean')==='on') params.set('boolean','on');
-    if (data.get('field-filters')?.trim()) params.set('fields', data.get('field-filters').trim());
-    if (data.get('direct-lookup')?.trim())  params.set('asin', data.get('direct-lookup').trim());
-    if (data.get('sort'))                  params.set('s', data.get('sort'));
-    if (data.get('q')?.trim())             params.set('k', data.get('q').trim());
+  // ─── continue with percentage-off, price range, etc. ───
 
-    // 10) RH & affiliate tag
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag','echolover25-20');
+// percentage-off dropdown
+const pct = data.get('percent-off');
+const PCT_MAP = {
+  10:'2665401011',20:'2665412011',30:'2665413011',
+  40:'2665414011',50:'2665415011',60:'2665416011',
+  70:'2665417011',80:'2665418011'
+};
+if (PCT_MAP[pct]) rh.push(`p_n_pct-off-with-tax:${PCT_MAP[pct]}`);
 
-    // 11) Play click sound if any
-    if (clickSound) clickSound.play().catch(()=>{});
+// price range
+const min = data.get('min-price')?.trim(),
+      max = data.get('max-price')?.trim();
+if      (min && max) rh.push(`p_36:${Math.round(min*100)}-${Math.round(max*100)}`);
+else if (min)        rh.push(`p_36:${Math.round(min*100)}-`);
+else if (max)        rh.push(`p_36:-${Math.round(max*100)}`);
+    
+// Deal-Hunter Goodies: discounts vs 30/60/90-day avg, and volatility
+const d30 = data.get('below-avg-30')?.trim();
+if (d30) rh.push(`p_n_discount_30day:${Math.round(d30)}`);
 
-    // 12) Redirect
-    const finalUrl = `https://${host}/s?${params.toString()}`;
-    window.open(finalUrl, '_blank');
+const d60 = data.get('below-avg-60')?.trim();
+if (d60) rh.push(`p_n_discount_60day:${Math.round(d60)}`);
+
+const d90 = data.get('below-avg-90')?.trim();
+if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);
+
+const vol = data.get('max-volatility-7')?.trim();
+if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
+
+// ✅ Brand Inclusion Logic
+const rawInclude = data.get('brand-include')?.trim();
+if (rawInclude) {
+  let brands = [];
+
+  // Tagify may output JSON or a comma-list; try both
+  try {
+    brands = JSON.parse(rawInclude).map(o => o.value.trim());
+  } catch {
+    brands = rawInclude.split(',').map(s => s.trim());
+  }
+
+  brands
+    .filter(b => b)
+    .forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+}
+
+// Brand Exclusion (for your NOT logic)
+const rawExclude = data.get('brand-exclude')?.trim();
+if (rawExclude) {
+  let exclude = [];
+  try {
+    exclude = JSON.parse(rawExclude).map(o => o.value.trim());
+  } catch {
+    exclude = rawExclude.split(',').map(s => s.trim());
+  }
+  // …then use exclude for your NOT or client-side prune…
+}
+
+// now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
+if (data.get('enable-boolean') === 'on') params.set('boolean','on');
+const fields = data.get('field-filters')?.trim();
+if (fields) params.set('fields', fields);
+const asin = data.get('direct-lookup')?.trim();
+if (asin)   params.set('asin', asin);
+
+const sort = data.get('sort');
+if (sort) params.set('s', sort);
+
+const q = data.get('q')?.trim();
+if (q) params.set('k', q);
+
+if (rh.length) params.set('rh', rh.join(','));
+params.set('tag','echolover25-20');
+
+const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
+window.open(finalUrl, '_blank');
   });
 });
 </script>
+
+<script src="/visitor-tracking.js" defer></script>
+<script src="/form-tracking.js" defer></script>
+
+<div class="floating-share">
+  <h2>Share With Friends</h2>
+  <div class="share-buttons">  
+    <!-- All your buttons here -->
+  </div>
+</div>
+</body>
+</html>
