@@ -65,9 +65,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
  <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js" defer></script>
 
-   <!-- Font Awesome (for share icons) -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
   <!-- Your external stylesheet with all the removed inline styles -->
   <link rel="stylesheet" href="styles.css">
 
@@ -107,8 +104,6 @@
 <audio id="boxselect" src="/select.mp3" preload="auto"></audio>
      <!-- Unselect sound -->
 <audio id="boxunselect" src="/unselect.mp3" preload="auto"></audio>
-     <!-- Success sound -->
-     <audio id="successSound" src="/success.mp3" preload="auto"></audio>
 <script src="/form-tracking.js" defer></script>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
@@ -252,6 +247,7 @@
         <option value="price-desc-rank">Price: High → Low</option>
         <option value="review-rank">Avg. Customer Review</option>
         <option value="date-desc-rank">Newest Arrivals</option>
+        <option value="salesrank">Best Sellers</option>
       </select>
     </div>
   </div>
@@ -377,6 +373,10 @@
       <div class="form-check">
        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
+        <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
@@ -1212,67 +1212,50 @@
     });
   }
 </script>
-
-<!-- All your HTML content above... -->
-  <script src="/form-tracking.js" defer></script>
+<!-- Floating Share Panel -->
 <div class="floating-share">
-  <h4 class="mb-2">Share with Friends</h4>
-
-  <!-- WhatsApp -->
-  <a
-    href="whatsapp://send?text=Check%20this%20out:%20https://amazonsupersearch.com"
-    class="d-inline-block me-2"
-    aria-label="Share on WhatsApp"
-  >
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Facebook -->
-  <a
-    href="fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=https://amazonsupersearch.com"
-    class="d-inline-block me-2"
-    aria-label="Share on Facebook"
-  >
-    <i class="fab fa-facebook"></i>
-  </a>
-
-  <!-- Twitter -->
-  <a
-    href="twitter://post?message=Check%20this%20out!%20https://amazonsupersearch.com"
-    class="d-inline-block me-2"
-    aria-label="Share on Twitter"
-  >
-    <i class="fab fa-twitter"></i>
-  </a>
-
-  <!-- Telegram -->
-  <a
-    href="tg://msg_url?url=https://amazonsupersearch.com&text=Check%20this%20out!"
-    class="d-inline-block me-2"
-    aria-label="Share on Telegram"
-  >
-    <i class="fab fa-telegram"></i>
-  </a>
-
-  <!-- Email -->
-  <a
-    href="mailto:?subject=Check%20this%20out!&body=I%20found%20this%20cool%20Amazon%20filter%20tool:%20https://amazonsupersearch.com"
-    class="d-inline-block me-2"
-    aria-label="Share via Email"
-  >
-    <i class="fas fa-envelope"></i>
-  </a>
-
-  <!-- Copy Link -->
-  <a
-    href="#"
-    onclick="navigator.clipboard.writeText('https://amazonsupersearch.com'); alert('Link copied!'); return false;"
-    class="d-inline-block"
-    aria-label="Copy link to clipboard"
-  >
-    <i class="fas fa-link"></i>
-  </a>
+  <h2>Share With Friends</h2>
+  <div class="share-buttons">
+    <a href="#"
+       onclick="window.open(
+         'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-primary btn-sm">
+      Facebook
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)
+         +'&text='+encodeURIComponent(document.title),
+         '_blank'
+       ); return false;"
+       class="btn btn-info btn-sm">
+      Twitter
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'mailto:?subject='+encodeURIComponent(document.title)
+         +'&body='+encodeURIComponent(window.location.href),
+         '_self'
+       ); return false;"
+       class="btn btn-secondary btn-sm">
+      Email
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'sms:?&body='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-success btn-sm">
+      SMS
+    </a>
+  </div>
 </div>
+<!-- All your HTML content above... -->
+
+   <script src="/visitor-tracking.js" defer></script>
+  <script src="/form-tracking.js" defer></script>
 
 </body>
 </html>
