@@ -50,6 +50,13 @@
     "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings."
   }
   </script>
+  <!-- Multilingual SEO: alternate language versions -->
+  <link rel="alternate" hreflang="en" href="https://www.amazonsupersearch.com/" />
+  <link rel="alternate" hreflang="es" href="https://www.amazonsupersearch.com/es/" />
+  <link rel="alternate" hreflang="fr" href="https://www.amazonsupersearch.com/fr/" />
+  <link rel="alternate" hreflang="de" href="https://www.amazonsupersearch.com/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.amazonsupersearch.com/" />
+
 
   <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -132,15 +139,8 @@
 #voiceSearchBtn.active {
   background-color: #ffc107;
 }
-    /* Pulse animations */
-    @keyframes pulse-glow {0%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);}50%{box-shadow:0 0 20px 10px rgba(13,110,253,0.5);}100%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);} }
-    .pulse-glow {animation:pulse-glow 2s infinite;transition:box-shadow .3s ease-in-out;}
-    @keyframes text-pulse {0%{text-shadow:0 0 5px rgba(255,153,0,0.7),0 0 10px rgba(255,153,0,0.5);}50%{text-shadow:0 0 20px rgba(255,153,0,0.9),0 0 30px rgba(255,153,0,0.7);}100%{text-shadow:0 0 5px rgba(255,153,0,0.7),0 0 10px rgba(255,153,0,0.5);} }
-    h1.text-pulse {color:#FF9900;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;animation:text-pulse 2s infinite ease-in-out;}
-    @keyframes orange-pulse {0%{box-shadow:0 0 0 0 rgba(255,153,0,0);}50%{box-shadow:0 0 12px 6px rgba(255,153,0,0.7);}100%{box-shadow:0 0 0 0 rgba(255,153,0,0);} }
-    .pulse-orange {animation:orange-pulse 2s infinite ease-in-out;}
-  </style>
-  <style>
+    </style>
+     <style>
   .coming-soon input[type="checkbox"] {
     pointer-events: none;
     opacity: 0.5;
@@ -150,6 +150,8 @@
     color: #6c757d;
     font-style: italic;
   }
+    </style>
+  <style>
     /* Floating share panel */
 .floating-share {
   position: fixed;
@@ -246,8 +248,10 @@
   padding: 0.5rem;
   z-index: 1000;
 }
-
-</style>
+    /* Pulse animations */
+    @keyframes pulse-glow {0%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);}50%{box-shadow:0 0 20px 10px rgba(13,110,253,0.5);}100%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);} }
+    .pulse-glow {animation:pulse-glow 2s infinite;transition:box-shadow .3s ease-in-out;}
+  </style>
 
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
@@ -277,9 +281,7 @@
   <main id="main">
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
-
-  <!-- Click sound audio -->
-  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+ <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
     🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
@@ -301,7 +303,7 @@
       </h1>
       <p class="lead mb-4">
         Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds.
-        Filter by price, brand, , free shipping, top ratings—and never miss another deal.
+        Filter by price, , , free shipping, top ratings—and never miss another deal.
         No signup, no fluff—just the products you crave, right now.
       </p>
       <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
@@ -400,7 +402,7 @@
     <!-- Customer Review -->
 <div class="col-12 col-lg-4">
   <label class="form-label" for="minRating">
-    Customer Review <span class="text-warning" style="font-size: 0.85rem;">⚠️ May cause 0 results</span>
+    Customer Review
   </label>
   <select class="form-select" name="min-rating" id="minRating">
     <option value="">Any</option>
@@ -430,7 +432,7 @@
 </div>
    
   
-   <!-- Step 4: Brand Filters -->
+<!-- Step 4: Brand Filters -->
 <section class="container text-start mb-4">
   <h2 class="mb-2">✅ Step 4: Choose brands to include or exclude</h2>
   <p class="text-muted mb-3">
@@ -439,6 +441,8 @@
 
   <div class="card border-success shadow-sm mb-4 p-3">
     <div class="row g-3">
+
+      <!-- Include Brands -->
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandInclude">Include Brands</label>
         <input
@@ -459,7 +463,12 @@
             Match only these brands
           </label>
         </div>
+        <small class="form-text text-muted">
+          Enter one or more brands (comma-separated or via tagify).
+        </small>
       </div>
+
+      <!-- Exclude Brands -->
       <div class="col-12 col-md-6">
         <label class="form-label" for="brandExclude">Exclude Brands</label>
         <input
@@ -469,10 +478,15 @@
           id="brandExclude"
           placeholder="e.g. Acer, Apple"
         >
+        <small class="form-text text-muted">
+          Any brands here will be stripped client-side (for future use).
+        </small>
       </div>
+
     </div>
   </div>
 </section>
+
 
 
  <!-- Step 5: Fine-tune your preferences -->
@@ -513,6 +527,22 @@
       </div>
 
       <!-- Other Available Filters -->
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-new" id="conditionNew">
+        <label class="form-check-label" for="conditionNew">New</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-used" id="conditionUsed">
+        <label class="form-check-label" for="conditionUsed">Used</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-refurbished" id="conditionRefurbished">
+        <label class="form-check-label" for="conditionRefurbished">Refurbished</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="condition-collectible" id="conditionCollectible">
+        <label class="form-check-label" for="conditionCollectible">Collectible</label>
+      </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="subscribe-save" id="subscribeSave" aria-label="Show Subscribe & Save items">
         <label class="form-check-label" for="subscribeSave">Subscribe & Save</label>
@@ -621,7 +651,7 @@
 </button>
 
     <p class="text-warning mt-2 text-center" style="font-weight: bold;">
-  ⚠️ Too many filters may return no results.
+   Too many filters may return no results.
 </p>
 
   </div>
@@ -646,126 +676,192 @@
       </h2>
       <div id="collapsePower" class="accordion-collapse collapse" data-bs-parent="#accordionPower">
         <div class="accordion-body">
+
+          <!-- How-to instructions -->
           <p><strong>🧠 How to Use Power-User Tools</strong><br>
-          This section gives you extra control to target exactly what you want—like using “search magic.” Here's how each option works:</p>
-
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Enable Boolean Operators</strong><br>
-          ✅ Check this box if you want to combine keywords with logic.<br>
-          Type your keywords in the main search box using:</p>
-
+             This section gives you extra control to target exactly what you want—like using “search magic.” Here’s how:</p>
           <ul>
-            <li><strong>AND</strong>: Must include both words (e.g., camera AND tripod)</li>
-            <li><strong>OR</strong>: Show either word (e.g., headphones OR earbuds)</li>
-            <li><strong>NOT</strong>: Exclude something (e.g., tablet NOT refurbished)</li>
+            <li><strong>Enable Boolean Operators</strong><br>
+              Check the box and then use <code>AND</code>, <code>OR</code>, <code>NOT</code> in your main search.</li>
+            <li><strong>Field Filters</strong><br>
+              Type things like <code>field-brand:Sony</code> to only show that brand.</li>
+            <li><strong>ASIN / ISBN Lookup</strong><br>
+              Paste a product’s ASIN or ISBN (e.g. <code>B08N5WRWNW</code>) to go directly to it.</li>
           </ul>
+          <hr>
 
-          <p><strong>Field Filters</strong><br>
-          📅 Click the input box.<br>
-          Type something like:</p>
-
-          <ul>
-            <li>field-brand:Sony to only show Sony products.</li>
-            <li>field-title:Bluetooth to only show items with "Bluetooth" in the title.</li>
-          </ul>
-
-          <p>🔍 This lets you drill down with precision.</p>
-
-          <p><strong>ASIN / ISBN Direct Lookup</strong><br>
-          💡 Got a specific product code?<br>
-          Paste the ASIN (Amazon product ID) or ISBN (for books).<br>
-          Example: B08N5WRWNW</p>
-
-          <p>🔍 It will take you straight to that product in filtered results.</p>
-
+          <!-- LIVE features -->
           <div class="form-check mb-2">
             <input class="form-check-input" type="checkbox" name="enable-boolean" id="enableBoolean">
-            <label class="form-check-label" for="enableBoolean">Enable Boolean Operators</label>
+            <label class="form-check-label" for="enableBoolean">
+              Enable Boolean Operators
+            </label>
           </div>
+
           <div class="mb-2">
-            <label class="form-label">Field Filters</label>
-            <input type="text" class="form-control" name="field-filters" placeholder="e.g. field-brand:Sony">
+            <label class="form-label" for="field-filters">Field Filters</label>
+            <input
+              type="text"
+              class="form-control"
+              name="field-filters"
+              id="field-filters"
+              placeholder="e.g. field-brand:Sony">
           </div>
-          <div class="mb-2">
-            <label class="form-label">ASIN / ISBN Direct Lookup</label>
-            <input type="text" class="form-control" name="direct-lookup" placeholder="Enter ASIN, ISBN or UPC">
+
+          <div class="mb-4">
+            <label class="form-label" for="direct-lookup">ASIN / ISBN Direct Lookup</label>
+            <input
+              type="text"
+              class="form-control"
+              name="direct-lookup"
+              id="direct-lookup"
+              placeholder="Enter ASIN, ISBN or UPC">
           </div>
+
+          <!-- COMING SOON: everything below -->
+          <div class="coming-soon">
+            <p class="text-muted"><em>More filters coming soon:</em></p>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Discount (%) from 90-Day Avg Price <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Coupon-Clippable Only <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <!-- add additional placeholders here as needed -->
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- Deal-Hunter Goodies -->
 <section>
   <div class="accordion mb-4" id="accordionDeal">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingDeal">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeal">
+        <button class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseDeal">
           Deal-Hunter Goodies
         </button>
       </h2>
-      <div id="collapseDeal" class="accordion-collapse collapse" data-bs-parent="#accordionDeal">
+      <div id="collapseDeal"
+           class="accordion-collapse collapse"
+           data-bs-parent="#accordionDeal">
         <div class="accordion-body">
+
+          <!-- How-to instructions -->
           <p><strong>💸 How to Use Deal-Hunter Goodies</strong><br>
-          This section is for finding major discounts, coupons, and bargains based on past pricing history.</p>
+             Spot real bargains and coupon opportunities using past price trends and open-box deals:</p>
+          <ul>
+            <li><strong>Discount from 90-Day Avg</strong><br>
+              Type a percentage (e.g. “25”) to see items at least that much below their three-month avg price.</li>
+            <li><strong>Coupon-Clippable Only</strong><br>
+              Check to show only products with a visible Amazon coupon at checkout.</li>
+            <li><strong>Warehouse / Open-Box</strong><br>
+              Check to include gently used or open-box items sold by Amazon at a discount.</li>
+            <li><strong>Discount from 30/60/90-Day Avg</strong><br>
+              Enter percentages to compare against one- or two-month averages.</li>
+            <li><strong>Max Daily Price Volatility</strong><br>
+              Set a threshold (e.g. “5”) to hide listings whose price jumps wildly day-to-day.</li>
+          </ul>
+          <hr>
 
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Discount (%) from 90-Day Avg Price</strong><br>
-          💰 Type a number like 25 to only see items at least 25% cheaper than their average over the last 90 days.<br>
-          📉 Helps you spot real deals—not just fake markdowns.</p>
-
-          <p><strong>Coupon-Clippable Only</strong><br>
-          ✅ Check this to only see products that offer a visible coupon at checkout.</p>
-
-          <p><strong>Warehouse / Open-Box</strong><br>
-          ✅ Check this to find gently used or open-box items sold directly by Amazon at a discount.</p>
-
-          <p><strong>Other Discount (%) Boxes</strong><br>
-          Enter percentages like:<br>
-          30 under “30-Day Avg” to see items 30% cheaper than last month.<br>
-          You can fill in 1, 2, or all of them.<br>
-          🔄 The more you fill in, the better chance you’ll find big-time deals.</p>
-
-          <p><strong>Max Daily Price Volatility (%)</strong><br>
-          📉 Want price stability? Type something like 10 to filter out products that constantly jump in price.<br>
-          Helps avoid unstable or manipulated listings.</p>
-
+          <!-- LIVE features -->
           <div class="mb-3">
             <label class="form-label">Discount (%) from 90-Day Avg Price</label>
-            <input type="number" class="form-control" name="price-drop" placeholder="e.g. 20">
+            <input type="number"
+                   class="form-control"
+                   name="price-drop"
+                   placeholder="e.g. 20">
           </div>
+
           <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="coupon-only" id="couponOnly">
-            <label class="form-check-label" for="couponOnly">Coupon-Clippable Only</label>
+            <input class="form-check-input"
+                   type="checkbox"
+                   name="coupon-only"
+                   id="couponOnly">
+            <label class="form-check-label"
+                   for="couponOnly">
+              Coupon-Clippable Only
+            </label>
           </div>
+
           <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="warehouse-refurb" id="warehouseRefurb">
-            <label class="form-check-label" for="warehouseRefurb">Warehouse / Open-Box</label>
+            <input class="form-check-input"
+                   type="checkbox"
+                   name="warehouse-refurb"
+                   id="warehouseRefurb">
+            <label class="form-check-label"
+                   for="warehouseRefurb">
+              Warehouse / Open-Box
+            </label>
           </div>
+
           <div class="row g-3 mt-3">
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 30-Day Avg</label>
-              <input type="number" min="0" class="form-control" name="below-avg-30" placeholder="e.g. 20">
+              <input type="number"
+                     min="0"
+                     class="form-control"
+                     name="below-avg-30"
+                     placeholder="e.g. 20">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 60-Day Avg</label>
-              <input type="number" min="0" class="form-control" name="below-avg-60" placeholder="e.g. 15">
+              <input type="number"
+                     min="0"
+                     class="form-control"
+                     name="below-avg-60"
+                     placeholder="e.g. 15">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Discount (%) from 90-Day Avg</label>
-              <input type="number" min="0" class="form-control" name="below-avg-90" placeholder="e.g. 10">
+              <input type="number"
+                     min="0"
+                     class="form-control"
+                     name="below-avg-90"
+                     placeholder="e.g. 10">
             </div>
             <div class="col-6 col-md-3">
               <label class="form-label">Max Daily Price Volatility (%)</label>
-              <input type="number" min="0" class="form-control" name="max-volatility-7" placeholder="e.g. 5">
+              <input type="number"
+                     min="0"
+                     class="form-control"
+                     name="max-volatility-7"
+                     placeholder="e.g. 5">
             </div>
           </div>
+
+          <!-- COMING SOON: future goodies -->
+          <div class="coming-soon mt-4">
+            <p class="text-muted"><em>More advanced goodies on the way:</em></p>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Price-Drop Alerts <small>(Coming Soon)</small>
+              </label>
+            </div>
+            <!-- Add more placeholders here as you plan new features -->
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
 
   
       <!-- Personalization & AI-Driven -->
@@ -773,46 +869,72 @@
   <div class="accordion mb-4" id="accordionPersonal">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingPersonal">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersonal">
+        <button class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsePersonal">
           Personalization &amp; AI-Driven
         </button>
       </h2>
-      <div id="collapsePersonal" class="accordion-collapse collapse" data-bs-parent="#accordionPersonal">
+      <div id="collapsePersonal"
+           class="accordion-collapse collapse"
+           data-bs-parent="#accordionPersonal">
         <div class="accordion-body">
-          <p><strong>🤖 How to Use Personalization & AI-Driven Tools</strong><br>
-          This section uses AI to help you shop smarter—even if you're not tech-savvy.</p>
 
-          <p><strong>✅ Step-by-Step:</strong><br>
-          <strong>Buy-Now-or-Wait Score</strong><br>
-          ✅ Check this to activate our smart AI that tells you whether now is a good time to buy, or if prices usually drop further.<br>
-          It’s like having a price advisor built-in.</p>
+          <!-- How-to instructions -->
+          <p><strong>🤖 How to Use Personalization &amp; AI-Driven Tools</strong><br>
+             Leverage AI insights to shop smarter:</p>
+          <ul>
+            <li><strong>Buy-Now-or-Wait Score</strong><br>
+              Check to get a recommendation if now is the best time to buy.</li>
+            <li><strong>Restock Forecasts (ASIN)</strong><br>
+              Paste an out-of-stock ASIN to predict when it’ll return.</li>
+            <li><strong>Emotion-Feedback Loop</strong><br>
+              Enable to teach the AI your tastes and improve future suggestions.</li>
+          </ul>
+          <hr>
 
-          <p><strong>Restock Forecasts (ASIN)</strong><br>
-          Paste the ASIN (Amazon product ID) of a product that’s out of stock.<br>
-          Example: B08N5WRWNW<br>
-          🤖 The AI checks trends and predicts when it might come back.</p>
+          <!-- ALL controls disabled & marked coming soon -->
+          <div class="coming-soon">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Buy-Now-or-Wait Score <small>(Coming Soon)</small>
+              </label>
+            </div>
 
-          <p><strong>Emotion-Feedback Loop</strong><br>
-          ✅ Check this to let the system learn from what you like.<br>
-          It improves results each time you interact—like a smart assistant that gets better with you.</p>
+            <div class="mb-2">
+              <label class="form-label">
+                Restock Forecasts (ASIN) <small>(Coming Soon)</small>
+              </label>
+              <input type="text"
+                     class="form-control"
+                     disabled
+                     placeholder="Enter ASIN">
+            </div>
 
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" name="predictive-score" id="predictiveScore">
-            <label class="form-check-label" for="predictiveScore">Buy-Now-or-Wait Score</label>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Emotion-Feedback Loop <small>(Coming Soon)</small>
+              </label>
+            </div>
+
+            <p class="text-muted mt-4"><em>More AI-driven tools coming soon:</em></p>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" disabled>
+              <label class="form-check-label">
+                Visual Style Match <small>(Coming Soon)</small>
+              </label>
+            </div>
           </div>
-          <div class="mb-2">
-            <label class="form-label">Restock Forecasts (ASIN)</label>
-            <input type="text" class="form-control" name="restock-forecast" placeholder="Enter ASIN">
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="emotion-feedback" id="emotionFeedback">
-            <label class="form-check-label" for="emotionFeedback">Emotion-Feedback Loop</label>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
       <!-- Visual & Voice Interfaces -->
@@ -884,52 +1006,331 @@
       🔍 Search Amazon Again
     </button>
     <p class="text-warning mt-2 text-center" style="font-weight: bold;">
-  ⚠️ Too many filters may return no results.
+   Too many filters may return no results.
 </p>
 
   </div>
 </section>
+</form>
+  
+<section id="faq" class="container my-5">
+  <h2 class="mb-4">🔍 Frequently Asked Questions</h2>
+  <div class="accordion" id="faqAccordion">
+
+    <!-- Q1 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading1">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse1"
+                aria-expanded="true" aria-controls="faqCollapse1">
+          What is Amazon Super Search?
+        </button>
+      </h3>
+      <div id="faqCollapse1" class="accordion-collapse collapse show"
+           aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Amazon Super Search is our advanced filter tool that lets you find exactly what you want—no fluff, no signup.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading2">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse2"
+                aria-expanded="false" aria-controls="faqCollapse2">
+          How do I filter by price range?
+        </button>
+      </h3>
+      <div id="faqCollapse2" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Use the min/max price fields in Step 2 to set your desired price range.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading3">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse3"
+                aria-expanded="false" aria-controls="faqCollapse3">
+          How do I select item condition?
+        </button>
+      </h3>
+      <div id="faqCollapse3" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          In Step 3 choose New, Used, Refurbished, or Any from the Condition dropdown.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading4">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse4"
+                aria-expanded="false" aria-controls="faqCollapse4">
+          Can I include or exclude specific brands?
+        </button>
+      </h3>
+      <div id="faqCollapse4" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Step 4 lets you type brands to include or exclude—plus you can toggle “Match only these brands.”
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading5">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse5"
+                aria-expanded="false" aria-controls="faqCollapse5">
+          How do I apply Prime, Free Shipping, or In-Stock filters?
+        </button>
+      </h3>
+      <div id="faqCollapse5" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Just check the Prime Only, Free Shipping, or In Stock boxes in Step 5.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading6">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse6"
+                aria-expanded="false" aria-controls="faqCollapse6">
+          How do I start the search?
+        </button>
+      </h3>
+      <div id="faqCollapse6" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Click the “🔍 Search Amazon” button in Step 6 to open your results in a new tab.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading7">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse7"
+                aria-expanded="false" aria-controls="faqCollapse7">
+          How do I use Boolean operators to refine my search?
+        </button>
+      </h3>
+      <div id="faqCollapse7" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading7" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Enable “Boolean Operators” in Step 7 and use <code>AND</code>, <code>OR</code>, <code>NOT</code>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading8">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse8"
+                aria-expanded="false" aria-controls="faqCollapse8">
+          Can I go straight to a product using its ASIN or ISBN?
+        </button>
+      </h3>
+      <div id="faqCollapse8" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading8" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Use the “ASIN / ISBN Direct Lookup” field in Power-User Tools.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading9">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse9"
+                aria-expanded="false" aria-controls="faqCollapse9">
+          What are Field Filters and how do I use them?
+        </button>
+      </h3>
+      <div id="faqCollapse9" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading9" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Field Filters let you target Amazon fields like <code>field-brand:Sony</code>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="accordion-item">
+      <h3 class="accordion-header" id="faqHeading10">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#faqCollapse10"
+                aria-expanded="false" aria-controls="faqCollapse10">
+          How do I filter for Prime-only or free-shipping items?
+        </button>
+      </h3>
+      <div id="faqCollapse10" class="accordion-collapse collapse"
+           aria-labelledby="faqHeading10" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Check “Prime Only” or “Free Shipping” in Step 5.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Amazon Super Search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Amazon Super Search is our advanced filter tool that lets you find exactly what you want—no fluff, no signup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I filter by price range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the min/max price fields in Step 2 to set your desired price range."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I select item condition?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Step 3 choose New, Used, Refurbished, or Any from the Condition dropdown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include or exclude specific brands?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step 4 lets you type brands to include or exclude—plus you can toggle “Match only these brands.”"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I apply Prime, Free Shipping, or In-Stock filters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Just check the Prime Only, Free Shipping, or In Stock boxes in Step 5."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I start the search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the “🔍 Search Amazon” button in Step 6 to open your results in a new tab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use Boolean operators to refine my search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enable “Boolean Operators” in Step 7 and use AND, OR, NOT."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I go straight to a product using its ASIN or ISBN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the “ASIN / ISBN Direct Lookup” field in Power-User Tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Field Filters and how do I use them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Field Filters let you target Amazon fields like field-brand:Sony."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I filter for Prime-only or free-shipping items?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check “Prime Only” or “Free Shipping” in Step 5."
+      }
+    }
+  ]
+}
+</script>
 
     <!-- …your search-logic <script> closes here… -->
  <!-- end of search logic -->
-</form>
-<!-- Visitor Question -->
-<section id="visitor-question" class="mb-4 text-center">
-  <h3>✨ Join the Conversation: How Can We Make Amazon Super Search Even Better? ✨</h3>
-  <p class="lead mb-4">
-    If you like our page, share, share, share the love! ❤️
+<section id="about-amazon-super-search" class="container my-5">
+  <h2 class="mb-3">🧭 What is Amazon Super Search and How Does It Help You?</h2>
+  <p>
+    <strong>Amazon Super Search</strong> is a powerful <em>advanced Amazon filter tool</em> that helps you find 
+    <strong>in-stock deals</strong>, <strong>hidden discounts</strong>, <strong>coupon-enabled listings</strong>, 
+    and <strong>Prime-only products</strong>—faster than ever before. Whether you're looking for 
+    <em>wireless headphones under $50</em>, <em>eco-friendly home goods</em>, or <em>top-rated gadgets with free shipping</em>, 
+    our tool lets you fine-tune every search with ease.
+  </p>
+
+  <h3 class="mt-4">🔍 How to Use It:</h3>
+  <ul>
+    <li>Enter your product keywords, ASIN, or UPC.</li>
+    <li>Filter by price, rating, brand, shipping speed, deal type, and more.</li>
+    <li>
+      Click <strong>“Search Amazon”</strong> to instantly view results that match your filters. 
+      <em>All products will be displayed on Amazon’s official website. This tool is for advanced searching only—nothing is sold directly on this site. You'll be redirected to Amazon for any purchases.</em>
+    </li>
+  </ul>
+
+  <h3 class="mt-4">💡 Why It Works:</h3>
+  <p>
+    With over <strong>20 smart filters</strong>, including <em>lightning deals</em>, <em>free returns</em>, 
+    <em>Amazon’s Choice</em>, and <em>discount percentages from past average prices</em>, you can:
+  </p>
+  <ul>
+    <li>Avoid endless scrolling</li>
+    <li>Spot real deals—not fake markdowns</li>
+    <li>Uncover coupons Amazon hides at checkout</li>
+    <li>Save time and money with targeted searches</li>
+  </ul>
+
+  <h3 class="mt-4">🛡️ Your Privacy Matters:</h3>
+  <p>
+    <strong>We do not collect, store, or track any personal information—ever.</strong> There is 
+    <strong>no login, no signup, and no tracking cookies</strong> on this site. All searches are 
+    processed client-side and sent directly to Amazon through a <strong>secure redirect</strong>.
   </p>
 </section>
 </main>
-<!-- Legal Disclaimer -->
 <footer class="text-center text-muted py-4" style="font-size: 0.9rem;">
-  <hr>
-  <!-- Legal + Affiliate Disclaimer -->
-  <div class="py-4">
+  <div class="container">
     <hr>
-    <p><strong>Disclaimer:</strong> This site is not affiliated with, endorsed by, or sponsored by Amazon.com or any of its subsidiaries. All trademarks are the property of their respective owners.</p>
-    <p><strong>Affiliate Disclaimer:</strong> This site contains affiliate links. We may earn a small commission when you make a purchase, at no extra cost to you.</p>
+    <p class="small mb-2">
+      <strong>Important:</strong> This is an independent website not affiliated with, endorsed by, or sponsored by Amazon.com or any of its subsidiaries.
+    </p>
+    <p class="small mb-0">
+      <strong>Affiliate Disclaimer:</strong> We may earn a small commission when you make a purchase, at no extra cost to you.
+    </p>
   </div>
 </footer>
-
-<!-- Comments -->
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url        = window.location.href;
-    this.page.identifier = 'amazon-super-search';
-  };
-  (function() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://amazon-super-search-1.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head||d.body).appendChild(s);
-  })();
-</script>
-<noscript>
-  Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
@@ -1008,147 +1409,66 @@
 </div>
 <!-- All your HTML content above... -->
 
-
-
-  
-
-
-
+   <!-- …all your page content above… -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
-
-  new Tagify(document.querySelector('input[name="brand-include"]'));
-  new Tagify(document.querySelector('input[name="brand-exclude"]'));
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-
-    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
-
-    ['brandInclude', 'brandExclude'].forEach(id => {
-      const tagifyInput = document.getElementById(id);
-      if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.value = JSON.stringify(tagifyInput._tagify.value);
-      }
-    });
-document.querySelectorAll('button, input[type="submit"]').forEach(el => {
-  el.addEventListener('click', () => {
-    const clickSound = document.getElementById('clickSound');
-    if (clickSound) clickSound.play().catch(() => {});
-  });
-});
-    const data = new FormData(form);
-    const params = new URLSearchParams();
-    const rh = [];
-    
-// --- Prime Only Filter Logic ---
- // ——— consolidate filters into one place ———
-const FILTER_DEFS = {
-  'prime-only':        ['p_n_prime',               '1'],
-  'free-shipping':     ['p_n_shipping',            'free'],
-  'in-stock':          ['p_n_in_stock',            '1'],
-  'coupons':           ['p_n_coupon',              '1'],
-  'lightning-deals':   ['p_n_deal_type',           '23566065011'],
-  'todays-deals':      ['p_n_deal_type',           '23566065011'],
-  'subscribe-save':    ['p_n_feature_browse-bin',  'Subscribe-Save'],
-  'amazon-choice':     ['p_n_feature_browse-bin',  'Amazon-Choice'],
-  'best-seller':       ['p_n_feature_browse-bin',  'Best-Sellers'],
-  'fba-only':          ['p_n_feature_browse-bin',  'Sold-and-Shipped-by-Amazon'],
-  'free-returns':      ['p_n_feature_browse-bin',  'Free-Returns'],
-  'gift-wrap':         ['p_n_feature_browse-bin',  'Gift-Wrap'],
-  'small-business':    ['p_n_feature_browse-bin',  'Small-Business'],
-  'amazon-brands':     ['p_n_feature_browse-bin',  'Amazon-Brands'],
-  'low-rating':        ['p_n_feature_browse-bin',  'Low-Rating'],
-  'coupon-only':       ['p_n_coupon',              '1'],
-  'warehouse-refurb':  ['p_n_feature_browse-bin',  'Warehouse-Open-Box'],
-};
-
-Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-  if (data.get(field) === 'on') {
-    rh.push(`${param}:${val}`);
-  }
-});
-  Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-    if (data.get(field) === 'on') {
-      rh.push(`${param}:${val}`);
+(function(){
+  function sendEvent(name, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', name, params);
     }
+  }
+
+  var form = document.getElementById('amazon-search-form');
+
+  // ① Track form submissions
+  form.addEventListener('submit', function(e) {
+    var q = document.getElementById('mainSearchInput').value || '(empty)';
+    sendEvent('search_submitted', {
+      search_term: q,
+      percent_off: form['percent-off'].value || 'any',
+      min_rating: form['min-rating'].value || 'any'
+    });
   });
 
-  // ─── AI-DRIVEN FILTERS ───
-  // Buy-Now-or-Wait Score
-  if (data.get('predictive-score') === 'on') {
-    rh.push('p_n_predictive-score:1');
-  }
-  // Restock Forecasts (ASIN)
-  const restockASIN = data.get('restock-forecast')?.trim();
-  if (restockASIN) {
-    params.set('restock_asin', restockASIN);
-  }
-  // Emotion-Feedback Loop
-  if (data.get('emotion-feedback') === 'on') {
-    rh.push('p_n_emotion-feedback:1');
-  }
+  // ② Track voice-search activation
+  document.getElementById('voiceSearchBtn')
+    .addEventListener('click', function() {
+      sendEvent('voice_search_start');
+    });
 
-  // ─── continue with percentage-off, price range, etc. ───
-
-// percentage-off dropdown
-const pct = data.get('percent-off');
-const PCT_MAP = {
-  10:'2665401011',20:'2665412011',30:'2665413011',
-  40:'2665414011',50:'2665415011',60:'2665416011',
-  70:'2665417011',80:'2665418011'
-};
-if (PCT_MAP[pct]) rh.push(`p_n_pct-off-with-tax:${PCT_MAP[pct]}`);
-
-// price range
-const min = data.get('min-price')?.trim(),
-      max = data.get('max-price')?.trim();
-if      (min && max) rh.push(`p_36:${Math.round(min*100)}-${Math.round(max*100)}`);
-else if (min)        rh.push(`p_36:${Math.round(min*100)}-`);
-else if (max)        rh.push(`p_36:-${Math.round(max*100)}`);
-    
-    // Deal-Hunter Goodies: discounts vs 30/60/90-day avg, and volatility
-const d30 = data.get('below-avg-30')?.trim();
-if (d30) rh.push(`p_n_discount_30day:${Math.round(d30)}`);
-
-const d60 = data.get('below-avg-60')?.trim();
-if (d60) rh.push(`p_n_discount_60day:${Math.round(d60)}`);
-
-const d90 = data.get('below-avg-90')?.trim();
-if (d90) rh.push(`p_n_discount:${Math.round(d90)}`);        // re-uses your 90-day avg param
-
-const vol = data.get('max-volatility-7')?.trim();
-if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
-
-
-// now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
-if (data.get('enable-boolean') === 'on') params.set('boolean','on');
-const fields = data.get('field-filters')?.trim();
-if (fields) params.set('fields', fields);
-const asin = data.get('direct-lookup')?.trim();
-if (asin)   params.set('asin', asin);
-
-const sort = data.get('sort');
-if (sort) params.set('s', sort);
-
-const q = data.get('q')?.trim();
-if (q) params.set('k', q);
-
-if (rh.length) params.set('rh', rh.join(','));
-params.set('tag','echolover25-20');
-
-const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-window.open(finalUrl, '_blank');
-
+  // ③ Auto-hook every checkbox in the form as a filter_toggle
+  form.querySelectorAll('input[type="checkbox"]').forEach(function(chk){
+    chk.addEventListener('change', function(){
+      sendEvent('filter_toggle', {
+        filter_name: chk.name || chk.id,
+        enabled: chk.checked
+      });
+    });
   });
-});
+
+  // ④ Auto-hook every <select> in the form as a filter_select
+  form.querySelectorAll('select').forEach(function(sel){
+    sel.addEventListener('change', function(){
+      sendEvent('filter_select', {
+        filter_name: sel.name || sel.id,
+        value: sel.value || 'any'
+      });
+    });
+  });
+
+  // ⑤ Track price range separately if you still want a dedicated event
+  var minPrice = form['min-price'], maxPrice = form['max-price'];
+  [minPrice, maxPrice].forEach(function(input) {
+    input.addEventListener('change', function() {
+      sendEvent('price_range_set', {
+        min: minPrice.value || 0,
+        max: maxPrice.value || 0
+      });
+    });
+  });
+
+})();
 </script>
- 
+
 </body>
 </html>
