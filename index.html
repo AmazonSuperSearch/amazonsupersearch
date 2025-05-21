@@ -50,8 +50,7 @@
     "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings."
   }
   </script>
-
-
+ 
   <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
@@ -252,28 +251,26 @@
 
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
-<!-- Google Translate Setup -->
-<script>
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
+<!-- helper to fire events -->
+   <!-- ① Auto-detect and set the cookie before Translate loads -->
   <script>
-  (function() {
-    var lang = navigator.language || navigator.userLanguage;
-    lang = lang.split('-')[0]; // "en-US" → "en"
-    var supported = ['es','fr','de','pt','it','ja','ko','zh']; // Add more if needed
-    if (supported.includes(lang) && lang !== 'en') {
-      document.cookie = 'googtrans=/en/' + lang + '; path=/';
+    (function(){
+      // grab e.g. “en”, “es”, “fr”, “de”, etc.
+      var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
+      // tell Google Translate to go from English → userLang
+      document.cookie = "googtrans=/en/" + userLang + "; path=/";
+    })();
+  </script>
+  <!-- Google Translate widget (all languages) -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
     }
-  })();
-</script>
-
-<script defer src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
@@ -424,6 +421,7 @@
         <option value="price-desc-rank">Price: High → Low</option>
         <option value="review-rank">Avg. Customer Review</option>
         <option value="date-desc-rank">Newest Arrivals</option>
+        <option value="salesrank">Best Sellers</option>
       </select>
     </div>
   </div>
@@ -549,6 +547,10 @@
       <div class="form-check">
        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
+        <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
