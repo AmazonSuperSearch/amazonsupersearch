@@ -1413,7 +1413,22 @@
 
 
 <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
+  // 🔍 Debug #1: did this script run AFTER the DOM was ready?
+  console.log('📌 [DOMContentLoaded] script fired');
+
+  const form = document.getElementById('amazon-search-form');
+  console.log('📌 [amazon-search-form] resolved to:', form);
+
+  // 🔍 Debug #2: are we attaching the listener?
+  console.log('📌 Attaching submit listener to form…');
+  form.addEventListener('submit', function(e) {
+    // 🔍 Debug #3: did the submit event fire?
+    console.log('📌 Submit event handler entered');
+    e.preventDefault();
+    …
+
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
 
