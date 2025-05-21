@@ -1416,7 +1416,7 @@ const checkboxSound = document.getElementById('checkboxSound');
 if (clickSound || checkboxSound) {
   document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
     el.addEventListener('click', () => {
-      const sound = el.type === 'checkbox' ? checkboxSound : clickSound;
+      const sound = el.matches('input[type="checkbox"]') ? checkboxSound : clickSound;
       if (sound) {
         sound.currentTime = 0;
         sound.play().catch(() => {});
@@ -1424,7 +1424,6 @@ if (clickSound || checkboxSound) {
     });
   });
 }
-
   // Tagify inputs
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
