@@ -50,6 +50,12 @@
     "description": "Amazon Super Search lets you uncover live in-stock lightning deals, filter by free shipping only, set deep discount thresholds, filter by past price trends, and sort by top customer ratings."
   }
   </script>
+  <!-- Multilingual SEO: alternate language versions -->
+  <link rel="alternate" hreflang="en" href="https://www.amazonsupersearch.com/" />
+  <link rel="alternate" hreflang="es" href="https://www.amazonsupersearch.com/es/" />
+  <link rel="alternate" hreflang="fr" href="https://www.amazonsupersearch.com/fr/" />
+  <link rel="alternate" hreflang="de" href="https://www.amazonsupersearch.com/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.amazonsupersearch.com/" />
 
 
   <!-- Bootstrap CSS -->
@@ -181,16 +187,6 @@
   padding: 0.3rem;
   text-align: center;
 }
- .floating-share {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease-in-out;
-}
-.floating-share.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
     .banner-inner {
   max-width: 1546px;
   margin: 0 auto;
@@ -262,28 +258,26 @@
 
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
-<!-- Google Translate Setup -->
-<script>
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
+<!-- helper to fire events -->
+   <!-- ① Auto-detect and set the cookie before Translate loads -->
   <script>
-  (function() {
-    var lang = navigator.language || navigator.userLanguage;
-    lang = lang.split('-')[0]; // "en-US" → "en"
-    var supported = ['es','fr','de','pt','it','ja','ko','zh']; // Add more if needed
-    if (supported.includes(lang) && lang !== 'en') {
-      document.cookie = 'googtrans=/en/' + lang + '; path=/';
+    (function(){
+      // grab e.g. “en”, “es”, “fr”, “de”, etc.
+      var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
+      // tell Google Translate to go from English → userLang
+      document.cookie = "googtrans=/en/" + userLang + "; path=/";
+    })();
+  </script>
+  <!-- Google Translate widget (all languages) -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
     }
-  })();
-</script>
-
-<script defer src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
@@ -291,8 +285,6 @@
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
  <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
-<audio id="checkboxSound" src="/select.mp3" preload="auto"></audio>
-
 <script src="/form-tracking.js" defer></script>
   <!-- Hero / SEO-Rich Intro -->
   <div class="bg-warning text-dark text-center py-2 shadow-sm">
@@ -436,6 +428,7 @@
         <option value="price-desc-rank">Price: High → Low</option>
         <option value="review-rank">Avg. Customer Review</option>
         <option value="date-desc-rank">Newest Arrivals</option>
+        <option value="salesrank">Best Sellers</option>
       </select>
     </div>
   </div>
@@ -561,6 +554,10 @@
       <div class="form-check">
        <input class="form-check-input" type="checkbox" name="amazon-choice" id="amazonChoice" aria-label="Show Amazon’s Choice items">
         <label class="form-check-label" for="amazonChoice">Amazon’s Choice</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="best-seller" id="bestSeller" aria-label="Show Best Seller items">
+        <label class="form-check-label" for="bestSeller">Best Seller</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="fba-only" id="fbaOnly" aria-label="Show items sold and shipped by Amazon">
@@ -1374,76 +1371,62 @@
     });
   }
 </script>
-<div class="share-buttons">
-  <!-- Facebook -->
- <!-- Facebook link (no spaces issue) -->
-<a href="fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=https://amazonsupersearch.com"
-   class="btn btn-primary btn-sm"
-   onclick="return openInApp(this.href)">
-  Facebook
-</a>
-
-<!-- Twitter -->
-<a href="twitter://post?message=Check%20out%20Amazon%20Super%20Search%3A%20https%3A%2F%2Famazonsupersearch.com"
-   class="btn btn-info btn-sm"
-   onclick="return openInApp(this.href)">
-  Twitter
-</a>
-
-<!-- WhatsApp -->
-<a href="whatsapp://send?text=Check%20out%20Amazon%20Super%20Search%3A%20https%3A%2F%2Famazonsupersearch.com"
-   class="btn btn-success btn-sm"
-   onclick="return openInApp(this.href)">
-  WhatsApp
-</a>
-
-<!-- Telegram -->
-<a href="tg://msg_url?url=https%3A%2F%2Famazonsupersearch.com&text=Check%20out%20Amazon%20Super%20Search"
-   class="btn btn-info btn-sm"
-   style="background:#0088cc; border-color:#0088cc;"
-   onclick="return openInApp(this.href)">
-  Telegram
-</a>
-
-<!-- Reddit -->
-<a href="https://www.reddit.com/submit?url=https://amazonsupersearch.com&title=Check%20out%20Amazon%20Super%20Search"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="btn btn-danger btn-sm">
-  Reddit
-</a>
-
-<!-- SMS -->
-<a href="sms:?body=Check%20out%20this%20Amazon%20filter%20tool:%20https%3A%2F%2Famazonsupersearch.com"
-   class="btn btn-success btn-sm">
-  SMS
-</a>
+<!-- Floating Share Panel -->
+<div class="floating-share">
+  <h2>Share With Friends</h2>
+  <div class="share-buttons">
+    <a href="#"
+       onclick="window.open(
+         'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-primary btn-sm">
+      Facebook
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)
+         +'&text='+encodeURIComponent(document.title),
+         '_blank'
+       ); return false;"
+       class="btn btn-info btn-sm">
+      Twitter
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'mailto:?subject='+encodeURIComponent(document.title)
+         +'&body='+encodeURIComponent(window.location.href),
+         '_self'
+       ); return false;"
+       class="btn btn-secondary btn-sm">
+      Email
+    </a>
+    <a href="#"
+       onclick="window.open(
+         'sms:?&body='+encodeURIComponent(window.location.href),
+         '_blank'
+       ); return false;"
+       class="btn btn-success btn-sm">
+      SMS
+    </a>
+  </div>
 </div>
 <!-- All your HTML content above... -->
+
+
+
+  
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
- const clickSound = document.getElementById('clickSound');
-const checkboxSound = document.getElementById('checkboxSound');
 
-if (clickSound || checkboxSound) {
-  document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
-    el.addEventListener('click', () => {
-      const sound = el.matches('input[type="checkbox"]') ? checkboxSound : clickSound;
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch(() => {});
-      }
-    });
-  });
-}
-  // Tagify inputs
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
 
-  // Form submission logic
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -1456,43 +1439,54 @@ if (clickSound || checkboxSound) {
     ['brandInclude', 'brandExclude'].forEach(id => {
       const tagifyInput = document.getElementById(id);
       if (tagifyInput && tagifyInput._tagify) {
-        tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
+       tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
       }
     });
-
+document.querySelectorAll('button, input[type="submit"]').forEach(el => {
+  el.addEventListener('click', () => {
+    const clickSound = document.getElementById('clickSound');
+    if (clickSound) clickSound.play().catch(() => {});
+  });
+});
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
+    
+// --- Prime Only Filter Logic ---
+ // ——— consolidate filters into one place ———
+const FILTER_DEFS = {
+  // Condition filters
+  'condition-new':         ['p_n_condition-type', '1248879011'],
+  'condition-used':        ['p_n_condition-type', '1248877011'],
+  'condition-refurbished': ['p_n_condition-type', '1248878111'],
+  'condition-collectible': ['p_n_condition-type', '1248878011'],
 
-    // Filter definitions
-    const FILTER_DEFS = {
-      'condition-new':         ['p_n_condition-type', '1248879011'],
-      'condition-used':        ['p_n_condition-type', '1248877011'],
-      'condition-refurbished': ['p_n_condition-type', '1248878111'],
-      'condition-collectible': ['p_n_condition-type', '1248878011'],
-      'prime-only':        ['p_n_prime',               '1'],
-      'free-shipping':     ['p_n_shipping',            'free'],
-      'in-stock':          ['p_n_availability',        '2661601011'],
-      'coupons':           ['p_n_coupon',              '1'],
-      'lightning-deals':   ['p_n_deal_type',           '23566065011'],
-      'todays-deals':      ['p_n_deal_type',           '23566065011'],
-      'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
-      'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
-      'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
-      'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
-      'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
-      'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
-      'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
-      'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
-      'coupon-only':       ['p_n_coupon',              '1'],
-      'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
-    };
+  // Other filters
+  'prime-only':        ['p_n_prime',               '1'],
+  'free-shipping':     ['p_n_shipping',            'free'],
+  'in-stock':          ['p_n_availability',        '2661601011'],
+  'coupons':           ['p_n_coupon',              '1'],
+  'lightning-deals':   ['p_n_deal_type',           '23566065011'],
+  'todays-deals':      ['p_n_deal_type',           '23566065011'],
+  'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
+  'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
+  'best-seller':       ['p_n_feature_browse-bin',  '14826383011'],
+  'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
+  'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
+  'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
+  'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
+  'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
+  'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
+  'coupon-only':       ['p_n_coupon',              '1'],
+  'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
+};
 
-    Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-      if (data.get(field) === 'on') {
-        rh.push(`${param}:${val}`);
-      }
-    });
+
+Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
+  if (data.get(field) === 'on') {
+    rh.push(`${param}:${val}`);
+  }
+});
 
   // ─── AI-DRIVEN FILTERS ───
   // Buy-Now-or-Wait Score
@@ -1557,6 +1551,7 @@ if (rawInclude) {
     .forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
 }
 
+
 // Brand Exclusion (for your NOT logic)
 const rawExclude = data.get('brand-exclude')?.trim();
 if (rawExclude) {
@@ -1568,6 +1563,8 @@ if (rawExclude) {
   }
   // …then use exclude for your NOT or client-side prune…
 }
+
+
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
 if (data.get('enable-boolean') === 'on') params.set('boolean','on');
@@ -1591,83 +1588,8 @@ window.open(finalUrl, '_blank');
   });
 });
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const sharePanel = document.querySelector('.floating-share');
-  if (!sharePanel) return;
+   <script src="/visitor-tracking.js" defer></script>
+  <script src="/form-tracking.js" defer></script>
 
-  function checkScroll() {
-    if (window.scrollY > 100) {
-      sharePanel.classList.add('visible');
-    } else {
-      sharePanel.classList.remove('visible');
-    }
-  }
-
-  window.addEventListener('scroll', checkScroll);
-  // Run once in case page is loaded scrolled
-  checkScroll();
-});
-</script>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const clickSound = document.getElementById('clickSound');
-  const form = document.getElementById('amazon-search-form');
-  if (!form) return;
-
-  // Play click sound on any button or submit input click
-  document.addEventListener('click', (e) => {
-    const tgt = e.target;
-    if (tgt.matches('button, input[type=submit], input[type=button]')) {
-      if (clickSound) {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-      }
-    }
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if (clickSound) {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(() => {});
-    }
-
-    const data = new FormData(form);
-    const rh = [];
-
-    const brandIncludeRaw = data.get('brand-include')?.trim();
-    const brandExcludeRaw = data.get('brand-exclude')?.trim();
-
-    if (brandIncludeRaw) {
-      try {
-        const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
-        brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
-      } catch {
-        console.warn('Brand include invalid JSON', brandIncludeRaw);
-      }
-    }
-
-    if (brandExcludeRaw) {
-      try {
-        const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
-        brands.forEach(b => rh.push(`p_89:-${encodeURIComponent(b)}`));
-      } catch {
-        console.warn('Brand exclude invalid JSON', brandExcludeRaw);
-      }
-    }
-
-    // Fire GA4 event if available
-    if (window.gtag) {
-      gtag('event', 'search_submit', {
-        search_term: data.get('q') || '',
-        filters: rh.join(',')
-      });
-    }
-
-  });
-});
-</script>
 </body>
 </html>
