@@ -1432,7 +1432,7 @@ if (clickSound || checkboxSound) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const checked = [...form.elements].filter(el =>
+    const checked = [.form.elements].filter(el =>
       el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
     ).length;
 
