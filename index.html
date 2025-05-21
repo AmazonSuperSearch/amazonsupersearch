@@ -1609,5 +1609,65 @@ document.addEventListener('DOMContentLoaded', () => {
   checkScroll();
 });
 </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const clickSound = document.getElementById('clickSound');
+  const form = document.getElementById('amazon-search-form');
+  if (!form) return;
+
+  // Play click sound on any button or submit input click
+  document.addEventListener('click', (e) => {
+    const tgt = e.target;
+    if (tgt.matches('button, input[type=submit], input[type=button]')) {
+      if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+      }
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (clickSound) {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    }
+
+    const data = new FormData(form);
+    const rh = [];
+
+    const brandIncludeRaw = data.get('brand-include')?.trim();
+    const brandExcludeRaw = data.get('brand-exclude')?.trim();
+
+    if (brandIncludeRaw) {
+      try {
+        const brands = JSON.parse(brandIncludeRaw).map(obj => obj.value);
+        brands.forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
+      } catch {
+        console.warn('Brand include invalid JSON', brandIncludeRaw);
+      }
+    }
+
+    if (brandExcludeRaw) {
+      try {
+        const brands = JSON.parse(brandExcludeRaw).map(obj => obj.value);
+        brands.forEach(b => rh.push(`p_89:-${encodeURIComponent(b)}`));
+      } catch {
+        console.warn('Brand exclude invalid JSON', brandExcludeRaw);
+      }
+    }
+
+    // Fire GA4 event if available
+    if (window.gtag) {
+      gtag('event', 'search_submit', {
+        search_term: data.get('q') || '',
+        filters: rh.join(',')
+      });
+    }
+
+  });
+});
+</script>
 </body>
 </html>
