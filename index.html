@@ -261,6 +261,17 @@
     }, 'google_translate_element');
   }
 </script>
+  <script>
+  (function() {
+    var lang = navigator.language || navigator.userLanguage;
+    lang = lang.split('-')[0]; // "en-US" → "en"
+    var supported = ['es','fr','de','pt','it','ja','ko','zh']; // Add more if needed
+    if (supported.includes(lang) && lang !== 'en') {
+      document.cookie = 'googtrans=/en/' + lang + '; path=/';
+    }
+  })();
+</script>
+
 <script defer src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   </head>
