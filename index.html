@@ -181,6 +181,16 @@
   padding: 0.3rem;
   text-align: center;
 }
+ .floating-share {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+.floating-share.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
     .banner-inner {
   max-width: 1546px;
   margin: 0 auto;
@@ -1364,45 +1374,57 @@
     });
   }
 </script>
-<!-- Floating Share Panel -->
-<div class="floating-share">
-  <h2>Share With Friends</h2>
-  <div class="share-buttons">
-    <a href="#"
-       onclick="window.open(
-         'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),
-         '_blank'
-       ); return false;"
-       class="btn btn-primary btn-sm">
-      Facebook
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)
-         +'&text='+encodeURIComponent(document.title),
-         '_blank'
-       ); return false;"
-       class="btn btn-info btn-sm">
-      Twitter
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'mailto:?subject='+encodeURIComponent(document.title)
-         +'&body='+encodeURIComponent(window.location.href),
-         '_self'
-       ); return false;"
-       class="btn btn-secondary btn-sm">
-      Email
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'sms:?&body='+encodeURIComponent(window.location.href),
-         '_blank'
-       ); return false;"
-       class="btn btn-success btn-sm">
-      SMS
-    </a>
-  </div>
+<div class="share-buttons">
+  <!-- Facebook -->
+  <a href="fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=https://amazonsupersearch.com"
+     class="btn btn-primary btn-sm"
+     onclick="return openInApp(this.href)">
+    Facebook
+  </a>
+
+  <!-- Twitter -->
+  <a href="twitter://post?message=Check out Amazon Super Search: https://amazonsupersearch.com"
+     class="btn btn-info btn-sm"
+     onclick="return openInApp(this.href)">
+    Twitter
+  </a>
+
+  <!-- WhatsApp -->
+  <a href="whatsapp://send?text=Check out Amazon Super Search: https://amazonsupersearch.com"
+     class="btn btn-success btn-sm"
+     onclick="return openInApp(this.href)">
+    WhatsApp
+  </a>
+
+  <!-- Telegram -->
+  <a href="tg://msg_url?url=https://amazonsupersearch.com&text=Check out Amazon Super Search"
+     class="btn btn-info btn-sm"
+     style="background:#0088cc; border-color:#0088cc;"
+     onclick="return openInApp(this.href)">
+    Telegram
+  </a>
+
+  <!-- Reddit -->
+  <a href="https://www.reddit.com/submit?url=https://amazonsupersearch.com&title=Check out Amazon Super Search"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="btn btn-danger btn-sm">
+    Reddit
+  </a>
+
+  <!-- Email -->
+  <a href="mailto:?subject=Amazon Super Search&body=Check out this free advanced Amazon filter tool: https://amazonsupersearch.com"
+     class="btn btn-secondary btn-sm">
+    Email
+  </a>
+
+  <!-- SMS -->
+  <a href="sms:?body=Check out this Amazon filter tool: https://amazonsupersearch.com"
+     class="btn btn-success btn-sm">
+    SMS
+  </a>
+</div>
+
 </div>
 <!-- All your HTML content above... -->
 
@@ -1578,6 +1600,23 @@ window.open(finalUrl, '_blank');
 </script>
    <script src="/visitor-tracking.js" defer></script>
   <script src="/form-tracking.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const sharePanel = document.querySelector('.floating-share');
+  if (!sharePanel) return;
 
+  function checkScroll() {
+    if (window.scrollY > 100) {
+      sharePanel.classList.add('visible');
+    } else {
+      sharePanel.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll);
+  // Run once in case page is loaded scrolled
+  checkScroll();
+});
+</script>
 </body>
 </html>
