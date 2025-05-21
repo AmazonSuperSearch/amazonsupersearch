@@ -158,6 +158,11 @@
   .banner-inner p {
     font-size: 1rem;
   }
+        /* Shrink the share panel to 50% on mobile */
+  .share-float {
+    transform: scale(0.5);
+    transform-origin: bottom right;
+  }
 }
 #minRating:disabled {
   background-color: #e9ecef;
