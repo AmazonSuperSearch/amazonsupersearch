@@ -1404,20 +1404,27 @@
 </div>
 <!-- All your HTML content above... -->
 
-
-
-  
-
-
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
+  const clickSound = document.getElementById('clickSound');
 
+  // Tagify inputs
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
 
+  // 🔊 Add sound to buttons, submits, and checkboxes
+  if (clickSound) {
+    document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
+      el.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+      });
+    });
+  }
+
+  // Form submission logic
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -1430,53 +1437,43 @@ document.addEventListener('DOMContentLoaded', () => {
     ['brandInclude', 'brandExclude'].forEach(id => {
       const tagifyInput = document.getElementById(id);
       if (tagifyInput && tagifyInput._tagify) {
-       tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
+        tagifyInput.setAttribute('value', tagifyInput._tagify.value.map(x => x.value).join(','));
       }
     });
-document.querySelectorAll('button, input[type="submit"]').forEach(el => {
-  el.addEventListener('click', () => {
-    const clickSound = document.getElementById('clickSound');
-    if (clickSound) clickSound.play().catch(() => {});
-  });
-});
+
     const data = new FormData(form);
     const params = new URLSearchParams();
     const rh = [];
-    
-// --- Prime Only Filter Logic ---
- // ——— consolidate filters into one place ———
-const FILTER_DEFS = {
-  // Condition filters
-  'condition-new':         ['p_n_condition-type', '1248879011'],
-  'condition-used':        ['p_n_condition-type', '1248877011'],
-  'condition-refurbished': ['p_n_condition-type', '1248878111'],
-  'condition-collectible': ['p_n_condition-type', '1248878011'],
 
-  // Other filters
-  'prime-only':        ['p_n_prime',               '1'],
-  'free-shipping':     ['p_n_shipping',            'free'],
-  'in-stock':          ['p_n_availability',        '2661601011'],
-  'coupons':           ['p_n_coupon',              '1'],
-  'lightning-deals':   ['p_n_deal_type',           '23566065011'],
-  'todays-deals':      ['p_n_deal_type',           '23566065011'],
-  'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
-  'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
-  'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
-  'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
-  'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
-  'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
-  'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
-  'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
-  'coupon-only':       ['p_n_coupon',              '1'],
-  'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
-};
+    // Filter definitions
+    const FILTER_DEFS = {
+      'condition-new':         ['p_n_condition-type', '1248879011'],
+      'condition-used':        ['p_n_condition-type', '1248877011'],
+      'condition-refurbished': ['p_n_condition-type', '1248878111'],
+      'condition-collectible': ['p_n_condition-type', '1248878011'],
+      'prime-only':        ['p_n_prime',               '1'],
+      'free-shipping':     ['p_n_shipping',            'free'],
+      'in-stock':          ['p_n_availability',        '2661601011'],
+      'coupons':           ['p_n_coupon',              '1'],
+      'lightning-deals':   ['p_n_deal_type',           '23566065011'],
+      'todays-deals':      ['p_n_deal_type',           '23566065011'],
+      'subscribe-save':    ['p_n_feature_browse-bin',  '15283820011'],
+      'amazon-choice':     ['p_n_feature_browse-bin',  '14826373011'],
+      'fba-only':          ['p_n_feature_browse-bin',  '14674966011'],
+      'free-returns':      ['p_n_feature_browse-bin',  '14674972011'],
+      'gift-wrap':         ['p_n_feature_browse-bin',  '14674970011'],
+      'small-business':    ['p_n_feature_browse-bin',  '14674977011'],
+      'amazon-brands':     ['p_n_feature_browse-bin',  '14674969011'],
+      'low-rating':        ['p_n_feature_browse-bin',  '14674975011'],
+      'coupon-only':       ['p_n_coupon',              '1'],
+      'warehouse-refurb':  ['p_n_feature_browse-bin',  '14674978011']
+    };
 
-
-Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
-  if (data.get(field) === 'on') {
-    rh.push(`${param}:${val}`);
-  }
-});
+    Object.entries(FILTER_DEFS).forEach(([field, [param, val]]) => {
+      if (data.get(field) === 'on') {
+        rh.push(`${param}:${val}`);
+      }
+    });
 
   // ─── AI-DRIVEN FILTERS ───
   // Buy-Now-or-Wait Score
@@ -1541,7 +1538,6 @@ if (rawInclude) {
     .forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
 }
 
-
 // Brand Exclusion (for your NOT logic)
 const rawExclude = data.get('brand-exclude')?.trim();
 if (rawExclude) {
@@ -1553,8 +1549,6 @@ if (rawExclude) {
   }
   // …then use exclude for your NOT or client-side prune…
 }
-
-
 
 // now your brand-include/brand-exclude, boolean, field-filters, asin lookup, sort, query…
 if (data.get('enable-boolean') === 'on') params.set('boolean','on');
