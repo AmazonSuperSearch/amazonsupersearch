@@ -158,10 +158,13 @@
   .banner-inner p {
     font-size: 1rem;
   }
-        /* Shrink the share panel to 50% on mobile */
+
+  /* Shrink the share panel even more and move it higher */
   .share-float {
-    transform: scale(0.5);
+    transform: scale(0.4);                /* shrink more */
     transform-origin: bottom right;
+    bottom: 80px !important;              /* move it up so disclaimers are visible */
+    right: 10px !important;
   }
 }
 #minRating:disabled {
