@@ -1423,33 +1423,6 @@ document.addEventListener('DOMContentLoaded', () => {
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const data   = new FormData(form);
-    const params = new URLSearchParams();
-    const rh     = [];
-
-    // 1) Currency → Amazon host
-    let host = 'www.amazon.com';
-    switch (data.get('currency')) {
-      case 'eur': host = 'www.amazon.de';    break;
-      case 'gbp': host = 'www.amazon.co.uk'; break;
-      case 'jpy': host = 'www.amazon.co.jp'; break;
-      case 'inr': host = 'www.amazon.in';    break;
-    }
-
-    // 2) Too-many-filters warning
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-    warningBox.style.display = (checked > 2) ? 'block' : 'none';
-
-    // 3) Sync Tagify values into real inputs
-    ['brandInclude','brandExclude'].forEach(id => {
-      const inp = document.getElementById(id);
-      if (inp && inp._tagify) inp.value = inp._tagify.value.map(t => t.value).join(',');
-    });
 
     // 4) Core FILTER_DEFS mapping
     const FILTER_DEFS = {
