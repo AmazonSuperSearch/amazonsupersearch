@@ -95,23 +95,14 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  width: 140px;               /* ⬅️ narrower */
-  height: auto;               /* 🆗 auto height grows with content */
-  padding: 1.25rem 0.75rem;   /* ⬆️ more top/bottom space */
-  background: rgba(255, 255, 255, 0.95);
+  width: 200px;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.95);
   border: 2px solid #007bff;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   z-index: 1000;
-  text-align: center;
 }
-
-.floating-share a {
-  display: inline-block;
-  margin: 0.3rem;
-  font-size: 1.2rem;
-}
-
 .floating-share h2 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -167,13 +158,10 @@
   .banner-inner p {
     font-size: 1rem;
   }
-
-  /* Shrink the floating share panel and move it higher */
-  .floating-share {
-    transform: scale(0.4);                /* shrink panel to 40% */
+        /* Shrink the share panel to 50% on mobile */
+  .share-float {
+    transform: scale(0.5);
     transform-origin: bottom right;
-    bottom: 80px !important;              /* move up to show disclaimers */
-    right: 10px !important;
   }
 }
 #minRating:disabled {
