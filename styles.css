@@ -159,11 +159,11 @@
     font-size: 1rem;
   }
 
-  /* Shrink the share panel even more and move it higher */
-  .share-float {
-    transform: scale(0.4);                /* shrink more */
+  /* Shrink the floating share panel and move it higher */
+  .floating-share {
+    transform: scale(0.4);                /* shrink panel to 40% */
     transform-origin: bottom right;
-    bottom: 80px !important;              /* move it up so disclaimers are visible */
+    bottom: 80px !important;              /* move up to show disclaimers */
     right: 10px !important;
   }
 }
