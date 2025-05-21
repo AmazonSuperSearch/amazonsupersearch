@@ -281,7 +281,7 @@
   <!-- Google Translate dropdown -->
   <div id="google_translate_element" class="text-end p-2"></div>
  <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
- <audio id="checkboxSound" src="/checkbox.mp3" preload="auto"></audio>
+<audio id="checkboxSound" src="/select.mp3" preload="auto"></audio>
 
 <script src="/form-tracking.js" defer></script>
   <!-- Hero / SEO-Rich Intro -->
@@ -1410,21 +1410,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
   const warningBox = document.getElementById('filter-warning');
-  const clickSound = document.getElementById('clickSound');
+ const clickSound = document.getElementById('clickSound');
+const checkboxSound = document.getElementById('checkboxSound');
+
+if (clickSound || checkboxSound) {
+  document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
+    el.addEventListener('click', () => {
+      const sound = el.type === 'checkbox' ? checkboxSound : clickSound;
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+      }
+    });
+  });
+}
 
   // Tagify inputs
   new Tagify(document.querySelector('input[name="brand-include"]'));
   new Tagify(document.querySelector('input[name="brand-exclude"]'));
-
-  // 🔊 Add sound to buttons, submits, and checkboxes
-  if (clickSound) {
-    document.querySelectorAll('button, input[type="submit"], input[type="checkbox"]').forEach(el => {
-      el.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-      });
-    });
-  }
 
   // Form submission logic
   form.addEventListener('submit', function (e) {
