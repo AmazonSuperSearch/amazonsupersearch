@@ -1584,6 +1584,28 @@ pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Ref
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const clickSound = document.getElementById("clickSound");
+
+  // Play sound function
+  const playClick = () => {
+    if (!clickSound) return;
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+  };
+
+  // Handle all button clicks
+  document.querySelectorAll("button, input[type=submit], input[type=button]").forEach(btn => {
+    btn.addEventListener("click", playClick);
+  });
+
+  // Handle all checkbox clicks
+  document.querySelectorAll("input[type=checkbox]").forEach(chk => {
+    chk.addEventListener("change", playClick);
+  });
+});
+</script>
 
 </body>
 </html>
