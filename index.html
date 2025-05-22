@@ -1359,7 +1359,8 @@
       btn.classList.remove('active');
     });
   }
-</script>
+  </script>
+</div>
 <!-- Floating Share Panel -->
 <div class="floating-share">
   <h2>Share With Friends</h2>
@@ -1400,6 +1401,25 @@
     </a>
   </div>
 </div>
+   <script>
+    if (navigator.share) {
+      document.querySelectorAll('.share-buttons a').forEach(btn => {
+        btn.addEventListener('click', async e => {
+          e.preventDefault();
+          try {
+            await navigator.share({
+              title: document.title,
+              text: 'Check out Amazon Super Search!',
+              url: window.location.href,
+            });
+          } catch (err) {
+            console.error('Share failed:', err);
+            window.open(btn.href, '_blank');
+          }
+        });
+      });
+    }
+      </script>
 <!-- All your HTML content above... -->
 
    <!-- …all your page content above… -->
