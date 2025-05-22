@@ -1533,23 +1533,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pctMap[pct]) rh.push(`p_n_pct-off-with-tax:${pctMap[pct]}`);
 
     // 4) All the other checkboxes via helper
-    pushFilter('prime-only',      'p_n_prime',              '1');
-    pushFilter('free-shipping',   'p_n_shipping',           'free');
-    pushFilter('in-stock',        'p_n_in_stock',           '1');
-    pushFilter('coupons',         'p_n_coupon',             '1');
-    pushFilter('lightning-deals', 'p_n_deal_type',          '23566065011');
-    pushFilter('todays-deals',    'p_n_deal_type',          '23566065011');
-    pushFilter('subscribe-save',  'p_n_feature_browse-bin', 'Subscribe-Save');
-    pushFilter('amazon-choice',   'p_n_feature_browse-bin', 'Amazon-Choice');
-    pushFilter('best-seller',     'p_n_feature_browse-bin', 'Best-Sellers');
-    pushFilter('fba-only',        'p_n_feature_browse-bin', 'Sold-and-Shipped-by-Amazon');
-    pushFilter('free-returns',    'p_n_feature_browse-bin', 'Free-Returns');
-    pushFilter('gift-wrap',       'p_n_feature_browse-bin', 'Gift-Wrap');
-    pushFilter('small-business',  'p_n_feature_browse-bin', 'Small-Business');
-    pushFilter('amazon-brands',   'p_n_feature_browse-bin', 'Amazon-Brands');
-    pushFilter('low-rating',      'p_n_feature_browse-bin', 'Low-Rating');
-    pushFilter('coupon-only',     'p_n_coupon',             '1');
-    pushFilter('warehouse-refurb','p_n_feature_browse-bin', 'Warehouse-Open-Box');
+ pushFilter('prime-only',      'p_85',    '2470955011');         // Amazon Prime
+pushFilter('free-shipping',   'p_76',    '1249177011');         // Free Shipping
+pushFilter('in-stock',        'p_n_availability', '2661601011'); // In Stock
+pushFilter('coupons',         'p_n_feature_browse-bin', '6779703011'); // Coupons Available
+pushFilter('lightning-deals', 'p_n_deal_type', '23566065011');  // Lightning Deals
+pushFilter('todays-deals',    'p_n_deal_type', '23566065011');  // Same as above (deals group)
+pushFilter('subscribe-save',  'p_n_is_sns_available', '2619533011');  // Subscribe & Save
+pushFilter('amazon-choice',   'p_n_feature_twenty_browse-bin', '21223116011'); // Amazon's Choice
+// REMOVED: pushFilter('best-seller', ...)                      // Best Sellers – not a valid filter
+pushFilter('fba-only',        'p_n_shipping_option-bin', '3242350011'); // Ships from Amazon (FBA)
+pushFilter('free-returns',    'p_n_feature_eight_browse-bin', '10171655011'); // Free Returns
+pushFilter('gift-wrap',       'p_n_feature_seventeen_browse-bin', '17482021011'); // Gift Wrap
+pushFilter('small-business',  'p_n_cpf_eligible', '5191495011'); // Small Business Eligible
+pushFilter('amazon-brands',   'p_n_feature_fourteen_browse-bin', '18584192011'); // Amazon Brands
+pushFilter('low-rating',      'p_n_feature_twenty_browse-bin', '21397296011'); // 1–2 Star Items
+pushFilter('coupon-only',     'p_n_feature_browse-bin', '6779703011'); // Same as coupons
+pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Refurbished (Warehouse)
+
 
     // 5) AI-driven filters
     pushFilter('predictive-score', 'p_n_predictive-score',    '1');
