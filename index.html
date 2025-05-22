@@ -1462,6 +1462,113 @@
 
 })();
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('amazon-search-form');
+  const warningBox = document.getElementById('filter-warning');
+
+  // Initialize Tagify on your brand inputs
+  new Tagify(form.querySelector('input[name="brand-include"]'));
+  new Tagify(form.querySelector('input[name="brand-exclude"]'));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    const rh = [];
+
+    // Helper to push checkbox-driven filters
+    const pushFilter = (field, param, val) => {
+      if (data.get(field) === 'on') rh.push(`${param}:${val}`);
+    };
+
+    // Show warning if too many filters
+    const checkedCount = [...form.elements].filter(el =>
+      el.type === 'checkbox' &&
+      el.checked &&
+      !el.closest('.coming-soon')
+    ).length;
+    warningBox.style.display = checkedCount > 2 ? 'block' : 'none';
+
+    // 1) Basic query + sort
+    const q = data.get('q')?.trim();
+    if (!q) return alert('Please enter a search term.');
+    params.set('k', q);
+
+    const sort = data.get('sort');
+    if (sort) params.set('s', sort);
+
+    // 2) Price range
+    const min = parseFloat(data.get('min-price')||0);
+    const max = parseFloat(data.get('max-price')||0);
+    if (min || max) {
+      const minC = Math.round(min*100), maxC = Math.round(max*100);
+      rh.push(`p_36:${minC}-${maxC}`);
+    }
+
+    // 3) Percentage-off dropdown
+    const pctMap = {10:'2665401011',20:'2665412011',30:'2665413011',40:'2665414011',
+                    50:'2665415011',60:'2665416011',70:'2665417011',80:'2665418011'};
+    const pct = data.get('percent-off');
+    if (pctMap[pct]) rh.push(`p_n_pct-off-with-tax:${pctMap[pct]}`);
+
+    // 4) All the other checkboxes via helper
+    pushFilter('prime-only',      'p_n_prime',              '1');
+    pushFilter('free-shipping',   'p_n_shipping',           'free');
+    pushFilter('in-stock',        'p_n_in_stock',           '1');
+    pushFilter('coupons',         'p_n_coupon',             '1');
+    pushFilter('lightning-deals', 'p_n_deal_type',          '23566065011');
+    pushFilter('todays-deals',    'p_n_deal_type',          '23566065011');
+    pushFilter('subscribe-save',  'p_n_feature_browse-bin', 'Subscribe-Save');
+    pushFilter('amazon-choice',   'p_n_feature_browse-bin', 'Amazon-Choice');
+    pushFilter('best-seller',     'p_n_feature_browse-bin', 'Best-Sellers');
+    pushFilter('fba-only',        'p_n_feature_browse-bin', 'Sold-and-Shipped-by-Amazon');
+    pushFilter('free-returns',    'p_n_feature_browse-bin', 'Free-Returns');
+    pushFilter('gift-wrap',       'p_n_feature_browse-bin', 'Gift-Wrap');
+    pushFilter('small-business',  'p_n_feature_browse-bin', 'Small-Business');
+    pushFilter('amazon-brands',   'p_n_feature_browse-bin', 'Amazon-Brands');
+    pushFilter('low-rating',      'p_n_feature_browse-bin', 'Low-Rating');
+    pushFilter('coupon-only',     'p_n_coupon',             '1');
+    pushFilter('warehouse-refurb','p_n_feature_browse-bin', 'Warehouse-Open-Box');
+
+    // 5) AI-driven filters
+    pushFilter('predictive-score', 'p_n_predictive-score',    '1');
+    pushFilter('emotion-feedback','p_n_emotion-feedback',   '1');
+    const restock = data.get('restock-forecast')?.trim();
+    if (restock) params.set('restock_asin', restock);
+
+    // 6) Deal-Hunter Goodies
+    const below30 = parseInt(data.get('below-avg-30')||0);
+    if (below30) rh.push(`p_n_discount_30day:${below30}`);
+    const below60 = parseInt(data.get('below-avg-60')||0);
+    if (below60) rh.push(`p_n_discount_60day:${below60}`);
+    const below90 = parseInt(data.get('below-avg-90')||0);
+    if (below90) rh.push(`p_n_discount:${below90}`);
+    const vol = parseInt(data.get('max-volatility-7')||0);
+    if (vol) rh.push(`p_n_price-volatility:${vol}`);
+
+    // 7) Brand Include/Exclude (Tagify JSON arrays)
+    const includeTags = JSON.parse(data.get('brand-include') || '[]');
+    includeTags.forEach(t => rh.push(`p_89:${encodeURIComponent(t.value)}`));
+    const excludeTags = JSON.parse(data.get('brand-exclude') || '[]');
+    excludeTags.forEach(t => rh.push(`-p_89:${encodeURIComponent(t.value)}`));
+
+    // 8) Boolean, field filters, ASIN lookup
+    if (data.get('enable-boolean')==='on') params.set('boolean','on');
+    const fields = data.get('field-filters')?.trim();
+    if (fields) params.set('fields', fields);
+    const asin = data.get('direct-lookup')?.trim();
+    if (asin) params.set('asin', asin);
+
+    // 9) Consolidate and open
+    if (rh.length) params.set('rh', rh.join(','));
+    params.set('tag','echolover25-20');  // your affiliate tag
+
+    const url = `https://www.amazon.com/s?${params.toString()}`;
+    window.open(url, '_blank');
+  });
+});
+</script>
 
 </body>
 </html>
