@@ -464,22 +464,6 @@
           Enter one or more brands (comma-separated or via tagify).
         </small>
       </div>
-
-      <!-- Exclude Brands -->
-      <div class="col-12 col-md-6">
-        <label class="form-label" for="brandExclude">Exclude Brands</label>
-        <input
-          type="text"
-          class="form-control"
-          name="brand-exclude"
-          id="brandExclude"
-          placeholder="e.g. Acer, Apple"
-        >
-        <small class="form-text text-muted">
-          Any brands here will be stripped client-side (for future use).
-        </small>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1485,7 +1469,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Tagify on your brand inputs
   new Tagify(form.querySelector('input[name="brand-include"]'));
-  new Tagify(form.querySelector('input[name="brand-exclude"]'));
 
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -1563,11 +1546,10 @@ pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Ref
     const vol = parseInt(data.get('max-volatility-7')||0);
     if (vol) rh.push(`p_n_price-volatility:${vol}`);
 
-    // 7) Brand Include/Exclude (Tagify JSON arrays)
+    // 7) Brand Include (Tagify JSON arrays)
     const includeTags = JSON.parse(data.get('brand-include') || '[]');
     includeTags.forEach(t => rh.push(`p_89:${encodeURIComponent(t.value)}`));
-    const excludeTags = JSON.parse(data.get('brand-exclude') || '[]');
-    excludeTags.forEach(t => rh.push(`-p_89:${encodeURIComponent(t.value)}`));
+
 
     // 8) Boolean, field filters, ASIN lookup
     if (data.get('enable-boolean')==='on') params.set('boolean','on');
