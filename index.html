@@ -1579,12 +1579,23 @@ pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Ref
     const asin = data.get('direct-lookup')?.trim();
     if (asin) params.set('asin', asin);
 
-    // 9) Consolidate and open
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag','echolover25-20');  // your affiliate tag
+ // 9) Consolidate and open
+if (rh.length) params.set('rh', rh.join(','));
+params.set('tag', 'echolover25-20'); // your affiliate tag
 
-    const url = `https://www.amazon.com/s?${params.toString()}`;
-    window.open(url, '_blank');
+// Get selected currency and map to appropriate Amazon domain
+const currency = data.get('currency') || 'usd';
+const domainMap = {
+  usd: 'www.amazon.com',
+  eur: 'www.amazon.de',
+  gbp: 'www.amazon.co.uk',
+  jpy: 'www.amazon.co.jp',
+  inr: 'www.amazon.in'
+};
+const host = domainMap[currency] || 'www.amazon.com';
+
+const url = `https://${host}/s?${params.toString()}`;
+window.open(url, '_blank');
   });
 });
 </script>
