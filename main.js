@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('amazon-search-form');
-  const warningBox = document.getElementById('filter-warning');
   const clickSound = document.getElementById('clickSound');
 
-  // Initialize Tagify for brand inclusion
+  // Tagify brand inclusion field
   new Tagify(document.querySelector('input[name="brand-include"]'));
 
-  // Click sound for all UI buttons
+  // Play click sound
   document.querySelectorAll("button, input[type='submit'], input[type='button'], input[type='checkbox']").forEach(el => {
     el.addEventListener("click", () => {
       if (clickSound) clickSound.play().catch(() => {});
@@ -20,22 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams();
     const rh = [];
 
-    // Show filter warning if too many checkboxes selected
-    const checked = [...form.elements].filter(el =>
-      el.type === 'checkbox' && el.checked && !el.closest('.coming-soon')
-    ).length;
-    if (warningBox) warningBox.style.display = (checked > 2) ? 'block' : 'none';
-
-    // Search query
+    // Basic query
     const q = data.get('q')?.trim();
     if (!q) {
-      alert('Please enter a product keyword before searching.');
+      alert('Please enter a product keyword.');
       document.getElementById('mainSearchInput')?.focus();
       return;
     }
     params.set('k', q);
 
-    // Sort
     const sort = data.get('sort');
     if (sort) params.set('s', sort);
 
@@ -46,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (min)   rh.push(`p_36:${Math.round(min * 100)}-`);
     else if (max)   rh.push(`p_36:-${Math.round(max * 100)}`);
 
-    // % Off
+    // % Off filter
     const pct = data.get('percent-off');
     const PCT_MAP = {
       10: '2665401011', 20: '2665412011', 30: '2665413011',
@@ -55,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     if (PCT_MAP[pct]) rh.push(`p_n_pct-off-with-tax:${PCT_MAP[pct]}`);
 
-    // Predefined filters
+    // Main filters
     const FILTER_DEFS = {
       'condition-new': ['p_n_condition-type', '1248879011'],
       'condition-used': ['p_n_condition-type', '1248877011'],
@@ -84,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.get(field) === 'on') rh.push(`${param}:${val}`);
     });
 
-    // Deal-Hunter metrics
+    // Deal-hunter goodies
     ['below-avg-30', 'below-avg-60', 'below-avg-90'].forEach((key, i) => {
       const val = data.get(key)?.trim();
       if (val) rh.push(`p_n_discount_${30 * (i + 1)}day:${Math.round(val)}`);
@@ -93,34 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const vol = data.get('max-volatility-7')?.trim();
     if (vol) rh.push(`p_n_price-volatility:${Math.round(vol)}`);
 
-    // AI Filters
+    // AI filters
     if (data.get('predictive-score') === 'on') rh.push('p_n_predictive-score:1');
     if (data.get('emotion-feedback') === 'on') rh.push('p_n_emotion-feedback:1');
     const restockASIN = data.get('restock-forecast')?.trim();
     if (restockASIN) params.set('restock_asin', restockASIN);
 
-    // Brand inclusion
+    // Brand include (Tagify)
     const brandInput = document.getElementById('brandInclude');
     let brands = [];
     try {
       brands = JSON.parse(brandInput.value).map(x => x.value.trim());
-    } catch {
-      brands = brandInput.value.split(',').map(x => x.trim());
-    }
-    brands.filter(Boolean).forEach(b => rh.push(`p_89:${encodeURIComponent(b)}`));
-
-    // Advanced tools
-    if (data.get('enable-boolean') === 'on') params.set('boolean', 'on');
-    const fields = data.get('field-filters')?.trim();
-    if (fields) params.set('fields', fields);
-    const asin = data.get('direct-lookup')?.trim();
-    if (asin) params.set('asin', asin);
-
-    // Finalize
-    if (rh.length) params.set('rh', rh.join(','));
-    params.set('tag', 'echolover25-20');
-
-    const finalUrl = `https://www.amazon.com/s?${params.toString()}`;
-    window.open(finalUrl, '_blank');
-  });
-});
