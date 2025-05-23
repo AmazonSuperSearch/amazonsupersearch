@@ -12,7 +12,7 @@
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>Amazon Super Search – Filter Lightning Deals & Price Trends</title>
+ <title>Amazon Super Search – Instantly Filter Deals & Discounts</title>
 <link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
 <link rel="manifest" href="/site.webmanifest">
 
@@ -143,108 +143,7 @@
     font-style: italic;
   }
     </style>
-  <style>
-    /* Floating share panel */
-.floating-share {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  width: 200px;
-  padding: 0.75rem;
-  background: rgba(255,255,255,0.95);
-  border: 2px solid #007bff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 1000;
-}
-.floating-share h2 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-.floating-share .share-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-}
-.floating-share .share-buttons a {
-  flex: 1 1 48%;
-  font-size: 0.85rem;
-  padding: 0.3rem;
-  text-align: center;
-}
-    .banner-inner {
-  max-width: 1546px;
-  margin: 0 auto;
-}
-    .banner-inner h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.2;
-}
-
-.banner-inner p {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  line-height: 1.5;
-}
-/* Desktop (large) */
-@media (min-width: 992px) {
-  .banner-inner {
-    padding: 0 3rem;
-  }
-}
-
-/* Tablet / small desktop */
-@media (min-width: 768px) and (max-width: 991px) {
-  .banner-inner {
-    padding: 0 2rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-  .banner-inner {
-    padding: 0 1rem;
-  }
-  .banner-inner h1 {
-    font-size: 1.75rem;
-  }
-  .banner-inner p {
-    font-size: 1rem;
-  }
-}
-#minRating:disabled {
-  background-color: #e9ecef;
-  cursor: not-allowed;
-}
-
-#minRating.enabled-glow {
-  box-shadow: 0 0 8px 2px rgba(255, 193, 7, 0.8);
-  transition: box-shadow 0.5s ease-in-out;
-}
-.visually-hidden-focusable {
-  position: absolute;
-  left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.visually-hidden-focusable:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  left: auto;
-  background: #ffffcc;
-  padding: 0.5rem;
-  z-index: 1000;
-}
-    /* Pulse animations */
-    @keyframes pulse-glow {0%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);}50%{box-shadow:0 0 20px 10px rgba(13,110,253,0.5);}100%{box-shadow:0 0 0 0 rgba(13,110,253,0.5);} }
-    .pulse-glow {animation:pulse-glow 2s infinite;transition:box-shadow .3s ease-in-out;}
-  </style>
-
+  
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
 <!-- helper to fire events -->
@@ -295,8 +194,8 @@
       </h1>
       <p class="lead mb-4">
         Tired of endless scrolling? Amazon Super Search lets you zero in on exactly what you want in seconds.
-        Filter by price, , , free shipping, top ratings—and never miss another deal.
-        No signup, no fluff—just the products you crave, right now.
+       Filter by price, brand, rating, free shipping—and never miss another deal.
+ No signup, no fluff—just the products you crave, right now.
       </p>
       <a href="#amazon-search-form" class="btn btn-primary btn-lg pulse-glow">
         🎯 Start Your Custom Search
@@ -969,23 +868,29 @@
         </div>
       </section>
 <section class="container text-start mb-5">
-  <h2 class="mb-2">🔁 Quick Access: Search Again</h2>
+  <h2 class="mb-2">✅ Step 6: Begin Your Amazon Search or Continue Below Using Advanced Settings</h2>
   <p class="text-muted mb-3">
-    Click below to run your current filter settings without scrolling.
+    You’re all set! Click the button below to view your filtered results directly on Amazon.
   </p>
   <div class="text-center">
-    <button
-      type="submit"
-      form="amazon-search-form"
-      class="btn btn-success btn-lg w-100 pulse-glow">
-      🔍 Search Amazon Again
-    </button>
-    <p class="text-warning mt-2 text-center" style="font-weight: bold;">
-   Too many filters may return no results.
-</p>
+    <div id="filter-warning" style="display:none; color: orange; font-weight: bold; padding: 10px;">
+      ⚠️ Too many filters may return no results. Try removing a few for better results.
+    </div>
 
+    <button 
+      type="submit" 
+      form="amazon-search-form" 
+      class="btn btn-primary btn-lg w-100 pulse-glow"
+      aria-label="Search Amazon with selected filters">
+      🔍 Search Amazon
+    </button>
+
+    <p class="text-warning mt-2 text-center" style="font-weight: bold;">
+      Too many filters may return no results.
+    </p>
   </div>
 </section>
+
   </form>
 <section id="faq" class="container my-5">
   <h2 class="mb-4">🔍 Frequently Asked Questions</h2>
@@ -1341,65 +1246,8 @@
     });
   }
   </script>
-<!-- Floating Share Panel -->
-<div class="floating-share">
-  <h2>Share With Friends</h2>
-  <div class="share-buttons">
-    <a href="#"
-       onclick="window.open(
-         'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),
-         '_blank'
-       ); return false;"
-       class="btn btn-primary btn-sm">
-      Facebook
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)
-         +'&text='+encodeURIComponent(document.title),
-         '_blank'
-       ); return false;"
-       class="btn btn-info btn-sm">
-      Twitter
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'mailto:?subject='+encodeURIComponent(document.title)
-         +'&body='+encodeURIComponent(window.location.href),
-         '_self'
-       ); return false;"
-       class="btn btn-secondary btn-sm">
-      Email
-    </a>
-    <a href="#"
-       onclick="window.open(
-         'sms:?&body='+encodeURIComponent(window.location.href),
-         '_blank'
-       ); return false;"
-       class="btn btn-success btn-sm">
-      SMS
-    </a>
-  </div>
 </div>
-   <script>
-    if (navigator.share) {
-      document.querySelectorAll('.share-buttons a').forEach(btn => {
-        btn.addEventListener('click', async e => {
-          e.preventDefault();
-          try {
-            await navigator.share({
-              title: document.title,
-              text: 'Check out Amazon Super Search!',
-              url: window.location.href,
-            });
-          } catch (err) {
-            console.error('Share failed:', err);
-            window.open(btn.href, '_blank');
-          }
-        });
-      });
-    }
-      </script>
+  
 <!-- All your HTML content above... -->
 
    <!-- …all your page content above… -->
