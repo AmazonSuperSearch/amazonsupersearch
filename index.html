@@ -118,8 +118,11 @@
     .form-check-input {
       width: 1.4em; height: 1.4em; border: 3px solid #000 !important; border-radius: 3px;
     }
-
-    .minimized {
+    input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+   .minimized {
   right: -260px; /* slide out of view */
   opacity: 0.3;
   transition: all 0.3s ease-in-out;
@@ -133,16 +136,13 @@
 }
     </style>
      <style>
-  .coming-soon input[type="checkbox"] {
-    pointer-events: none;
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
   .coming-soon label small {
     color: #6c757d;
     font-style: italic;
   }
     </style>
+ 
+
   
 <!-- … your existing GA4 snippet on lines 82–88 … -->
 
@@ -458,7 +458,7 @@
 
       <!-- Coming Soon Filters -->
       <div class="form-check coming-soon">
-        <input class="form-check-input" type="checkbox" name="ships-fast" id="shipsFast">
+        <input class="form-check-input" type="checkbox" name="ships-fast" id="shipsFast" disabled>
         <label class="form-check-label" for="shipsFast">Ships in 24 Hours <small>(Coming Soon)</small></label>
       </div>
       <div class="form-check coming-soon">
@@ -1364,14 +1364,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const pushFilter = (field, param, val) => {
       if (data.get(field) === 'on') rh.push(`${param}:${val}`);
     };
-
-    // Show warning if too many filters
-    const checkedCount = [...form.elements].filter(el =>
-      el.type === 'checkbox' &&
-      el.checked &&
-      !el.closest('.coming-soon')
-    ).length;
-    warningBox.style.display = checkedCount > 2 ? 'block' : 'none';
 
     // 1) Basic query + sort
     const q = data.get('q')?.trim();
