@@ -171,17 +171,28 @@
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
-  <main id="main">
-  <!-- Google Translate dropdown -->
- <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
-  <!-- Hero / SEO-Rich Intro -->
-  <div class="bg-warning text-dark text-center py-2 shadow-sm">
-    🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
+  <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
+
+  <!-- 🌐 Fixed Language & Currency Box (top right) -->
+  <div class="position-fixed top-0 end-0 p-2 bg-light border shadow-sm" style="z-index:9999;">
+    <strong>🌐 Language & Currency</strong><br>
+    <div id="google_translate_element" class="mb-2"></div>
+    <label for="currencySelector">Currency:</label>
+    <select id="currencySelector" class="form-select form-select-sm"
+      onchange="document.querySelector('select[name=currency]').value = this.value;">
+      <option value="usd">USD ($)</option>
+      <option value="eur">EUR (€)</option>
+      <option value="gbp">GBP (£)</option>
+      <option value="jpy">JPY (¥)</option>
+      <option value="inr">INR (₹)</option>
+    </select>
   </div>
-    <div id="google_translate_element" class="text-end p-2"></div>
-  <div class="text-center text-muted small mt-1">
-  <em>Not affiliated with or endorsed by Amazon.com.</em>
-</div>
+
+  <main id="main">
+    <!-- Hero / SEO-Rich Intro -->
+    <div class="bg-warning text-dark text-center py-2 shadow-sm">
+      🔎 <strong>Amazon Super Search</strong> — The Fast & Easy Way to Find Exactly What You Want on Amazon
+    </div>
 <div class="text-center my-3">
   <h2 class="text-pulse display-6 fw-bold">
     🔥 Find  & Filter Instantly With Our Search Tool Designed For Amazon Products!
