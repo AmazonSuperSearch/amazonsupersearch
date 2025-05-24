@@ -58,6 +58,7 @@
   <!-- Tagify CSS & JS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
   <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
+  <!-- ① Auto-detect and set the cookie before Translate loads -->
 
   <style>
       /* ——— AMAZON-ORANGE PULSING HEADING ——— */
@@ -146,47 +147,35 @@
     font-style: italic;
   }
     </style>
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
 
 <!-- helper to fire events -->
    <!-- ① Auto-detect and set the cookie before Translate loads -->
-  <script>
-    (function(){
-      // grab e.g. “en”, “es”, “fr”, “de”, etc.
-      var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
-      // tell Google Translate to go from English → userLang
-      document.cookie = "googtrans=/en/" + userLang + "; path=/";
-    })();
-  </script>
-  <!-- Google Translate widget (all languages) -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+  (function(){
+    // grab e.g. “en”, “es”, “fr”, “de”, etc.
+    var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
+    // tell Google Translate to go from English → userLang
+    document.cookie = "googtrans=/en/" + userLang + "; path=/";
+  })();
+</script>
   </head>
 <body>
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
   <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
-
-  <!-- 🌐 Fixed Language & Currency Box (top right) -->
-  <div class="position-fixed top-0 end-0 p-2 bg-light border shadow-sm" style="z-index:9999;">
-    <strong>🌐 Language & Currency</strong><br>
-    <div id="google_translate_element" class="mb-2"></div>
-    <label for="currencySelector">Currency:</label>
-    <select id="currencySelector" class="form-select form-select-sm"
-      onchange="document.querySelector('select[name=currency]').value = this.value;">
-      <option value="usd">USD ($)</option>
-      <option value="eur">EUR (€)</option>
-      <option value="gbp">GBP (£)</option>
-      <option value="jpy">JPY (¥)</option>
-      <option value="inr">INR (₹)</option>
-    </select>
-  </div>
-
+  
+ <!-- 🌐 Google Translate (top right) -->
+<div class="position-fixed top-0 end-0 p-2 bg-light border shadow-sm" style="z-index:9999;">
+  <div id="google_translate_element"></div>
+</div>
   <main id="main">
     <!-- Hero / SEO-Rich Intro -->
     <div class="bg-warning text-dark text-center py-2 shadow-sm">
