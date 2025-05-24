@@ -1480,6 +1480,13 @@ const domainMap = {
   inr: 'www.amazon.in'
 };
 const host = domainMap[currency] || 'www.amazon.com';
+// If direct ASIN lookup is provided, go straight to product page
+if (asin) {
+  const asinTag = tagMap[currency] || 'echolover25-20';
+  const asinUrl = `https://${host}/dp/${encodeURIComponent(asin)}?tag=${asinTag}`;
+  window.open(asinUrl, '_blank');
+  return; // Stop further execution so we don't also open /s?...
+}
 
 const url = `https://${host}/s?${params.toString()}`;
 window.open(url, '_blank');
