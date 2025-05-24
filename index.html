@@ -148,6 +148,16 @@
   }
     </style>
 <script>
+// ① Auto-detect and set the cookie before Translate loads
+(function(){
+  var userLang = (navigator.language || navigator.userLanguage).substr(0,2);
+  document.cookie = "googtrans=/en/" + userLang + "; path=/";
+})();
+</script>
+
+<!-- ② Load the Google Translate engine, telling it to call your init() on load -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'en',
