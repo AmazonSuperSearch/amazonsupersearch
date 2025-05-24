@@ -1461,7 +1461,14 @@ pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Ref
 
  // 9) Consolidate and open
 if (rh.length) params.set('rh', rh.join(','));
-params.set('tag', 'echolover25-20'); // your affiliate tag
+const tagMap = {
+  usd: 'echolover25-20',     // Amazon.com (US)
+  eur: 'yourtag-21',         // Amazon.de (Germany)
+  gbp: 'yourtag-20',         // Amazon.co.uk (UK)
+  jpy: 'yourtag-22',         // Amazon.co.jp
+  inr: 'yourtag-21'          // Amazon.in
+};
+params.set('tag', tagMap[currency] || 'echolover25-20');
 
 // Get selected currency and map to appropriate Amazon domain
 const currency = data.get('currency') || 'usd';
