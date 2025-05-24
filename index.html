@@ -173,21 +173,6 @@
   <a href="#main" class="visually-hidden-focusable">Skip to main content</a>
   <audio id="clickSound" src="/click.mp3" preload="auto"></audio>
 
-  <!-- 🌐 Fixed Language & Currency Box (top right) -->
-  <div class="position-fixed top-0 end-0 p-2 bg-light border shadow-sm" style="z-index:9999;">
-    <strong>🌐 Language & Currency</strong><br>
-    <div id="google_translate_element" class="mb-2"></div>
-    <label for="currencySelector">Currency:</label>
-    <select id="currencySelector" class="form-select form-select-sm"
-      onchange="document.querySelector('select[name=currency]').value = this.value;">
-      <option value="usd">USD ($)</option>
-      <option value="eur">EUR (€)</option>
-      <option value="gbp">GBP (£)</option>
-      <option value="jpy">JPY (¥)</option>
-      <option value="inr">INR (₹)</option>
-    </select>
-  </div>
-
   <main id="main">
     <!-- Hero / SEO-Rich Intro -->
     <div class="bg-warning text-dark text-center py-2 shadow-sm">
