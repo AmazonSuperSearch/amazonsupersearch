@@ -1461,17 +1461,20 @@ pushFilter('warehouse-refurb','p_n_condition-type', '2224371011'); // Used & Ref
 
  // 9) Consolidate and open
 if (rh.length) params.set('rh', rh.join(','));
+
+// ✅ Define currency first
+const currency = data.get('currency') || 'usd';
+
+// ✅ Then use it in your tag map
 const tagMap = {
-  usd: 'echolover25-20',     // Amazon.com (US)
-  eur: 'yourtag-21',         // Amazon.de (Germany)
-  gbp: 'yourtag-20',         // Amazon.co.uk (UK)
-  jpy: 'yourtag-22',         // Amazon.co.jp
-  inr: 'yourtag-21'          // Amazon.in
+  usd: 'echolover25-20',
+  eur: 'yourtag-21',
+  gbp: 'yourtag-20',
+  jpy: 'yourtag-22',
+  inr: 'yourtag-21'
 };
 params.set('tag', tagMap[currency] || 'echolover25-20');
 
-// Get selected currency and map to appropriate Amazon domain
-const currency = data.get('currency') || 'usd';
 const domainMap = {
   usd: 'www.amazon.com',
   eur: 'www.amazon.de',
@@ -1479,6 +1482,7 @@ const domainMap = {
   jpy: 'www.amazon.co.jp',
   inr: 'www.amazon.in'
 };
+
 const host = domainMap[currency] || 'www.amazon.com';
 // If direct ASIN lookup is provided, go straight to product page
 if (asin) {
